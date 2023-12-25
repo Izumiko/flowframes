@@ -233,15 +233,15 @@
             // custOutDirBrowseBtn
             // 
             this.custOutDirBrowseBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.custOutDirBrowseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.custOutDirBrowseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.custOutDirBrowseBtn.ForeColor = System.Drawing.Color.White;
             this.custOutDirBrowseBtn.Location = new System.Drawing.Point(704, 95);
             this.custOutDirBrowseBtn.Name = "custOutDirBrowseBtn";
             this.custOutDirBrowseBtn.Size = new System.Drawing.Size(55, 23);
             this.custOutDirBrowseBtn.TabIndex = 93;
             this.custOutDirBrowseBtn.Text = "Browse";
-            this.custOutDirBrowseBtn.UseVisualStyleBackColor = false;
-            this.custOutDirBrowseBtn.Click += new System.EventHandler(this.custOutDirBrowseBtn_Click);
+            //this.custOutDirBrowseBtn.UseVisualStyleBackColor = false;
+            this.custOutDirBrowseBtn.Click += new System.EventHandler(this.CustOutDirBrowseBtn_Click);
             // 
             // custOutDir
             // 
@@ -267,7 +267,7 @@
             this.outFolderLoc.Name = "outFolderLoc";
             this.outFolderLoc.Size = new System.Drawing.Size(200, 21);
             this.outFolderLoc.TabIndex = 91;
-            this.outFolderLoc.SelectedIndexChanged += new System.EventHandler(this.outFolderLoc_SelectedIndexChanged);
+            this.outFolderLoc.SelectedIndexChanged += new System.EventHandler(this.OutFolderLoc_SelectedIndexChanged);
             // 
             // label78
             // 
@@ -312,16 +312,16 @@
             // modelDownloaderBtn
             // 
             this.modelDownloaderBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.modelDownloaderBtn.FlatAppearance.BorderSize = 0;
-            this.modelDownloaderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.modelDownloaderBtn.FlatAppearance.BorderSize = 0;
+            //this.modelDownloaderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.modelDownloaderBtn.ForeColor = System.Drawing.Color.White;
             this.modelDownloaderBtn.Location = new System.Drawing.Point(492, 215);
             this.modelDownloaderBtn.Name = "modelDownloaderBtn";
             this.modelDownloaderBtn.Size = new System.Drawing.Size(206, 23);
             this.modelDownloaderBtn.TabIndex = 86;
             this.modelDownloaderBtn.Text = "Open Model Downloader";
-            this.modelDownloaderBtn.UseVisualStyleBackColor = false;
-            this.modelDownloaderBtn.Click += new System.EventHandler(this.modelDownloaderBtn_Click);
+            //this.modelDownloaderBtn.UseVisualStyleBackColor = false;
+            this.modelDownloaderBtn.Click += new System.EventHandler(this.ModelDownloaderBtn_Click);
             // 
             // exportNamePatternLoop
             // 
@@ -387,16 +387,16 @@
             // clearModelCacheBtn
             // 
             this.clearModelCacheBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.clearModelCacheBtn.FlatAppearance.BorderSize = 0;
-            this.clearModelCacheBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.clearModelCacheBtn.FlatAppearance.BorderSize = 0;
+            //this.clearModelCacheBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearModelCacheBtn.ForeColor = System.Drawing.Color.White;
             this.clearModelCacheBtn.Location = new System.Drawing.Point(280, 215);
             this.clearModelCacheBtn.Name = "clearModelCacheBtn";
             this.clearModelCacheBtn.Size = new System.Drawing.Size(206, 23);
             this.clearModelCacheBtn.TabIndex = 79;
             this.clearModelCacheBtn.Text = "Clear Model Cache";
-            this.clearModelCacheBtn.UseVisualStyleBackColor = false;
-            this.clearModelCacheBtn.Click += new System.EventHandler(this.clearModelCacheBtn_Click);
+            //this.clearModelCacheBtn.UseVisualStyleBackColor = false;
+            this.clearModelCacheBtn.Click += new System.EventHandler(this.ClearModelCacheBtn_Click);
             // 
             // label64
             // 
@@ -436,15 +436,15 @@
             // tempDirBrowseBtn
             // 
             this.tempDirBrowseBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tempDirBrowseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.tempDirBrowseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tempDirBrowseBtn.ForeColor = System.Drawing.Color.White;
             this.tempDirBrowseBtn.Location = new System.Drawing.Point(704, 65);
             this.tempDirBrowseBtn.Name = "tempDirBrowseBtn";
             this.tempDirBrowseBtn.Size = new System.Drawing.Size(55, 23);
             this.tempDirBrowseBtn.TabIndex = 70;
             this.tempDirBrowseBtn.Text = "Browse";
-            this.tempDirBrowseBtn.UseVisualStyleBackColor = false;
-            this.tempDirBrowseBtn.Click += new System.EventHandler(this.tempDirBrowseBtn_Click);
+            //this.tempDirBrowseBtn.UseVisualStyleBackColor = false;
+            this.tempDirBrowseBtn.Click += new System.EventHandler(this.TempDirBrowseBtn_Click);
             // 
             // tempDirCustom
             // 
@@ -502,7 +502,7 @@
             this.tempFolderLoc.Name = "tempFolderLoc";
             this.tempFolderLoc.Size = new System.Drawing.Size(200, 21);
             this.tempFolderLoc.TabIndex = 65;
-            this.tempFolderLoc.SelectedIndexChanged += new System.EventHandler(this.tempFolderLoc_SelectedIndexChanged);
+            this.tempFolderLoc.SelectedIndexChanged += new System.EventHandler(this.TempFolderLoc_SelectedIndexChanged);
             // 
             // label34
             // 
@@ -722,7 +722,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(10, 150);
             this.label18.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label18.Name = "label18";
@@ -879,7 +879,7 @@
             this.autoEncMode.Name = "autoEncMode";
             this.autoEncMode.Size = new System.Drawing.Size(250, 21);
             this.autoEncMode.TabIndex = 70;
-            this.autoEncMode.SelectedIndexChanged += new System.EventHandler(this.autoEncMode_SelectedIndexChanged);
+            this.autoEncMode.SelectedIndexChanged += new System.EventHandler(this.AutoEncMode_SelectedIndexChanged);
             // 
             // label49
             // 
@@ -1020,7 +1020,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(10, 10);
             this.label24.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label24.Name = "label24";
@@ -1062,7 +1062,7 @@
             this.dedupMode.Name = "dedupMode";
             this.dedupMode.Size = new System.Drawing.Size(250, 21);
             this.dedupMode.TabIndex = 27;
-            this.dedupMode.SelectedIndexChanged += new System.EventHandler(this.dedupMode_SelectedIndexChanged);
+            this.dedupMode.SelectedIndexChanged += new System.EventHandler(this.DedupMode_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -1210,7 +1210,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label26.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label26.Location = new System.Drawing.Point(10, 260);
             this.label26.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label26.Name = "label26";
@@ -1294,7 +1294,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label28.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label28.Location = new System.Drawing.Point(10, 150);
             this.label28.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label28.Name = "label28";
@@ -1396,7 +1396,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label32.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label32.Location = new System.Drawing.Point(10, 10);
             this.label32.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label32.Name = "label32";
@@ -1561,7 +1561,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(10, 10);
             this.label21.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label21.Name = "label21";
@@ -1703,7 +1703,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.Location = new System.Drawing.Point(10, 120);
             this.label46.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label46.Name = "label46";
@@ -1714,7 +1714,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.Location = new System.Drawing.Point(10, 10);
             this.label45.Margin = new System.Windows.Forms.Padding(10, 10, 10, 7);
             this.label45.Name = "label45";
@@ -1747,7 +1747,7 @@
             this.cmdDebugMode.Name = "cmdDebugMode";
             this.cmdDebugMode.Size = new System.Drawing.Size(250, 21);
             this.cmdDebugMode.TabIndex = 27;
-            this.cmdDebugMode.SelectedIndexChanged += new System.EventHandler(this.cmdDebugMode_SelectedIndexChanged);
+            this.cmdDebugMode.SelectedIndexChanged += new System.EventHandler(this.CmdDebugMode_SelectedIndexChanged);
             // 
             // titleLabel
             // 
@@ -1766,18 +1766,18 @@
             this.resetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.resetBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_restart_alt_white_48dp;
             this.resetBtn.DrawImage = true;
-            this.resetBtn.FlatAppearance.BorderSize = 0;
-            this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.resetBtn.FlatAppearance.BorderSize = 0;
+            //this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetBtn.ForeColor = System.Drawing.Color.White;
-            this.resetBtn.ImageIndex = 0;
+            //this.resetBtn.ImageIndex = 0;
             this.resetBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.resetBtn.Location = new System.Drawing.Point(889, 12);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(40, 40);
             this.resetBtn.TabIndex = 39;
             this.toolTip1.SetToolTip(this.resetBtn, "Reset To Default");
-            this.resetBtn.UseVisualStyleBackColor = false;
-            this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
+            //this.resetBtn.UseVisualStyleBackColor = false;
+            this.resetBtn.Click += new System.EventHandler(this.ResetBtn_Click);
             // 
             // label10
             // 
@@ -1792,16 +1792,16 @@
             // btnResetHwEnc
             // 
             this.btnResetHwEnc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnResetHwEnc.FlatAppearance.BorderSize = 0;
-            this.btnResetHwEnc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.btnResetHwEnc.FlatAppearance.BorderSize = 0;
+            //this.btnResetHwEnc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResetHwEnc.ForeColor = System.Drawing.Color.White;
             this.btnResetHwEnc.Location = new System.Drawing.Point(280, 245);
             this.btnResetHwEnc.Name = "btnResetHwEnc";
             this.btnResetHwEnc.Size = new System.Drawing.Size(206, 23);
             this.btnResetHwEnc.TabIndex = 95;
             this.btnResetHwEnc.Text = "Re-Detected Hardware Encoders";
-            this.btnResetHwEnc.UseVisualStyleBackColor = false;
-            this.btnResetHwEnc.Click += new System.EventHandler(this.btnResetHwEnc_Click);
+            //this.btnResetHwEnc.UseVisualStyleBackColor = false;
+            this.btnResetHwEnc.Click += new System.EventHandler(this.BtnResetHwEnc_Click);
             // 
             // SettingsForm
             // 

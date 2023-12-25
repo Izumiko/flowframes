@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Flowframes.MiscUtils;
 using Flowframes.Ui;
@@ -25,7 +23,7 @@ namespace Flowframes.Main
         public static string interpSettingsFilename = "interpSettings.ini";
         public static string filenameMapFilename = "frameFilenames.ini";
 
-        public static Stopwatch timeSinceLastSave = new Stopwatch();
+        public static Stopwatch timeSinceLastSave = new();
 
         public static void Save ()
         {
@@ -41,7 +39,7 @@ namespace Flowframes.Main
 
         static void SaveState (int frames)
         {
-            ResumeState state = new ResumeState(I.currentlyUsingAutoEnc, frames);
+            ResumeState state = new(I.currentlyUsingAutoEnc, frames);
             string filePath = Path.Combine(I.currentSettings.tempFolder, Paths.resumeDir, resumeFilename);
             File.WriteAllText(filePath, state.ToString());
         }
@@ -105,7 +103,7 @@ namespace Flowframes.Main
 
         static void LoadFilenameMap()
         {
-            List<string> files = new List<string>();
+            List<string> files = [];
             string filePath = Path.Combine(I.currentSettings.tempFolder, Paths.resumeDir, filenameMapFilename);
             string[] fileLines = File.ReadAllLines(filePath);
 
@@ -115,7 +113,7 @@ namespace Flowframes.Main
                 files.Add(line.Trim());
             }
 
-            FrameRename.importFilenames = files.ToArray();
+            FrameRename.importFilenames = [.. files];
         }
     }
 }

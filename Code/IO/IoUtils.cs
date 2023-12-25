@@ -25,14 +25,14 @@ namespace Flowframes.IO
 		{
             try
             {
-				using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-					return Image.FromStream(stream);
-			}
+                using FileStream stream = new(path, FileMode.Open, FileAccess.Read);
+                return Image.FromStream(stream);
+            }
 			catch
             {
                 try
                 {
-					MagickImage img = new MagickImage(path);
+					MagickImage img = new(path);
 					Bitmap bitmap = img.ToBitmap();
 
 					if(log)
@@ -53,9 +53,9 @@ namespace Flowframes.IO
 		public static string[] ReadLines(string path)
 		{
 			if (!File.Exists(path))
-				return new string[0];
+				return [];
 
-			List<string> lines = new List<string>();
+			List<string> lines = [];
 			using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 0x1000, FileOptions.SequentialScan))
 			
             using (var reader = new StreamReader(stream, Encoding.UTF8))
@@ -65,13 +65,14 @@ namespace Flowframes.IO
 					lines.Add(line);
 			}
 
-			return lines.ToArray();
+			return [.. lines];
 		}
 
-		public static bool IsPathDirectory(string path)
+        internal static readonly string[] endSlash = ["\\", "/"];
+
+        public static bool IsPathDirectory(string path)
 		{
-			if (path == null)
-				throw new ArgumentNullException("path");
+            ArgumentNullException.ThrowIfNull(path);
 
             path = path.Trim();
 
@@ -81,7 +82,7 @@ namespace Flowframes.IO
             if (File.Exists(path))
 				return false;
 
-            if (new string[2] {"\\", "/"}.Any((string x) => path.EndsWith(x)))
+            if (endSlash.Any((string x) => path.EndsWith(x)))
 				return true;
 
             return string.IsNullOrWhiteSpace(Path.GetExtension(path));
@@ -123,8 +124,8 @@ namespace Flowframes.IO
 		public static void CopyDir(string sourceDirectory, string targetDirectory, bool move = false)
 		{
 			Directory.CreateDirectory(targetDirectory);
-			DirectoryInfo source = new DirectoryInfo(sourceDirectory);
-			DirectoryInfo target = new DirectoryInfo(targetDirectory);
+			DirectoryInfo source = new(sourceDirectory);
+			DirectoryInfo target = new(targetDirectory);
 			CopyWork(source, target, move);
 		}
 
@@ -177,7 +178,7 @@ namespace Flowframes.IO
 		public static void ReplaceInFilenamesDir(string dir, string textToFind, string textToReplace, bool recursive = true, string wildcard = "*")
 		{
 			int counter = 1;
-			DirectoryInfo d = new DirectoryInfo(dir);
+			DirectoryInfo d = new(dir);
 			FileInfo[] files;
 
 			if (recursive)
@@ -212,7 +213,7 @@ namespace Flowframes.IO
 				if (!Directory.Exists(path))
 					return 0;
 
-                DirectoryInfo d = new DirectoryInfo(path);
+                DirectoryInfo d = new(path);
 				FileInfo[] files = null;
 
 				if (recursive)
@@ -265,15 +266,15 @@ namespace Flowframes.IO
 
 		public static async Task RenameCounterDir(string path, int startAt = 0, int zPad = 8, bool inverse = false)
 		{
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
 			int counter = startAt;
-			DirectoryInfo d = new DirectoryInfo(path);
+			DirectoryInfo d = new(path);
 			FileInfo[] files = d.GetFiles();
 			var filesSorted = files.OrderBy(n => n);
 
 			if (inverse)
-				filesSorted.Reverse();
+                filesSorted = files.OrderByDescending(n => n);
 
 			foreach (FileInfo file in files)
 			{
@@ -320,10 +321,10 @@ namespace Flowframes.IO
 
 		public static async Task<Fraction> GetVideoFramerate (string path)
         {
-			string[] preferFfmpegReadoutFormats = new string[] { ".gif", ".png", ".apng", ".webp" };
+			string[] preferFfmpegReadoutFormats = [".gif", ".png", ".apng", ".webp"];
 			bool preferFfmpegReadout = preferFfmpegReadoutFormats.Contains(Path.GetExtension(path).ToLowerInvariant());
 
-            Fraction fps = new Fraction();
+            Fraction fps = new();
 
 			try
 			{
@@ -340,7 +341,7 @@ namespace Flowframes.IO
 
 		public static Fraction GetVideoFramerateForDir(string path)
 		{
-            Fraction fps = new Fraction();
+            Fraction fps = new();
 
             try
             {
@@ -364,7 +365,7 @@ namespace Flowframes.IO
 
 		public static async Task<Size> GetVideoOrFramesRes (string path)
         {
-			Size res = new Size();
+			Size res = new();
 
             try
             {
@@ -388,7 +389,7 @@ namespace Flowframes.IO
 
 		public static Size GetVideoRes (string path)
 		{
-			Size size = new Size(0, 0);
+			Size size = new(0, 0);
 
 			try
 			{
@@ -519,7 +520,7 @@ namespace Flowframes.IO
                     string renamedPath = path;
 
                     while (Directory.Exists(renamedPath))
-                        renamedPath = renamedPath + ".old";
+                        renamedPath += ".old";
 
                     Directory.Move(path, renamedPath);
                 }
@@ -581,7 +582,7 @@ namespace Flowframes.IO
 		{
 			InterpSettings curr = Interpolate.currentSettings;
 			string max = Config.Get(Config.Key.maxFps);
-			Fraction maxFps = max.Contains("/") ? new Fraction(max) : new Fraction(max.GetFloat());
+			Fraction maxFps = max.Contains('/') ? new Fraction(max) : new Fraction(max.GetFloat());
 			float fps = fpsLimit ? maxFps.GetFloat() : curr.outFps.GetFloat();
 
             Size outRes = await InterpolateUtils.GetOutputResolution(curr.inPath, true);
@@ -725,7 +726,7 @@ namespace Flowframes.IO
 		public static string GetHash (string path, Hash hashType, bool log = true)
 		{
 			string hashStr = "";
-			NmkdStopwatch sw = new NmkdStopwatch();
+			NmkdStopwatch sw = new();
 
 			if (IsPathDirectory(path))
             {
@@ -822,7 +823,7 @@ namespace Flowframes.IO
             try
             {
 				Image img = GetImage(path);
-                return (img.Width > 0 && img.Height > 0);
+                return img.Width > 0 && img.Height > 0;
             }
 			catch
             {
@@ -833,7 +834,7 @@ namespace Flowframes.IO
 		public static string[] GetFilesSorted (string path, bool recursive = false, string pattern = "*")
         {
 			SearchOption opt = recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-			return Directory.GetFiles(path, pattern, opt).OrderBy(x => Path.GetFileName(x)).ToArray();
+			return [.. Directory.GetFiles(path, pattern, opt).OrderBy(x => Path.GetFileName(x))];
         }
 
 		public static string[] GetFilesSorted(string path, string pattern = "*")
@@ -849,8 +850,8 @@ namespace Flowframes.IO
 		public static FileInfo[] GetFileInfosSorted(string path, bool recursive = false, string pattern = "*")
 		{
 			SearchOption opt = recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-			DirectoryInfo dir = new DirectoryInfo(path);
-			return dir.GetFiles(pattern, opt).OrderBy(x => x.Name).ToArray();
+			DirectoryInfo dir = new(path);
+			return [.. dir.GetFiles(pattern, opt).OrderBy(x => x.Name)];
 		}
 
 		public static bool CreateFileIfNotExists (string path)
@@ -958,7 +959,7 @@ namespace Flowframes.IO
 		{
 			try
 			{
-				string driveLetter = path.Substring(0, 2);      // Make 'C:/some/random/path' => 'C:' etc
+				string driveLetter = path[..2];      // Make 'C:/some/random/path' => 'C:' etc
 				DriveInfo[] allDrives = DriveInfo.GetDrives();
 
 				foreach (DriveInfo d in allDrives)
@@ -989,13 +990,9 @@ namespace Flowframes.IO
 
 		public static string ReadFile(string path)
 		{
-            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var streamReader = new StreamReader(fileStream))
-                {
-                    return streamReader.ReadToEnd();
-                }
-            }
+            using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var streamReader = new StreamReader(fileStream);
+            return streamReader.ReadToEnd();
         }
 
         public static string[] ReadFileLines(string path)
@@ -1005,13 +1002,9 @@ namespace Flowframes.IO
 
         public static string ReadFileFirstLine(string path)
         {
-            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var streamReader = new StreamReader(fileStream))
-                {
-                    return streamReader.ReadLine();
-                }
-            }
+            using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var streamReader = new StreamReader(fileStream);
+            return streamReader.ReadLine();
         }
     }
 }

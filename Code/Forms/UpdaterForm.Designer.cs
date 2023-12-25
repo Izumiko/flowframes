@@ -56,7 +56,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(17, 67);
             this.label13.Margin = new System.Windows.Forms.Padding(8, 8, 3, 0);
@@ -77,12 +77,12 @@
             this.updatePatreonBtn.TabIndex = 36;
             this.updatePatreonBtn.Text = "Download Patreon Version";
             this.updatePatreonBtn.UseVisualStyleBackColor = true;
-            this.updatePatreonBtn.Click += new System.EventHandler(this.updatePatreonBtn_Click);
+            this.updatePatreonBtn.Click += new System.EventHandler(this.UpdatePatreonBtn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(16, 93);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 10, 3, 0);
@@ -94,7 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(16, 119);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 10, 3, 0);
@@ -106,7 +106,7 @@
             // installedLabel
             // 
             this.installedLabel.AutoSize = true;
-            this.installedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.installedLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.installedLabel.ForeColor = System.Drawing.Color.White;
             this.installedLabel.Location = new System.Drawing.Point(170, 67);
             this.installedLabel.Margin = new System.Windows.Forms.Padding(8, 8, 3, 0);
@@ -118,7 +118,7 @@
             // latestLabel
             // 
             this.latestLabel.AutoSize = true;
-            this.latestLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.latestLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.latestLabel.ForeColor = System.Drawing.Color.White;
             this.latestLabel.Location = new System.Drawing.Point(170, 93);
             this.latestLabel.Margin = new System.Windows.Forms.Padding(8, 8, 3, 0);
@@ -130,7 +130,7 @@
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLabel.ForeColor = System.Drawing.Color.White;
             this.statusLabel.Location = new System.Drawing.Point(170, 119);
             this.statusLabel.Margin = new System.Windows.Forms.Padding(8, 8, 3, 0);
@@ -142,7 +142,7 @@
             // downloadingLabel
             // 
             this.downloadingLabel.AutoSize = true;
-            this.downloadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.downloadingLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.downloadingLabel.ForeColor = System.Drawing.Color.White;
             this.downloadingLabel.Location = new System.Drawing.Point(226, 241);
             this.downloadingLabel.Margin = new System.Windows.Forms.Padding(8, 10, 3, 0);
@@ -162,7 +162,7 @@
             this.updateFreeBtn.TabIndex = 43;
             this.updateFreeBtn.Text = "Download Free Version";
             this.updateFreeBtn.UseVisualStyleBackColor = true;
-            this.updateFreeBtn.Click += new System.EventHandler(this.updateFreeBtn_Click);
+            this.updateFreeBtn.Click += new System.EventHandler(this.UpdateFreeBtn_Click);
             // 
             // UpdaterForm
             // 

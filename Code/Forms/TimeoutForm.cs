@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,8 +6,8 @@ namespace Flowframes.Forms
 {
     public partial class TimeoutForm : Form
     {
-        string actionName = "";
-        int waitSeconds;
+        readonly string actionName = "";
+        readonly int waitSeconds;
 
         public delegate void ActionCallback();
         public static ActionCallback actionCallback;
@@ -59,14 +53,14 @@ namespace Flowframes.Forms
             Close();
         }
 
-        private void skipCountdownBtn_Click(object sender, EventArgs e)
+        private void SkipCountdownBtn_Click(object sender, EventArgs e)
         {
             cancelCountdown = true;
             actionCallback();
             Close();
         }
 
-        private void cancelActionBtn_Click(object sender, EventArgs e)
+        private void CancelActionBtn_Click(object sender, EventArgs e)
         {
             cancelCountdown = true;
             Close();

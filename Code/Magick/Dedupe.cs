@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using Flowframes.IO;
@@ -41,23 +40,23 @@ namespace Flowframes.Magick
 
         public static async Task RemoveDupeFrames(string path, float threshold, string ext, bool testRun = false, bool debugLog = false, bool skipIfNoDupes = false)
         {
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
             Logger.Log("Removing duplicate frames - Threshold: " + threshold.ToString("0.00"));
 
             FileInfo[] framePaths = IoUtils.GetFileInfosSorted(path, false, "*." + ext);
-            List<string> framesToDelete = new List<string>();
+            List<string> framesToDelete = [];
 
             int statsFramesKept = framePaths.Length > 0 ? 1 : 0; // always keep at least one frame
             int statsFramesDeleted = 0;
 
-            Mutex mtx_framesToDelete = new Mutex();
-            Mutex mtx_debugLog = new Mutex();
+            Mutex mtx_framesToDelete = new();
+            Mutex mtx_debugLog = new();
             Task[] workTasks = new Task[Environment.ProcessorCount];
 
             bool threadAbort = false;
 
-            Action<int, int> lamProcessFrames = (indStart, indEnd) =>
+            void lamProcessFrames(int indStart, int indEnd)
             {
                 MagickImage img1 = null;
                 MagickImage img2 = null;
@@ -132,14 +131,14 @@ namespace Flowframes.Magick
                         break;
                     }
                 }
-            };
+            }
 
-            Action lamUpdateInfoBox = () =>
+            void lamUpdateInfoBox()
             {
                 int framesProcessed = statsFramesKept + statsFramesDeleted;
-                Logger.Log($"Deduplication: Running de-duplication ({framesProcessed}/{framePaths.Length}), deleted {statsFramesDeleted} ({(((float)statsFramesDeleted / framePaths.Length) * 100f).ToString("0")}%) duplicate frames so far...", false, true);
+                Logger.Log($"Deduplication: Running de-duplication ({framesProcessed}/{framePaths.Length}), deleted {statsFramesDeleted} ({((float)statsFramesDeleted / framePaths.Length) * 100f:0}%) duplicate frames so far...", false, true);
                 Program.mainForm.SetProgress((int)Math.Round(((float)framesProcessed / framePaths.Length) * 100f));
-            };
+            }
 
             // start the worker threads
             for (int i = 0; i < workTasks.Length; i++)
@@ -197,7 +196,7 @@ namespace Flowframes.Magick
             int framesLeft = IoUtils.GetAmountOfFiles(path, false, "*" + Interpolate.currentSettings.framesExt);
             int framesDeleted = framePaths.Length - framesLeft;
             float percentDeleted = ((float)framesDeleted / framePaths.Length) * 100f;
-            string keptPercent = $"{(100f - percentDeleted).ToString("0.0")}%";
+            string keptPercent = $"{100f - percentDeleted:0.0}%";
 
             if (framesDeleted <= 0)
             {
@@ -233,7 +232,7 @@ namespace Flowframes.Magick
             if (debug)
                 Logger.Log($"Running CreateDupesFile for '{framesPath}' ({frameFiles.Length} files), lastFrameNum = {lastFrameNum}, ext = {ext}.", true, false, "dupes");
 
-            Dictionary<string, List<string>> frames = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> frames = [];
 
 
             for (int i = 0; i < frameFiles.Length; i++)
@@ -243,7 +242,7 @@ namespace Flowframes.Magick
                 String fnameCur = Path.GetFileNameWithoutExtension(frameFiles[i].Name);
                 int frameNumCur = fnameCur.GetInt();
 
-                frames[fnameCur] = new List<string>();
+                frames[fnameCur] = [];
 
                 if (!isLastItem)
                 {

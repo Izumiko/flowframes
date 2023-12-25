@@ -1,6 +1,5 @@
 ﻿using Flowframes.Data;
 using Flowframes.Forms;
-using Flowframes.IO;
 using Flowframes.Main;
 using Flowframes.Os;
 using System;
@@ -74,7 +73,7 @@ namespace Flowframes.Ui
             {
                 for (int i = 0; i < combox.Items.Count; i++)
                 {
-                    if (((string)combox.Items[i]).ToUpper().Contains("NCNN"))
+                    if (((string)combox.Items[i]).Contains("NCNN", StringComparison. OrdinalIgnoreCase))
                         combox.SelectedIndex = i;
                 }
             }
@@ -96,14 +95,14 @@ namespace Flowframes.Ui
             if (type == MessageType.Warning) icon = MessageBoxIcon.Warning;
             else if (type == MessageType.Error) icon = MessageBoxIcon.Error;
 
-            MessageForm form = new MessageForm(text, type.ToString());
+            MessageForm form = new(text, type.ToString());
             form.ShowDialog();
             return DialogResult.OK;
         }
 
         public static DialogResult ShowMessageBox(string text, string title, MessageBoxButtons btns)
         {
-            MessageForm form = new MessageForm(text, title, btns);
+            MessageForm form = new(text, title, btns);
             return form.ShowDialog();
         }
          

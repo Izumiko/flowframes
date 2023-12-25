@@ -6,68 +6,68 @@ namespace Flowframes.Data
 {
     class Implementations
     {
-        public static AI rifeCuda = new AI()
+        public static AI rifeCuda = new()
         {
             Backend = AI.AiBackend.Pytorch,
             NameInternal = "RIFE_CUDA",
             NameLong = "Real-Time Intermediate Flow Estimation",
             FactorSupport = AI.InterpFactorSupport.AnyInteger,
-            SupportedFactors = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+            SupportedFactors = [2, 3, 4, 5, 6, 7, 8, 9, 10]
         };
 
-        public static AI rifeNcnn = new AI()
+        public static AI rifeNcnn = new()
         {
             Backend = AI.AiBackend.Ncnn,
             NameInternal = "RIFE_NCNN",
             NameLong = "Real-Time Intermediate Flow Estimation",
             FactorSupport = AI.InterpFactorSupport.AnyFloat,
-            SupportedFactors = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+            SupportedFactors = [2, 3, 4, 5, 6, 7, 8, 9, 10],
         };
 
-        public static AI rifeNcnnVs = new AI()
+        public static AI rifeNcnnVs = new()
         {
             Backend = AI.AiBackend.Ncnn,
             NameInternal = "RIFE_NCNN_VS",
             NameLong = "Real-Time Intermediate Flow Estimation",
             FactorSupport = AI.InterpFactorSupport.AnyFloat,
-            SupportedFactors = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+            SupportedFactors = [2, 3, 4, 5, 6, 7, 8, 9, 10],
             Piped = true
         };
 
-        public static AI flavrCuda = new AI()
+        public static AI flavrCuda = new()
         {
             Backend = AI.AiBackend.Pytorch,
             NameInternal = "FLAVR_CUDA",
             NameLong = "Flow-Agnostic Video Representations",
             FactorSupport = AI.InterpFactorSupport.Fixed,
-            SupportedFactors = new int[] { 2, 4, 8 },
+            SupportedFactors = [2, 4, 8],
         };
 
-        public static AI dainNcnn = new AI()
+        public static AI dainNcnn = new()
         {
             Backend = AI.AiBackend.Ncnn,
             NameInternal = "DAIN_NCNN",
             NameLong = "Depth-Aware Video Frame Interpolation",
             FactorSupport = AI.InterpFactorSupport.AnyFloat,
-            SupportedFactors = new int[] { 2, 3, 4, 5, 6, 7, 8 },
+            SupportedFactors = [2, 3, 4, 5, 6, 7, 8],
         };
 
-        public static AI xvfiCuda = new AI()
+        public static AI xvfiCuda = new()
         {
             Backend = AI.AiBackend.Pytorch,
             NameInternal = "XVFI_CUDA",
             NameLong = "eXtreme Video Frame Interpolation",
             FactorSupport = AI.InterpFactorSupport.AnyInteger,
-            SupportedFactors = new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+            SupportedFactors = [2, 3, 4, 5, 6, 7, 8, 9, 10],
         };
 
-        public static AI ifrnetNcnn = new AI()
+        public static AI ifrnetNcnn = new()
         {
             Backend = AI.AiBackend.Ncnn,
             NameInternal = "IFRNet_NCNN",
             NameLong = "Intermediate Feature Refine Network",
             FactorSupport = AI.InterpFactorSupport.Fixed,
-            SupportedFactors = new int[] { 2 },
+            SupportedFactors = [2],
         };
 
 
@@ -75,7 +75,7 @@ namespace Flowframes.Data
         {
             get
             {
-                return new List<AI> { rifeNcnnVs, rifeNcnn, rifeCuda, flavrCuda, dainNcnn, xvfiCuda, /* ifrnetNcnn */ };
+                return [rifeNcnnVs, rifeNcnn, rifeCuda, flavrCuda, dainNcnn, xvfiCuda, /* ifrnetNcnn */];
             }
         }
 

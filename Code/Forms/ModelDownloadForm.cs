@@ -1,13 +1,6 @@
 ﻿using Flowframes.MiscUtils;
 using Microsoft.WindowsAPICodePack.Taskbar;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flowframes.Forms
@@ -28,9 +21,9 @@ namespace Flowframes.Forms
         {
             Logger.Log($"ModelDownloadForm SetWorking({state})", true);
             SetProgress(-1);
-            Control[] controlsToDisable = new Control[] { downloadModelsBtn };
-            Control[] controlsToHide = new Control[] { closeBtn };
-            progressCircle.Visible = state;
+            Control[] controlsToDisable = [downloadModelsBtn];
+            Control[] controlsToHide = [closeBtn];
+            //progressCircle.Visible = state;
 
             foreach (Control c in controlsToDisable)
                 c.Enabled = !state;
@@ -60,7 +53,7 @@ namespace Flowframes.Forms
             downloadModelsBtn.Enabled = state;
         }
 
-        private void downloadModelsBtn_Click(object sender, EventArgs e)
+        private void DownloadModelsBtn_Click(object sender, EventArgs e)
         {
             ModelDownloadFormUtils.form = this;
             bool rifeC = rifeCuda.Checked;
@@ -71,12 +64,12 @@ namespace Flowframes.Forms
             ModelDownloadFormUtils.DownloadModels(rifeC, rifeN, dainN, flavrC, xvfiC);
         }
 
-        private void cancelBtn_Click(object sender, EventArgs e)
+        private void CancelBtn_Click(object sender, EventArgs e)
         {
             ModelDownloadFormUtils.Cancel();
         }
 
-        private void closeBtn_Click(object sender, EventArgs e)
+        private void CloseBtn_Click(object sender, EventArgs e)
         {
             ModelDownloadFormUtils.Cancel();
             Close();

@@ -3,10 +3,7 @@ using Flowframes.Forms;
 using Flowframes.IO;
 using Flowframes.Os;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowframes.Main
@@ -44,8 +41,7 @@ namespace Flowframes.Main
                         Logger.Log($"Queue: Running queue task {i + 1}/{initTaskCount}, {Program.batchQueue.Count} tasks left.");
                         await RunEntry(Program.batchQueue.Peek());
 
-                        if (currentBatchForm != null)
-                            currentBatchForm.RefreshGui();
+                        currentBatchForm?.RefreshGui();
                     }
                     catch (Exception e)
                     {
@@ -81,8 +77,10 @@ namespace Flowframes.Main
                 return;
             }
 
-            MediaFile mf = new MediaFile(entry.inPath, false);
-            mf.InputRate = entry.inFps;
+            MediaFile mf = new(entry.inPath, false)
+            {
+                InputRate = entry.inFps
+            };
             await mf.Initialize();
             Interpolate.currentMediaFile = mf;
 
@@ -104,8 +102,7 @@ namespace Flowframes.Main
         {
             busy = state;
 
-            if (currentBatchForm != null)
-                currentBatchForm.SetWorking(state);
+            currentBatchForm?.SetWorking(state);
 
             Program.mainForm.GetMainTabControl().Enabled = !state;   // Lock GUI
         }

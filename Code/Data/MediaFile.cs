@@ -1,5 +1,4 @@
 ﻿using Flowframes.Data.Streams;
-using Flowframes.Forms;
 using Flowframes.IO;
 using Flowframes.Main;
 using Flowframes.Media;
@@ -8,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Stream = Flowframes.Data.Streams.Stream;
 
@@ -30,12 +28,12 @@ namespace Flowframes.Data
         public int StreamCount;
         public int TotalKbits;
         public long Size;
-        public List<Stream> AllStreams = new List<Stream>();
-        public List<VideoStream> VideoStreams = new List<VideoStream>();
-        public List<AudioStream> AudioStreams = new List<AudioStream>();
-        public List<SubtitleStream> SubtitleStreams = new List<SubtitleStream>();
-        public List<DataStream> DataStreams = new List<DataStream>();
-        public List<AttachmentStream> AttachmentStreams = new List<AttachmentStream>();
+        public List<Stream> AllStreams = [];
+        public List<VideoStream> VideoStreams = [];
+        public List<AudioStream> AudioStreams = [];
+        public List<SubtitleStream> SubtitleStreams = [];
+        public List<DataStream> DataStreams = [];
+        public List<AttachmentStream> AttachmentStreams = [];
         public VideoColorData ColorData = null;
         public long CreationTime;
         public bool Initialized = false;
@@ -80,7 +78,7 @@ namespace Flowframes.Data
 
                 string seqPath = Path.Combine(Paths.GetFrameSeqPath(), CreationTime.ToString(), "frames.concat");
                 string chosenExt = IoUtils.GetUniqueExtensions(SourcePath).FirstOrDefault();
-                int fileCount = FfmpegUtils.CreateConcatFile(SourcePath, seqPath, new List<string> { chosenExt });
+                int fileCount = FfmpegUtils.CreateConcatFile(SourcePath, seqPath, [chosenExt]);
                 ImportPath = seqPath;
                 FileCount = fileCount;
                 SequenceInitialized = true;

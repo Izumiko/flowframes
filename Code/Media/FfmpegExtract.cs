@@ -1,6 +1,5 @@
 ﻿using Flowframes.Data;
 using Flowframes.IO;
-using Flowframes.Main;
 using Flowframes.MiscUtils;
 using Flowframes.Ui;
 using System;
@@ -25,7 +24,7 @@ namespace Flowframes.Media
             if (inputIsFrames)
             {
                 string concatFile = Path.Combine(Paths.GetSessionDataPath(), "png-scndetect-concat-temp.ini");
-                FfmpegUtils.CreateConcatFile(inPath, concatFile, Filetypes.imagesInterpCompat.ToList());
+                FfmpegUtils.CreateConcatFile(inPath, concatFile, [.. Filetypes.imagesInterpCompat]);
                 inArg = $"-f concat -safe 0 -i {concatFile.Wrap()}";
             }
 
@@ -41,13 +40,17 @@ namespace Flowframes.Media
             Logger.Log($"Detected {amount} scene {(amount == 1 ? "change" : "changes")}.".Replace(" 0 ", " no "), false, !hiddenLog);
         }
 
+        internal static readonly string[] jpgFmt = ["yuvj420p", "yuvj422p", "yuvj444p", "yuv420p", "yuv422p", "yuv444p"];
+        internal static readonly string[] tiffFmt = ["rgb24", "rgb48le", "pal8", "rgba", "yuv420p", "yuv422p", "yuv440p", "yuv444p"];
+        internal static readonly string[] webpFmt = ["bgra", "yuv420p", "yuva420p"];
+
         static string GetImgArgs(string extension, bool includePixFmt = true, bool alpha = false)
         {
             extension = extension.Lower().Remove(".").Replace("jpeg", "jpg");
 
             string pixFmt = "yuv420p";
 
-            if (Interpolate.currentMediaFile != null && Interpolate.currentMediaFile.VideoStreams.Any())
+            if (Interpolate.currentMediaFile != null && Interpolate.currentMediaFile.VideoStreams.Count != 0)
             {
                 pixFmt = Interpolate.currentMediaFile.VideoStreams.First().PixelFormat.Lower();
             }
@@ -65,7 +68,7 @@ namespace Flowframes.Media
             else if (extension == "jpg")
             {
                 // Fallback to YUV420P if not in list of supported formats
-                if (!new[] { "yuvj420p", "yuvj422p", "yuvj444p", "yuv420p", "yuv422p", "yuv444p" }.Contains(pixFmt))
+                if (!jpgFmt.Contains(pixFmt))
                 {
                     pixFmt = "yuv420p";
                 }
@@ -75,7 +78,7 @@ namespace Flowframes.Media
             else if (extension == "tiff")
             {
                 // Fallback to YUV420P if not in list of supported formats
-                if (!new[] { "rgb24", "rgb48le", "pal8", "rgba", "yuv420p", "yuv422p", "yuv440p", "yuv444p" }.Contains(pixFmt))
+                if (!tiffFmt.Contains(pixFmt))
                 {
                     pixFmt = inputHighBitDepth && outputHighBitDepth ? "rgb48le" : "yuv420p";
                 }
@@ -83,7 +86,7 @@ namespace Flowframes.Media
             else if (extension == "webp")
             {
                 // Fallback to YUV420P if not in list of supported formats
-                if (!new[] { "bgra", "yuv420p", "yuva420p" }.Contains(pixFmt))
+                if (!webpFmt.Contains(pixFmt))
                 {
                     pixFmt = "yuv420p";
                 }
@@ -104,7 +107,7 @@ namespace Flowframes.Media
             string sizeStr = (size.Width > 1 && size.Height > 1) ? $"-s {size.Width}x{size.Height}" : "";
             IoUtils.CreateDir(framesDir);
             string mpStr = deDupe ? ((Config.GetInt(Config.Key.mpdecimateMode) == 0) ? mpDecDef : mpDecAggr) : "";
-            string filters = FormatUtils.ConcatStrings(new[] { GetPadFilter(), mpStr });
+            string filters = FormatUtils.ConcatStrings([GetPadFilter(), mpStr]);
             string vf = filters.Length > 2 ? $"-vf {filters}" : "";
             string rateArg = (rate.GetFloat() > 0 && !deDupe) ? $" -fps_mode cfr -r {rate}" : "-fps_mode passthrough";
             string args = $"{GetTrimArg(true)} -i {inputFile.Wrap()} {GetImgArgs(format, true, alpha)} {rateArg} -frame_pts 1 {vf} {sizeStr} {GetTrimArg(false)} \"{framesDir}/%{Padding.inputFrames}d{format}\"";
@@ -136,7 +139,7 @@ namespace Flowframes.Media
             if (showLog) Logger.Log($"Loading images from {new DirectoryInfo(inpath).Name}...");
             Directory.CreateDirectory(outpath);
 
-            Dictionary<string, string> moveFromTo = new Dictionary<string, string>();
+            Dictionary<string, string> moveFromTo = [];
             int counter = 0;
 
             foreach (FileInfo file in IoUtils.GetFileInfosSorted(inpath))
@@ -165,7 +168,7 @@ namespace Flowframes.Media
 
         static bool AreImagesCompatible(string inpath, int maxHeight)
         {
-            NmkdStopwatch sw = new NmkdStopwatch();
+            NmkdStopwatch sw = new();
             string[] validExtensions = Filetypes.imagesInterpCompat; // = new string[] { ".jpg", ".jpeg", ".png" };
             FileInfo[] files = IoUtils.GetFileInfosSorted(inpath);
 
@@ -238,7 +241,7 @@ namespace Flowframes.Media
             Logger.Log($"ImportImages() - Alpha: {alpha} - Size: {size} - Format: {format}", true, false, "ffmpeg");
             IoUtils.CreateDir(outPath);
             string concatFile = Path.Combine(Paths.GetSessionDataPath(), "import-concat-temp.ini");
-            FfmpegUtils.CreateConcatFile(inPath, concatFile, Filetypes.imagesInterpCompat.ToList());
+            FfmpegUtils.CreateConcatFile(inPath, concatFile, [.. Filetypes.imagesInterpCompat]);
 
             string inArg = $"-f concat -safe 0 -i {concatFile.Wrap()}";
             string linksDir = Path.Combine(concatFile + Paths.symlinksSuffix);
@@ -258,7 +261,7 @@ namespace Flowframes.Media
 
         public static string[] GetTrimArgs()
         {
-            return new string[] { GetTrimArg(true), GetTrimArg(false) };
+            return [GetTrimArg(true), GetTrimArg(false)];
         }
 
         public static string GetTrimArg(bool input)
@@ -303,7 +306,7 @@ namespace Flowframes.Media
         public static async Task ImportSingleImage(string inputFile, string outPath, Size size)
         {
             string sizeStr = (size.Width > 1 && size.Height > 1) ? $"-s {size.Width}x{size.Height}" : "";
-            bool isPng = (Path.GetExtension(outPath).ToLowerInvariant() == ".png");
+            bool isPng = (Path.GetExtension(outPath).Equals(".png", StringComparison.OrdinalIgnoreCase));
             string comprArg = isPng ? pngCompr : "";
             string pixFmt = "-pix_fmt " + (isPng ? $"rgb24 {comprArg}" : "yuvj420p");
             string args = $"-i {inputFile.Wrap()} {comprArg} {sizeStr} {pixFmt} -vf {GetPadFilter()} {outPath.Wrap()}";
@@ -312,7 +315,7 @@ namespace Flowframes.Media
 
         public static async Task ExtractSingleFrame(string inputFile, string outputPath, int frameNum)
         {
-            bool isPng = (Path.GetExtension(outputPath).ToLowerInvariant() == ".png");
+            bool isPng = (Path.GetExtension(outputPath).Equals(".png", StringComparison.OrdinalIgnoreCase));
             string comprArg = isPng ? pngCompr : "";
             string pixFmt = "-pix_fmt " + (isPng ? $"rgb24 {comprArg}" : "yuvj420p");
             string args = $"-i {inputFile.Wrap()} -vf \"select=eq(n\\,{frameNum})\" -vframes 1 {pixFmt} {outputPath.Wrap()}";
@@ -327,7 +330,7 @@ namespace Flowframes.Media
             if (IoUtils.IsPathDirectory(outputPath))
                 outputPath = Path.Combine(outputPath, "last.png");
 
-            bool isPng = (Path.GetExtension(outputPath).ToLowerInvariant() == ".png");
+            bool isPng = (Path.GetExtension(outputPath).Equals(".png", StringComparison.OrdinalIgnoreCase));
             string comprArg = isPng ? pngCompr : "";
             string pixFmt = "-pix_fmt " + (isPng ? $"rgb24 {comprArg}" : "yuvj420p");
             string sizeStr = (size.Width > 1 && size.Height > 1) ? $"-s {size.Width}x{size.Height}" : "";

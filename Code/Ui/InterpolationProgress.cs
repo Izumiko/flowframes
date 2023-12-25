@@ -15,7 +15,7 @@ using Flowframes.Os;
 
 namespace Flowframes.Ui
 {
-    class InterpolationProgress
+    partial class InterpolationProgress
     {
         public static int deletedFramesCount;
         public static int lastFrame;
@@ -80,7 +80,7 @@ namespace Flowframes.Ui
             try
             {
                 string ncnnStr = I.currentSettings.ai.NameInternal.Contains("NCNN") ? " done" : "";
-                Regex frameRegex = new Regex($@"(?<=.)\d*(?={I.currentSettings.interpExt}{ncnnStr})");
+                Regex frameRegex = new($@"(?<=.)\d*(?={I.currentSettings.interpExt}{ncnnStr})");
                 if (!frameRegex.IsMatch(output)) return;
                 lastFrame = Math.Max(int.Parse(frameRegex.Match(output).Value), lastFrame);
             }
@@ -152,7 +152,7 @@ namespace Flowframes.Ui
             float eta = framesLeft * secondsPerFrame;
             string etaStr = FormatUtils.Time(new TimeSpan(0, 0, eta.RoundToInt()), false);
 
-            bool replaceLine = Regex.Split(Logger.textbox.Text, "\r\n|\r|\n").Last().Contains("Average Speed: ");
+            bool replaceLine = RegexCRLF().Split(Logger.textbox.Text).Last().Contains("Average Speed: ");
 
             string logStr = $"Interpolated {frames}/{target} Frames ({percent}%) - Average Speed: {fpsIn} FPS In / {fpsOut} FPS Out - ";
             logStr += $"Time: {FormatUtils.Time(AiProcess.processTime.Elapsed)} - ETA: {etaStr}";
@@ -192,7 +192,7 @@ namespace Flowframes.Ui
             }
         }
 
-        public static Stopwatch timeSinceLastPreviewUpdate = new Stopwatch();
+        public static Stopwatch timeSinceLastPreviewUpdate = new();
 
         public static void SetPreviewImg(Image img)
         {
@@ -203,8 +203,10 @@ namespace Flowframes.Ui
 
             preview.Image = img;
 
-            if (bigPreviewForm != null)
-                bigPreviewForm.SetImage(img);
+            bigPreviewForm?.SetImage(img);
         }
+
+        [GeneratedRegex("\r\n|\r|\n")]
+        private static partial Regex RegexCRLF();
     }
 }

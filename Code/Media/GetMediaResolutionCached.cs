@@ -8,14 +8,14 @@ namespace Flowframes.Media
 {
     class GetMediaResolutionCached
     {
-        private static Dictionary<QueryInfo, Size> cache = new Dictionary<QueryInfo, Size>();
+        private static readonly Dictionary<QueryInfo, Size> cache = [];
 
         public static async Task<Size> GetSizeAsync(string path)
         {
             Logger.Log($"Getting media resolution ({path})", true);
 
             long filesize = IoUtils.GetPathSize(path);
-            QueryInfo hash = new QueryInfo(path, filesize);
+            QueryInfo hash = new(path, filesize);
 
             if (filesize > 0 && CacheContains(hash))
             {

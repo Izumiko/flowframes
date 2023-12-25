@@ -1,13 +1,8 @@
-﻿using Flowframes;
-using Flowframes.IO;
-using Flowframes.Ui;
+﻿using Flowframes.IO;
 using ImageMagick;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowframes.Magick
@@ -23,9 +18,11 @@ namespace Flowframes.Magick
             foreach (string file in files)
             {
                 if (print) Logger.Log("Converting " + Path.GetFileName(file) + " to " + format.ToString().StripNumbers().ToUpper(), false, true);
-                MagickImage img = new MagickImage(file);
-                img.Format = format;
-                img.Quality = quality;
+                MagickImage img = new(file)
+                {
+                    Format = format,
+                    Quality = quality
+                };
                 string outpath = file;
                 if (!string.IsNullOrWhiteSpace(ext)) outpath = Path.ChangeExtension(outpath, ext);
                 img.Write(outpath);
@@ -43,14 +40,16 @@ namespace Flowframes.Magick
                 var files = IoUtils.GetFilesSorted(inputDir);
                 if (print) Logger.Log($"Processing alpha channel...");
                 Directory.CreateDirectory(outputDir);
-                Stopwatch sw = new Stopwatch();
+                Stopwatch sw = new();
                 sw.Restart();
                 int counter = 0;
                 foreach (string file in files)
                 {
-                    MagickImage img = new MagickImage(file);
-                    img.Format = MagickFormat.Png24;
-                    img.Quality = 10;
+                    MagickImage img = new(file)
+                    {
+                        Format = MagickFormat.Png24,
+                        Quality = 10
+                    };
                     img.Threshold(new Percentage(75));
 
                     string outPath = Path.Combine(outputDir, Path.GetFileName(file));
@@ -78,19 +77,19 @@ namespace Flowframes.Magick
                 var files = IoUtils.GetFilesSorted(inputDir);
                 if (print) Logger.Log($"Extracting alpha channel from images...");
                 Directory.CreateDirectory(outputDir);
-                Stopwatch sw = new Stopwatch();
+                Stopwatch sw = new();
                 sw.Restart();
                 int counter = 0;
                 foreach (string file in files)
                 {
-                    MagickImage alphaImg = new MagickImage(file);
+                    MagickImage alphaImg = new(file);
 
                     if (removeInputAlpha)
                     {
                         MagickImage rgbImg = alphaImg;
                         rgbImg.Format = MagickFormat.Png24;
                         rgbImg.Quality = 10;
-                        MagickImage bg = new MagickImage(MagickColors.Black, rgbImg.Width, rgbImg.Height);
+                        MagickImage bg = new(MagickColors.Black, rgbImg.Width, rgbImg.Height);
                         bg.Composite(rgbImg, CompositeOperator.Over);
                         rgbImg = bg;
                         rgbImg.Write(file);
@@ -129,12 +128,14 @@ namespace Flowframes.Magick
             foreach (string file in files)
             {
                 //Logger.Log("Converting " + Path.GetFileName(file) + " to " + format, false, true);
-                MagickImage img = new MagickImage(file);
-                //img.Format = MagickFormat.Bmp;
-                //img.Write(file);
-                //img = new MagickImage(file);
-                img.Format = MagickFormat.Png24;
-                img.Quality = 10;
+                MagickImage img = new(file)
+                {
+                    //img.Format = MagickFormat.Bmp;
+                    //img.Write(file);
+                    //img = new MagickImage(file);
+                    Format = MagickFormat.Png24,
+                    Quality = 10
+                };
                 counter++;
                 if (setProgress)
                     Program.mainForm.SetProgress((int)Math.Round(((float)counter / files.Length) * 100f));

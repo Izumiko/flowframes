@@ -2,11 +2,9 @@
 using Flowframes.MiscUtils;
 using Flowframes.Ui;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Flowframes.Os
 {
@@ -22,7 +20,7 @@ namespace Flowframes.Os
             if(HasEmbeddedPyFolder() && (Config.Get(Config.Key.compressedPyVersion) != Updater.GetInstalledVer().ToString()))
             {
                 Program.mainForm.SetWorking(true, false);
-                Stopwatch sw = new Stopwatch();
+                Stopwatch sw = new();
                 sw.Restart();
                 try
                 {
@@ -158,7 +156,7 @@ namespace Flowframes.Os
             Logger.Log("Checking if system Python is available...", true);
             string sysPyVer = GetSysPyVersion();
 
-            if (!string.IsNullOrWhiteSpace(sysPyVer) && !sysPyVer.ToLowerInvariant().Contains("not found") && sysPyVer.Length <= 35)
+            if (!string.IsNullOrWhiteSpace(sysPyVer) && !sysPyVer.Contains("not found", StringComparison.OrdinalIgnoreCase) && sysPyVer.Length <= 35)
             {
                 isInstalled = true;
                 Logger.Log("Using Python installation: " + sysPyVer, true);

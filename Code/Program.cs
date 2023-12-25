@@ -21,8 +21,8 @@ namespace Flowframes
 {
     static class Program
     {
-        public static string[] fileArgs = new string[0];
-        public static string[] args = new string[0];
+        public static string[] fileArgs = [];
+        public static string[] args = [];
         public static bool initialRun = true;
         public static Form1 mainForm;
 
@@ -31,7 +31,7 @@ namespace Flowframes
         public static string lastInputPath;
         public static bool lastInputPathIsSsd;
 
-        public static Queue<InterpSettings> batchQueue = new Queue<InterpSettings>();
+        public static Queue<InterpSettings> batchQueue = new();
 
         [STAThread]
         static void Main()
@@ -51,7 +51,7 @@ namespace Flowframes
 
             Task.Run(() => DiskSpaceCheckLoop());
             fileArgs = Environment.GetCommandLineArgs().Where(a => a[0] != '-' && File.Exists(a)).ToList().Skip(1).ToArray();
-            args = Environment.GetCommandLineArgs().Where(a => a[0] == '-').Select(x => x.Trim().Substring(1).ToLowerInvariant()).ToArray();
+            args = Environment.GetCommandLineArgs().Where(a => a[0] == '-').Select(x => x.Trim()[1..].ToLowerInvariant()).ToArray();
             Logger.Log($"Command Line: {Environment.CommandLine}", true);
             Logger.Log($"Files: {(fileArgs.Length > 0 ? string.Join(", ", fileArgs) : "None")}", true);
             Logger.Log($"Args: {(args.Length > 0 ? string.Join(", ", args) : "None")}", true);
@@ -148,10 +148,10 @@ namespace Flowframes
                         if (Interpolate.currentSettings == null || Interpolate.currentSettings.tempFolder.Length < 3)
                             return;
 
-                        string drivePath = Interpolate.currentSettings.tempFolder.Substring(0, 2);
+                        string drivePath = Interpolate.currentSettings.tempFolder[..2];
                         long mb = IoUtils.GetDiskSpace(Interpolate.currentSettings.tempFolder);
 
-                        Logger.Log($"Disk space check for '{drivePath}/': {(mb / 1024f).ToString("0.0")} GB free.", true);
+                        Logger.Log($"Disk space check for '{drivePath}/': {mb / 1024f:0.0} GB free.", true);
 
                         bool lowDiskSpace = mb < (Config.GetInt(Config.Key.lowDiskSpacePauseGb, 5) * 1024);
                         bool tooLowDiskSpace = mb < (Config.GetInt(Config.Key.lowDiskSpaceCancelGb, 2) * 1024);

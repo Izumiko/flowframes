@@ -117,7 +117,7 @@ namespace Flowframes.Main
                 }
 
                 string fpsLimitValue = Config.Get(Config.Key.maxFps);
-                float fpsLimit = (fpsLimitValue.Contains("/") ? new Fraction(fpsLimitValue).GetFloat() : fpsLimitValue.GetFloat());
+                float fpsLimit = (fpsLimitValue.Contains('/') ? new Fraction(fpsLimitValue).GetFloat() : fpsLimitValue.GetFloat());
                 int maxFps = s.outSettings.Encoder.GetInfo().MaxFramerate;
 
                 if (passes && s.outFps.GetFloat() < 1f || (s.outFps.GetFloat() > maxFps && !(fpsLimit > 0 && fpsLimit <= maxFps)))
@@ -162,7 +162,7 @@ namespace Flowframes.Main
                 return false;
             }
 
-            if (I.currentSettings.ai.NameInternal.ToUpper().Contains("CUDA") && NvApi.gpuList.Count < 1)
+            if (I.currentSettings.ai.NameInternal.Contains("CUDA", StringComparison.OrdinalIgnoreCase) && NvApi.gpuList.Count < 1)
             {
                 UiUtils.ShowMessageBox("Warning: No Nvidia GPU was detected. CUDA might fall back to CPU!\n\nTry an NCNN implementation instead if you don't have an Nvidia GPU.", UiUtils.MessageType.Error);
 
@@ -226,7 +226,7 @@ namespace Flowframes.Main
         {
             string enc = I.currentSettings.outSettings.Encoder.GetInfo().Name;
 
-            if (enc.ToLowerInvariant().Contains("nvenc") && !(await FfmpegCommands.IsEncoderCompatible(enc)))
+            if (enc.Contains("nvenc", StringComparison.OrdinalIgnoreCase) && !(await FfmpegCommands.IsEncoderCompatible(enc)))
             {
                 UiUtils.ShowMessageBox("NVENC encoding is not available on your hardware!\nPlease use a different encoder.", UiUtils.MessageType.Error);
                 I.Cancel();
@@ -251,11 +251,11 @@ namespace Flowframes.Main
 
         public static Size GetOutputResolution(Size inputRes, bool pad, bool print = false)
         {
-            Size res = new Size(inputRes.Width, inputRes.Height);
+            Size res = new(inputRes.Width, inputRes.Height);
             int maxHeight = Config.GetInt(Config.Key.maxVidHeight);
             int mod = pad ? FfmpegCommands.GetModulo() : 1;
             float factor = res.Height > maxHeight ? (float)maxHeight / res.Height : 1f; // Calculate downscale factor if bigger than max, otherwise just use 1x
-            Logger.Log($"Un-rounded downscaled size: {(res.Width * factor).ToString("0.###")}x{(res.Height * factor).ToString("0.###")}", true);
+            Logger.Log($"Un-rounded downscaled size: {res.Width * factor:0.###}x{res.Height * factor:0.###}", true);
             int width = RoundDivisibleBy((res.Width * factor).RoundToInt(), mod);
             int height = RoundDivisibleBy((res.Height * factor).RoundToInt(), mod);
             res = new Size(width, height);
@@ -337,7 +337,7 @@ namespace Flowframes.Main
 
             List<string> sceneFrames = IoUtils.GetFilesSorted(sceneFramesPath).Select(x => Path.GetFileNameWithoutExtension(x)).ToList();
             List<string> sourceFrames = IoUtils.GetFilesSorted(sourceFramesPath).Select(x => Path.GetFileNameWithoutExtension(x)).ToList();
-            List<string> sceneFramesToDelete = new List<string>();
+            List<string> sceneFramesToDelete = [];
 
             foreach (string scnFrame in sceneFrames)
             {
@@ -368,7 +368,7 @@ namespace Flowframes.Main
         public static Fraction AskForFramerate(string mediaName, bool isImageSequence = true)
         {
             string text = $"Please enter an input frame rate to use for{(isImageSequence ? " the image sequence" : "")} '{mediaName.Trunc(80)}'.";
-            PromptForm form = new PromptForm("Enter Frame Rate", text, "15");
+            PromptForm form = new("Enter Frame Rate", text, "15");
             form.ShowDialog();
             return new Fraction(form.EnteredText);
         }

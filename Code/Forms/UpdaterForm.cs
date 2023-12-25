@@ -1,7 +1,5 @@
-﻿using Flowframes.Data;
-using Flowframes.Os;
+﻿using Flowframes.Os;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -65,14 +63,14 @@ namespace Flowframes.Forms
             downloadingLabel.Text = str;
         }
 
-        private void updatePatreonBtn_Click(object sender, EventArgs e)
+        private void UpdatePatreonBtn_Click(object sender, EventArgs e)
         {
             string link = Updater.GetLatestVerLink(true);
             if(!string.IsNullOrWhiteSpace(link))
                 Process.Start(link);
         }
 
-        private void updateFreeBtn_Click(object sender, EventArgs e)
+        private void UpdateFreeBtn_Click(object sender, EventArgs e)
         {
             string link = Updater.GetLatestVerLink(false);
             if (!string.IsNullOrWhiteSpace(link))

@@ -50,7 +50,7 @@ namespace Flowframes.Forms
             // 
             this.textBox.AllowDrop = true;
             this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox.ForeColor = System.Drawing.Color.White;
             this.textBox.Location = new System.Drawing.Point(16, 57);
             this.textBox.MinimumSize = new System.Drawing.Size(4, 23);
@@ -70,7 +70,7 @@ namespace Flowframes.Forms
             this.confirmBtn.TabIndex = 56;
             this.confirmBtn.Text = "OK";
             this.confirmBtn.UseVisualStyleBackColor = false;
-            this.confirmBtn.Click += new System.EventHandler(this.confirmBtn_Click);
+            this.confirmBtn.Click += new System.EventHandler(this.ConfirmBtn_Click);
             // 
             // PromptForm
             // 

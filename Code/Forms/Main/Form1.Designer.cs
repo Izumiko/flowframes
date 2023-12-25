@@ -51,7 +51,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.runBtn = new System.Windows.Forms.Button();
-            this.progressCircle = new CircularProgressBar.CircularProgressBar();
+            this.progressCircle = new CircularProgressBar_NET5.CircularProgressBar();
             this.logBox = new System.Windows.Forms.TextBox();
             this.inFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.inFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -212,7 +212,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(11, 10);
             this.label13.Margin = new System.Windows.Forms.Padding(8, 8, 3, 0);
@@ -224,7 +224,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(11, 160);
             this.label9.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -236,7 +236,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(11, 130);
             this.label8.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -297,7 +297,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(11, 100);
             this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -335,7 +335,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(11, 70);
             this.label3.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -347,7 +347,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(11, 40);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -427,10 +427,10 @@
             // 
             // progressCircle
             // 
-            this.progressCircle.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this.progressCircle.AnimationFunction = WinFormAnimation_NET5.KnownAnimationFunctions.Linear;
             this.progressCircle.AnimationSpeed = 500;
             this.progressCircle.BackColor = System.Drawing.Color.Transparent;
-            this.progressCircle.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold);
+            this.progressCircle.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Bold);
             this.progressCircle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.progressCircle.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.progressCircle.InnerMargin = 2;
@@ -443,7 +443,7 @@
             this.progressCircle.OuterWidth = 21;
             this.progressCircle.ProgressColor = System.Drawing.Color.LimeGreen;
             this.progressCircle.ProgressWidth = 8;
-            this.progressCircle.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
+            this.progressCircle.SecondaryFont = new System.Drawing.Font("Segoe UI", 36F);
             this.progressCircle.Size = new System.Drawing.Size(40, 40);
             this.progressCircle.StartAngle = 270;
             this.progressCircle.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -516,17 +516,17 @@
             this.updateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.updateBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_system_update_alt_white_48dp;
             this.updateBtn.DrawImage = true;
-            this.updateBtn.FlatAppearance.BorderSize = 0;
-            this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.updateBtn.FlatAppearance.BorderSize = 0;
+            //this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateBtn.ForeColor = System.Drawing.Color.White;
-            this.updateBtn.ImageIndex = 0;
+            //this.updateBtn.ImageIndex = 0;
             this.updateBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.updateBtn.Location = new System.Drawing.Point(790, 12);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(40, 40);
             this.updateBtn.TabIndex = 41;
             this.toolTip1.SetToolTip(this.updateBtn, "Update");
-            this.updateBtn.UseVisualStyleBackColor = false;
+            //this.updateBtn.UseVisualStyleBackColor = false;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // queueBtn
@@ -534,17 +534,16 @@
             this.queueBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.queueBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_queue_white_48dp;
             this.queueBtn.DrawImage = true;
-            this.queueBtn.FlatAppearance.BorderSize = 0;
-            this.queueBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.queueBtn.FlatAppearance.BorderSize = 0;
+            //this.queueBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.queueBtn.ForeColor = System.Drawing.Color.White;
-            this.queueBtn.ImageIndex = 0;
             this.queueBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.queueBtn.Location = new System.Drawing.Point(836, 12);
             this.queueBtn.Name = "queueBtn";
             this.queueBtn.Size = new System.Drawing.Size(40, 40);
             this.queueBtn.TabIndex = 39;
             this.toolTip1.SetToolTip(this.queueBtn, "Open Queue");
-            this.queueBtn.UseVisualStyleBackColor = false;
+            //this.queueBtn.UseVisualStyleBackColor = false;
             this.queueBtn.Click += new System.EventHandler(this.queueBtn_Click);
             this.queueBtn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.queueBtn_MouseDown);
             // 
@@ -588,17 +587,17 @@
             this.settingsBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.settingsBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_settings_white_48dp;
             this.settingsBtn.DrawImage = true;
-            this.settingsBtn.FlatAppearance.BorderSize = 0;
-            this.settingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.settingsBtn.FlatAppearance.BorderSize = 0;
+            //this.settingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsBtn.ForeColor = System.Drawing.Color.White;
-            this.settingsBtn.ImageIndex = 0;
+            //this.settingsBtn.ImageIndex = 0;
             this.settingsBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.settingsBtn.Location = new System.Drawing.Point(882, 12);
             this.settingsBtn.Name = "settingsBtn";
             this.settingsBtn.Size = new System.Drawing.Size(40, 40);
             this.settingsBtn.TabIndex = 38;
             this.toolTip1.SetToolTip(this.settingsBtn, "Open Settings");
-            this.settingsBtn.UseVisualStyleBackColor = false;
+            //this.settingsBtn.UseVisualStyleBackColor = false;
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             // 
             // patreonBtn
@@ -606,17 +605,17 @@
             this.patreonBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.patreonBtn.ButtonImage = global::Flowframes.Properties.Resources.patreon256pxColored;
             this.patreonBtn.DrawImage = true;
-            this.patreonBtn.FlatAppearance.BorderSize = 0;
-            this.patreonBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.patreonBtn.FlatAppearance.BorderSize = 0;
+            //this.patreonBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.patreonBtn.ForeColor = System.Drawing.Color.White;
-            this.patreonBtn.ImageIndex = 0;
+            //this.patreonBtn.ImageIndex = 0;
             this.patreonBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.patreonBtn.Location = new System.Drawing.Point(606, 12);
             this.patreonBtn.Name = "patreonBtn";
             this.patreonBtn.Size = new System.Drawing.Size(40, 40);
             this.patreonBtn.TabIndex = 37;
             this.toolTip1.SetToolTip(this.patreonBtn, "Donate on Patreon :)");
-            this.patreonBtn.UseVisualStyleBackColor = false;
+            //this.patreonBtn.UseVisualStyleBackColor = false;
             this.patreonBtn.Click += new System.EventHandler(this.patreonBtn_Click);
             // 
             // paypalBtn
@@ -624,17 +623,17 @@
             this.paypalBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.paypalBtn.ButtonImage = global::Flowframes.Properties.Resources.paypal256px;
             this.paypalBtn.DrawImage = true;
-            this.paypalBtn.FlatAppearance.BorderSize = 0;
-            this.paypalBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.paypalBtn.FlatAppearance.BorderSize = 0;
+            //this.paypalBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.paypalBtn.ForeColor = System.Drawing.Color.White;
-            this.paypalBtn.ImageIndex = 0;
+            //this.paypalBtn.ImageIndex = 0;
             this.paypalBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.paypalBtn.Location = new System.Drawing.Point(559, 12);
             this.paypalBtn.Name = "paypalBtn";
             this.paypalBtn.Size = new System.Drawing.Size(40, 40);
             this.paypalBtn.TabIndex = 36;
             this.toolTip1.SetToolTip(this.paypalBtn, "Donate :)");
-            this.paypalBtn.UseVisualStyleBackColor = false;
+            //this.paypalBtn.UseVisualStyleBackColor = false;
             this.paypalBtn.Click += new System.EventHandler(this.paypalBtn_Click);
             // 
             // discordBtn
@@ -642,17 +641,17 @@
             this.discordBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.discordBtn.ButtonImage = global::Flowframes.Properties.Resources.discordNew;
             this.discordBtn.DrawImage = true;
-            this.discordBtn.FlatAppearance.BorderSize = 0;
-            this.discordBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.discordBtn.FlatAppearance.BorderSize = 0;
+            //this.discordBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.discordBtn.ForeColor = System.Drawing.Color.White;
-            this.discordBtn.ImageIndex = 0;
+            //this.discordBtn.ImageIndex = 0;
             this.discordBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.discordBtn.Location = new System.Drawing.Point(652, 12);
             this.discordBtn.Name = "discordBtn";
             this.discordBtn.Size = new System.Drawing.Size(40, 40);
             this.discordBtn.TabIndex = 35;
             this.toolTip1.SetToolTip(this.discordBtn, "Chat on Discord");
-            this.discordBtn.UseVisualStyleBackColor = false;
+            //this.discordBtn.UseVisualStyleBackColor = false;
             this.discordBtn.Click += new System.EventHandler(this.discordBtn_Click);
             // 
             // pictureBox1
@@ -714,17 +713,17 @@
             this.debugBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.debugBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_list_alt_white_48dp;
             this.debugBtn.DrawImage = true;
-            this.debugBtn.FlatAppearance.BorderSize = 0;
-            this.debugBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.debugBtn.FlatAppearance.BorderSize = 0;
+            //this.debugBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.debugBtn.ForeColor = System.Drawing.Color.White;
-            this.debugBtn.ImageIndex = 0;
+            //this.debugBtn.ImageIndex = 0;
             this.debugBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.debugBtn.Location = new System.Drawing.Point(744, 12);
             this.debugBtn.Name = "debugBtn";
             this.debugBtn.Size = new System.Drawing.Size(40, 40);
             this.debugBtn.TabIndex = 75;
             this.toolTip1.SetToolTip(this.debugBtn, "Debug Tools");
-            this.debugBtn.UseVisualStyleBackColor = false;
+            //this.debugBtn.UseVisualStyleBackColor = false;
             this.debugBtn.Click += new System.EventHandler(this.debugBtn_Click);
             // 
             // panel2
@@ -945,7 +944,7 @@
             // labelOutput
             // 
             this.labelOutput.AutoSize = true;
-            this.labelOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOutput.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOutput.ForeColor = System.Drawing.Color.Silver;
             this.labelOutput.Location = new System.Drawing.Point(692, 161);
             this.labelOutput.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -1038,15 +1037,15 @@
             // aiInfoBtn
             // 
             this.aiInfoBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.aiInfoBtn.FlatAppearance.BorderSize = 0;
-            this.aiInfoBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.aiInfoBtn.FlatAppearance.BorderSize = 0;
+            //this.aiInfoBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.aiInfoBtn.ForeColor = System.Drawing.Color.White;
             this.aiInfoBtn.Location = new System.Drawing.Point(689, 7);
             this.aiInfoBtn.Name = "aiInfoBtn";
             this.aiInfoBtn.Size = new System.Drawing.Size(206, 23);
             this.aiInfoBtn.TabIndex = 45;
             this.aiInfoBtn.Text = "About This Implementation...";
-            this.aiInfoBtn.UseVisualStyleBackColor = false;
+            //this.aiInfoBtn.UseVisualStyleBackColor = false;
             this.aiInfoBtn.Click += new System.EventHandler(this.aiInfoBtn_Click);
             // 
             // outSpeedCombox
@@ -1099,7 +1098,7 @@
             // 
             this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Silver;
             this.label25.Location = new System.Drawing.Point(10, 15);
             this.label25.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -1111,7 +1110,7 @@
             // inputInfo
             // 
             this.inputInfo.AutoSize = true;
-            this.inputInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputInfo.ForeColor = System.Drawing.Color.Silver;
             this.inputInfo.Location = new System.Drawing.Point(280, 190);
             this.inputInfo.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -1122,7 +1121,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Silver;
             this.label1.Location = new System.Drawing.Point(11, 190);
             this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 3, 0);
@@ -1134,43 +1133,43 @@
             // browseOutBtn
             // 
             this.browseOutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.browseOutBtn.FlatAppearance.BorderSize = 0;
-            this.browseOutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.browseOutBtn.FlatAppearance.BorderSize = 0;
+            //this.browseOutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.browseOutBtn.ForeColor = System.Drawing.Color.White;
             this.browseOutBtn.Location = new System.Drawing.Point(689, 67);
             this.browseOutBtn.Name = "browseOutBtn";
             this.browseOutBtn.Size = new System.Drawing.Size(206, 23);
             this.browseOutBtn.TabIndex = 35;
             this.browseOutBtn.Text = "Browse (Folder)";
-            this.browseOutBtn.UseVisualStyleBackColor = false;
+            //this.browseOutBtn.UseVisualStyleBackColor = false;
             this.browseOutBtn.Click += new System.EventHandler(this.browseOutBtn_Click);
             // 
             // browseInputFileBtn
             // 
             this.browseInputFileBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.browseInputFileBtn.FlatAppearance.BorderSize = 0;
-            this.browseInputFileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.browseInputFileBtn.FlatAppearance.BorderSize = 0;
+            //this.browseInputFileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.browseInputFileBtn.ForeColor = System.Drawing.Color.White;
             this.browseInputFileBtn.Location = new System.Drawing.Point(795, 38);
             this.browseInputFileBtn.Name = "browseInputFileBtn";
             this.browseInputFileBtn.Size = new System.Drawing.Size(100, 23);
             this.browseInputFileBtn.TabIndex = 34;
             this.browseInputFileBtn.Text = "Browse (Video)";
-            this.browseInputFileBtn.UseVisualStyleBackColor = false;
+            //this.browseInputFileBtn.UseVisualStyleBackColor = false;
             this.browseInputFileBtn.Click += new System.EventHandler(this.browseInputFileBtn_Click);
             // 
             // browseInputBtn
             // 
             this.browseInputBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.browseInputBtn.FlatAppearance.BorderSize = 0;
-            this.browseInputBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.browseInputBtn.FlatAppearance.BorderSize = 0;
+            //this.browseInputBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.browseInputBtn.ForeColor = System.Drawing.Color.White;
             this.browseInputBtn.Location = new System.Drawing.Point(689, 38);
             this.browseInputBtn.Name = "browseInputBtn";
             this.browseInputBtn.Size = new System.Drawing.Size(100, 23);
             this.browseInputBtn.TabIndex = 33;
             this.browseInputBtn.Text = "Browse (Folder)";
-            this.browseInputBtn.UseVisualStyleBackColor = false;
+            //this.browseInputBtn.UseVisualStyleBackColor = false;
             this.browseInputBtn.Click += new System.EventHandler(this.browseInputBtn_Click);
             // 
             // quickSettingsTab
@@ -1489,15 +1488,15 @@
             // trimResetBtn
             // 
             this.trimResetBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.trimResetBtn.FlatAppearance.BorderSize = 0;
-            this.trimResetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.trimResetBtn.FlatAppearance.BorderSize = 0;
+            //this.trimResetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.trimResetBtn.ForeColor = System.Drawing.Color.White;
             this.trimResetBtn.Location = new System.Drawing.Point(183, 0);
             this.trimResetBtn.Name = "trimResetBtn";
             this.trimResetBtn.Size = new System.Drawing.Size(150, 23);
             this.trimResetBtn.TabIndex = 80;
             this.trimResetBtn.Text = "Reset To Full Length";
-            this.trimResetBtn.UseVisualStyleBackColor = false;
+            //this.trimResetBtn.UseVisualStyleBackColor = false;
             this.trimResetBtn.Click += new System.EventHandler(this.trimResetBtn_Click);
             // 
             // trimStartBox
@@ -1603,20 +1602,20 @@
             // 
             // htButton1
             // 
-            this.htButton1.BackColor = System.Drawing.Color.Transparent;
+            //this.htButton1.BackColor = System.Drawing.Color.Transparent;
             this.htButton1.ButtonImage = global::Flowframes.Properties.Resources.separatorTest1;
             this.htButton1.DrawImage = true;
             this.htButton1.Enabled = false;
-            this.htButton1.FlatAppearance.BorderSize = 0;
-            this.htButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.htButton1.FlatAppearance.BorderSize = 0;
+            //this.htButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.htButton1.ForeColor = System.Drawing.Color.White;
-            this.htButton1.ImageIndex = 0;
+            //this.htButton1.ImageIndex = 0;
             this.htButton1.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.htButton1.Location = new System.Drawing.Point(698, 9);
             this.htButton1.Name = "htButton1";
             this.htButton1.Size = new System.Drawing.Size(40, 40);
             this.htButton1.TabIndex = 40;
-            this.htButton1.UseVisualStyleBackColor = false;
+            //this.htButton1.UseVisualStyleBackColor = false;
             // 
             // runStepBtn
             // 
@@ -1638,7 +1637,7 @@
             this.stepSelector.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.stepSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.stepSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stepSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepSelector.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stepSelector.ForeColor = System.Drawing.Color.White;
             this.stepSelector.FormattingEnabled = true;
             this.stepSelector.Items.AddRange(new object[] {
@@ -1745,7 +1744,7 @@
             this.Controls.Add(this.longProgBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.logBox);
-            this.Controls.Add(this.progressCircle);
+            //this.Controls.Add(this.progressCircle);
             this.Controls.Add(this.titleLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1814,7 +1813,7 @@
         private System.Windows.Forms.TextBox fpsInTbox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private CircularProgressBar.CircularProgressBar progressCircle;
+        private CircularProgressBar_NET5.CircularProgressBar progressCircle;
         private System.Windows.Forms.TextBox logBox;
         private System.Windows.Forms.FolderBrowserDialog inFolderDialog;
         private System.Windows.Forms.OpenFileDialog inFileDialog;

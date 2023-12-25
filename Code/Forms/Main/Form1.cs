@@ -1,5 +1,4 @@
-﻿using Flowframes.Forms;
-using Flowframes.IO;
+﻿using Flowframes.IO;
 using Flowframes.Main;
 using Flowframes.Os;
 using Flowframes.Ui;
@@ -26,8 +25,8 @@ namespace Flowframes.Forms.Main
     {
         [Flags]
         public enum EXECUTION_STATE : uint { ES_AWAYMODE_REQUIRED = 0x00000040, ES_CONTINUOUS = 0x80000000, ES_DISPLAY_REQUIRED = 0x00000002, ES_SYSTEM_REQUIRED = 0x00000001 }
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags); // PREVENT WINDOWS FROM GOING TO SLEEP
+        [LibraryImport("kernel32.dll", SetLastError = true)]
+        private static partial EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags); // PREVENT WINDOWS FROM GOING TO SLEEP
 
         private bool _initialized = false;
         private bool _mainTabInitialized = false;
@@ -378,23 +377,23 @@ namespace Flowframes.Forms.Main
 
         private void browseInputBtn_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog { InitialDirectory = inputTbox.Text.Trim(), IsFolderPicker = true };
+            CommonOpenFileDialog dialog = new() { InitialDirectory = inputTbox.Text.Trim(), IsFolderPicker = true };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                DragDropHandler(new string[] { dialog.FileName });
+                DragDropHandler([dialog.FileName]);
         }
 
         private void browseInputFileBtn_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog { InitialDirectory = inputTbox.Text.Trim(), IsFolderPicker = false };
+            CommonOpenFileDialog dialog = new() { InitialDirectory = inputTbox.Text.Trim(), IsFolderPicker = false };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                DragDropHandler(new string[] { dialog.FileName });
+                DragDropHandler([dialog.FileName]);
         }
 
         private void browseOutBtn_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog { InitialDirectory = outputTbox.Text.Trim(), IsFolderPicker = true };
+            CommonOpenFileDialog dialog = new() { InitialDirectory = outputTbox.Text.Trim(), IsFolderPicker = true };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 outputTbox.Text = dialog.FileName;
@@ -478,10 +477,10 @@ namespace Flowframes.Forms.Main
 
         public void UpdateUiFps()
         {
-            if (fpsInTbox.Text.Contains("/"))   // Parse fraction
+            if (fpsInTbox.Text.Contains('/'))   // Parse fraction
             {
                 string[] split = fpsInTbox.Text.Split('/');
-                Fraction frac = new Fraction(split[0].GetInt(), split[1].GetInt());
+                Fraction frac = new(split[0].GetInt(), split[1].GetInt());
                 fpsOutTbox.Text = (frac * interpFactorCombox.GetFloat()).ToString() + " FPS";
 
                 if (!fpsInTbox.ReadOnly)
@@ -511,9 +510,9 @@ namespace Flowframes.Forms.Main
         {
             Logger.Log($"SetWorking({state})", true);
             SetProgress(-1);
-            Control[] controlsToDisable = new Control[] { runBtn, runStepBtn, stepSelector, settingsBtn };
-            Control[] controlsToHide = new Control[] { runBtn, runStepBtn, stepSelector };
-            progressCircle.Visible = state;
+            Control[] controlsToDisable = [runBtn, runStepBtn, stepSelector, settingsBtn];
+            Control[] controlsToHide = [runBtn, runStepBtn, stepSelector];
+            //progressCircle.Visible = state;
             busyControlsPanel.Visible = state;
 
             foreach (Control c in controlsToDisable)
@@ -596,8 +595,7 @@ namespace Flowframes.Forms.Main
             {
                 SetTab(interpOptsTab.Name);
                 queueBtn_Click(null, null);
-                if (BatchProcessing.currentBatchForm != null)
-                    BatchProcessing.currentBatchForm.LoadDroppedPaths(files, start);
+                BatchProcessing.currentBatchForm?.LoadDroppedPaths(files, start);
             }
             else
             {

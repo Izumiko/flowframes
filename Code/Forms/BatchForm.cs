@@ -19,7 +19,7 @@ namespace Flowframes.Forms
             BatchProcessing.currentBatchForm = this;
         }
 
-        private void addToQueue_Click(object sender, EventArgs e)
+        private void AddToQueue_Click(object sender, EventArgs e)
         {
             Program.batchQueue.Enqueue(Program.mainForm.GetCurrentSettings());
             RefreshGui();
@@ -82,7 +82,7 @@ namespace Flowframes.Forms
             taskList.SetSelected(newIndex, true);
         }
 
-        private void runBtn_Click(object sender, EventArgs e)
+        private void RunBtn_Click(object sender, EventArgs e)
         {
             stopBtn.Enabled = true;
             BatchProcessing.Start();
@@ -90,19 +90,19 @@ namespace Flowframes.Forms
             Program.mainForm.BringToFront();
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private void ClearBtn_Click(object sender, EventArgs e)
         {
             Program.batchQueue.Clear();
             RefreshGui();
         }
 
-        private void stopBtn_Click(object sender, EventArgs e)
+        private void StopBtn_Click(object sender, EventArgs e)
         {
             stopBtn.Enabled = false;
             BatchProcessing.stopped = true;
         }
 
-        private void forceStopBtn_Click(object sender, EventArgs e)
+        private void ForceStopBtn_Click(object sender, EventArgs e)
         {
             Interpolate.Cancel("Force stopped by user.");
             BatchProcessing.stopped = true;
@@ -113,11 +113,11 @@ namespace Flowframes.Forms
             BatchProcessing.currentBatchForm = null;
         }
 
-        private void clearSelectedBtn_Click(object sender, EventArgs e)
+        private void ClearSelectedBtn_Click(object sender, EventArgs e)
         {
             if (taskList.SelectedItem == null) return;
 
-            Queue<InterpSettings> temp = new Queue<InterpSettings>();
+            Queue<InterpSettings> temp = new();
 
             for(int i = 0; i < Program.batchQueue.Count; i++)
             {
@@ -130,7 +130,7 @@ namespace Flowframes.Forms
             RefreshGui();
         }
 
-        private void taskList_SelectedIndexChanged(object sender, EventArgs e)
+        private void TaskList_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool sel = taskList.SelectedItem != null;
             clearSelectedBtn.Enabled = sel;
@@ -138,9 +138,9 @@ namespace Flowframes.Forms
             moveDownBtn.Visible = sel;
         }
 
-        private void taskList_DragEnter(object sender, DragEventArgs e) { e.Effect = DragDropEffects.Copy; }
+        private void TaskList_DragEnter(object sender, DragEventArgs e) { e.Effect = DragDropEffects.Copy; }
 
-        private async void taskList_DragDrop(object sender, DragEventArgs e)
+        private async void TaskList_DragDrop(object sender, DragEventArgs e)
         {
             string[] droppedPaths = (string[])e.Data.GetData(DataFormats.FileDrop);
             await LoadDroppedPaths(droppedPaths);
@@ -169,15 +169,15 @@ namespace Flowframes.Forms
             }
 
             if (start)
-                runBtn_Click(null, null);
+                RunBtn_Click(null, null);
         }
 
-        private void moveUpBtn_Click(object sender, EventArgs e)
+        private void MoveUpBtn_Click(object sender, EventArgs e)
         {
             MoveListItem(-1);
         }
 
-        private void moveDownBtn_Click(object sender, EventArgs e)
+        private void MoveDownBtn_Click(object sender, EventArgs e)
         {
             MoveListItem(1);
         }

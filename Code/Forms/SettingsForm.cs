@@ -1,6 +1,5 @@
 ﻿using Flowframes.Data;
 using Flowframes.IO;
-using Flowframes.Media;
 using Flowframes.MiscUtils;
 using Flowframes.Ui;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -9,7 +8,6 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-#pragma warning disable IDE1006
 
 namespace Flowframes.Forms
 {
@@ -171,31 +169,31 @@ namespace Flowframes.Forms
             ConfigParser.LoadGuiElement(ffEncArgs);
         }
 
-        private void tempFolderLoc_SelectedIndexChanged(object sender, EventArgs e)
+        private void TempFolderLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             tempDirBrowseBtn.Visible = tempFolderLoc.SelectedIndex == 4;
             tempDirCustom.Visible = tempFolderLoc.SelectedIndex == 4;
         }
 
-        private void outFolderLoc_SelectedIndexChanged(object sender, EventArgs e)
+        private void OutFolderLoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             custOutDirBrowseBtn.Visible = outFolderLoc.SelectedIndex == 1;
             custOutDir.Visible = outFolderLoc.SelectedIndex == 1;
         }
 
-        private void tempDirBrowseBtn_Click(object sender, EventArgs e)
+        private void TempDirBrowseBtn_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog { InitialDirectory = tempDirCustom.Text.Trim(), IsFolderPicker = true };
-            
+            CommonOpenFileDialog dialog = new() { InitialDirectory = tempDirCustom.Text.Trim(), IsFolderPicker = true };
+
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 tempDirCustom.Text = dialog.FileName;
 
             ConfigParser.SaveGuiElement(tempDirCustom);
         }
 
-        private void custOutDirBrowseBtn_Click(object sender, EventArgs e)
+        private void CustOutDirBrowseBtn_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog { InitialDirectory = custOutDir.Text.Trim(), IsFolderPicker = true };
+            CommonOpenFileDialog dialog = new() { InitialDirectory = custOutDir.Text.Trim(), IsFolderPicker = true };
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 custOutDir.Text = dialog.FileName;
@@ -203,38 +201,38 @@ namespace Flowframes.Forms
             ConfigParser.SaveGuiElement(custOutDir);
         }
 
-        private void cmdDebugMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmdDebugMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (initialized && cmdDebugMode.SelectedIndex == 2)
                 UiUtils.ShowMessageBox("If you enable this, you need to close the CMD window manually after the process has finished, otherwise processing will be paused!", UiUtils.MessageType.Warning);
         }
 
-        private void dedupMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void DedupMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             dedupeSensLabel.Visible = dedupMode.SelectedIndex != 0;
             magickDedupePanel.Visible = dedupMode.SelectedIndex == 1;
             mpDedupePanel.Visible = dedupMode.SelectedIndex == 2;
         }
 
-        private void clearModelCacheBtn_Click(object sender, EventArgs e)
+        private void ClearModelCacheBtn_Click(object sender, EventArgs e)
         {
             ModelDownloader.DeleteAllModels();
             clearModelCacheBtn.Text = "Clear Model Cache";
             CheckModelCacheSize();
         }
 
-        private void modelDownloaderBtn_Click(object sender, EventArgs e)
+        private void ModelDownloaderBtn_Click(object sender, EventArgs e)
         {
             new ModelDownloadForm().ShowDialog();
             CheckModelCacheSize();
         }
 
-        private void autoEncMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void AutoEncMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             autoEncBlockPanel.Visible = autoEncMode.SelectedIndex == 0;
         }
 
-        private async void resetBtn_Click(object sender, EventArgs e)
+        private async void ResetBtn_Click(object sender, EventArgs e)
         {
             DialogResult dialog = UiUtils.ShowMessageBox($"Are you sure you want to reset the configuration?", "Are you sure?", MessageBoxButtons.YesNo);
 
@@ -245,7 +243,7 @@ namespace Flowframes.Forms
             SettingsForm_Load(null, null);
         }
 
-        private void btnResetHwEnc_Click(object sender, EventArgs e)
+        private void BtnResetHwEnc_Click(object sender, EventArgs e)
         {
             Close();
             Program.mainForm.ResetOutputUi();

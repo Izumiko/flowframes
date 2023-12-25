@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Flowframes.Data
 {
@@ -22,7 +18,7 @@ namespace Flowframes.Data
             autoEncode = false;
             interpolatedInputFrames = 0;
 
-            Dictionary<string, string> entries = new Dictionary<string, string>();
+            Dictionary<string, string> entries = [];
 
             foreach (string line in serializedData.SplitIntoLines())
             {
@@ -41,7 +37,7 @@ namespace Flowframes.Data
             }
         }
 
-        public override string ToString ()
+        public override readonly string ToString ()
         {
             string s = $"AUTOENC|{autoEncode}\n";
 

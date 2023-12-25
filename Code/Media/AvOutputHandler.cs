@@ -1,17 +1,12 @@
 ﻿using Flowframes.Forms.Main;
 using Flowframes.MiscUtils;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using static Flowframes.AvProcess;
 
 namespace Flowframes.Media
 {
-    class AvOutputHandler
+    partial class AvOutputHandler
     {
         public static readonly string prefix = "[ffmpeg]";
 
@@ -35,8 +30,7 @@ namespace Flowframes.Media
 
             if (!hidden && showProgressBar && line.Contains("Time:"))
             {
-                Regex timeRegex = new Regex("(?<=Time:).*(?= )");
-                UpdateFfmpegProgress(timeRegex.Match(line).Value);
+                UpdateFfmpegProgress(RegexTime().Match(line).Value);
             }
 
 
@@ -121,7 +115,7 @@ namespace Flowframes.Media
 
         static bool HideMessage(string msg)
         {
-            string[] hiddenMsgs = new string[] { "can produce invalid output", "pixel format", "provided invalid", "Non-monotonous", "not enough frames to estimate rate", "invalid dropping", "message repeated" };
+            string[] hiddenMsgs = ["can produce invalid output", "pixel format", "provided invalid", "Non-monotonous", "not enough frames to estimate rate", "invalid dropping", "message repeated"];
 
             foreach (string str in hiddenMsgs)
                 if (msg.MatchesWildcard($"*{str}*"))
@@ -129,5 +123,8 @@ namespace Flowframes.Media
 
             return false;
         }
+
+        [GeneratedRegex("(?<=Time:).*(?= )")]
+        private static partial Regex RegexTime();
     }
 }

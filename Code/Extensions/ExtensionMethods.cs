@@ -5,23 +5,23 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Flowframes.Data;
-using System.Management.Automation;
+//using System.Management.Automation;
+using System.IO.Enumeration;
 using System.Drawing;
 using Flowframes.MiscUtils;
 
 namespace Flowframes
 {
-    public static class ExtensionMethods
+    public static partial class ExtensionMethods
     {
         public static string TrimNumbers(this string s, bool allowDotComma = false)
         {
             if (!allowDotComma)
-                s = Regex.Replace(s, "[^0-9]", "");
+                s = RegexNumber().Replace(s, "");
             else
-                s = Regex.Replace(s, "[^.,0-9]", "");
+                s = RegexNumberDotComma().Replace(s, "");
             return s.Trim();
         }
 
@@ -79,8 +79,10 @@ namespace Flowframes
                 return 0f;
 
             string num = str.TrimNumbers(true).Replace(",", ".");
-            float.TryParse(num, out float value);
-            return value;
+            if (float.TryParse(num, out float value))
+                return value;
+            else
+                return 0f;
         }
 
         public static string Wrap(this string path, bool addSpaceFront = false, bool addSpaceEnd = false)
@@ -91,7 +93,7 @@ namespace Flowframes
                 s = " " + s;
 
             if (addSpaceEnd)
-                s = s + " ";
+                s += " ";
 
             return s;
         }
@@ -131,14 +133,14 @@ namespace Flowframes
         public static string[] SplitIntoLines(this string str)
         {
             if (string.IsNullOrWhiteSpace(str))
-                return new string[0];
+                return [];
 
-            return Regex.Split(str, "\r\n|\r|\n");
+            return RegexCRLF().Split(str);
         }
 
         public static string Trunc(this string inStr, int maxChars, bool addEllipsis = true)
         {
-            string str = inStr.Length <= maxChars ? inStr : inStr.Substring(0, maxChars);
+            string str = inStr.Length <= maxChars ? inStr : inStr[..maxChars];
             if(addEllipsis && inStr.Length > maxChars)
                 str += "…";
             return str;
@@ -146,7 +148,7 @@ namespace Flowframes
 
         public static string StripBadChars(this string str)
         {
-            string outStr = Regex.Replace(str, @"[^\u0020-\u007E]", string.Empty);
+            string outStr = RegexBadChars().Replace(str, string.Empty);
             outStr = outStr.Remove("(").Remove(")").Remove("[").Remove("]").Remove("{").Remove("}").Remove("%").Remove("'").Remove("~");
             return outStr;
         }
@@ -171,7 +173,7 @@ namespace Flowframes
             bool previousIsWhitespace = false;
             for (int i = 0; i < str.Length; i++)
             {
-                if (Char.IsWhiteSpace(str[i]))
+                if (char.IsWhiteSpace(str[i]))
                 {
                     if (previousIsWhitespace)
                         continue;
@@ -228,8 +230,9 @@ namespace Flowframes
 
         public static bool MatchesWildcard(this string str, string wildcard)
         {
-            WildcardPattern pattern = new WildcardPattern(wildcard);
-            return pattern.IsMatch(str);
+            //WildcardPattern pattern = new WildcardPattern(wildcard);
+            //return pattern.IsMatch(str);
+            return FileSystemName.MatchesSimpleExpression(wildcard, str);
         }
 
         public static int RoundMod(this int n, int mod = 2)     // Round to a number that's divisible by 2 (for h264 etc)
@@ -274,8 +277,7 @@ namespace Flowframes
 
         public static string Get(this Dictionary<string, string> dict, string key, bool returnKeyInsteadOfEmptyString = false, bool ignoreCase = false)
         {
-            if (key == null)
-                key = "";
+            key ??= "";
 
             for (int i = 0; i < dict.Count; i++)
             {
@@ -299,8 +301,7 @@ namespace Flowframes
 
         public static void FillFromEnum<TEnum>(this ComboBox comboBox, Dictionary<string, string> stringMap = null, int defaultIndex = -1, List<TEnum> exclusionList = null) where TEnum : Enum
         {
-            if (exclusionList == null)
-                exclusionList = new List<TEnum>();
+            exclusionList ??= [];
 
             var entriesToAdd = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().Except(exclusionList);
             var strings = entriesToAdd.Select(x => stringMap.Get(x.ToString(), true));
@@ -315,8 +316,7 @@ namespace Flowframes
 
         public static void FillFromEnum<TEnum>(this ComboBox comboBox, IEnumerable<TEnum> entries, Dictionary<string, string> stringMap, TEnum defaultEntry) where TEnum : Enum
         {
-            if (stringMap == null)
-                stringMap = new Dictionary<string, string>();
+            stringMap ??= [];
 
             comboBox.Items.Clear();
             comboBox.Items.AddRange(entries.Select(x => stringMap.Get(x.ToString(), true)).ToArray());
@@ -325,11 +325,9 @@ namespace Flowframes
 
         public static void FillFromStrings(this ComboBox comboBox, IEnumerable<string> entries, Dictionary<string, string> stringMap = null, int defaultIndex = -1, IEnumerable<string> exclusionList = null)
         {
-            if (stringMap == null)
-                stringMap = new Dictionary<string, string>();
+            stringMap ??= [];
 
-            if (exclusionList == null)
-                exclusionList = new List<string>();
+            exclusionList ??= new List<string>();
 
             comboBox.Items.Clear();
             comboBox.Items.AddRange(entries.Select(x => stringMap.Get(x, true)).Except(exclusionList).ToArray());
@@ -340,8 +338,7 @@ namespace Flowframes
 
         public static void SetIfTextMatches(this ComboBox comboBox, string str, bool ignoreCase = true, Dictionary<string, string> stringMap = null)
         {
-            if (stringMap == null)
-                stringMap = new Dictionary<string, string>();
+            stringMap ??= [];
 
             str = stringMap.Get(str, true, true);
 
@@ -396,5 +393,14 @@ namespace Flowframes
         {
             return !string.IsNullOrWhiteSpace(s);
         }
+
+        [GeneratedRegex("[^0-9]")]
+        private static partial Regex RegexNumber();
+        [GeneratedRegex("[^.,0-9]")]
+        private static partial Regex RegexNumberDotComma();
+        [GeneratedRegex("\r\n|\r|\n")]
+        private static partial Regex RegexCRLF();
+        [GeneratedRegex(@"[^\u0020-\u007E]")]
+        private static partial Regex RegexBadChars();
     }
 }

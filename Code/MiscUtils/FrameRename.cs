@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Flowframes.Data;
 using Flowframes.IO;
@@ -24,7 +21,7 @@ namespace Flowframes.MiscUtils
 
         public static async Task Unrename()
         {
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
 
             string[] files = IoUtils.GetFilesSorted(Interpolate.currentSettings.framesFolder);

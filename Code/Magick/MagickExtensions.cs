@@ -1,16 +1,10 @@
-﻿using Flowframes.MiscUtils;
-using ImageMagick;
+﻿using ImageMagick;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace Flowframes.Magick
 {
@@ -29,7 +23,6 @@ namespace Flowframes.Magick
 
     public static class MagickExtensions
     {
-        [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "False positive.")]
         public static Bitmap ToBitmap(this MagickImage magickImg, BitmapDensity density)
         {
             string mapping = "BGR";
@@ -51,25 +44,23 @@ namespace Flowframes.Magick
                     format = PixelFormat.Format32bppArgb;
                 }
 
-                using (var pixels = image.GetPixelsUnsafe())
+                using var pixels = image.GetPixelsUnsafe();
+                var bitmap = new Bitmap(image.Width, image.Height, format);
+                var data = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, format);
+                var destination = data.Scan0;
+
+                for (int y = 0; y < image.Height; y++)
                 {
-                    var bitmap = new Bitmap(image.Width, image.Height, format);
-                    var data = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, format);
-                    var destination = data.Scan0;
+                    byte[] bytes = pixels.ToByteArray(0, y, image.Width, 1, mapping);
+                    Marshal.Copy(bytes, 0, destination, bytes.Length);
 
-                    for (int y = 0; y < image.Height; y++)
-                    {
-                        byte[] bytes = pixels.ToByteArray(0, y, image.Width, 1, mapping);
-                        Marshal.Copy(bytes, 0, destination, bytes.Length);
-
-                        destination = new IntPtr(destination.ToInt64() + data.Stride);
-                    }
-
-                    bitmap.UnlockBits(data);
-                    SetBitmapDensity(magickImg, bitmap, density);
-
-                    return bitmap;
+                    destination = new IntPtr(destination.ToInt64() + data.Stride);
                 }
+
+                bitmap.UnlockBits(data);
+                SetBitmapDensity(magickImg, bitmap, density);
+
+                return bitmap;
             }
             finally
             {
@@ -86,7 +77,7 @@ namespace Flowframes.Magick
         {
             imageMagick.Format = InternalMagickFormatInfo.GetFormat(imageFormat);
 
-            MemoryStream memStream = new MemoryStream();
+            MemoryStream memStream = new();
             imageMagick.Write(memStream);
             memStream.Position = 0;
 
@@ -100,16 +91,14 @@ namespace Flowframes.Magick
 
         public static void FromBitmap(this MagickImage imageMagick, Bitmap bitmap)
         {
-            using (MemoryStream memStream = new MemoryStream())
-            {
-                if (IsSupportedImageFormat(bitmap.RawFormat))
-                    bitmap.Save(memStream, bitmap.RawFormat);
-                else
-                    bitmap.Save(memStream, ImageFormat.Bmp);
+            using MemoryStream memStream = new();
+            if (IsSupportedImageFormat(bitmap.RawFormat))
+                bitmap.Save(memStream, bitmap.RawFormat);
+            else
+                bitmap.Save(memStream, ImageFormat.Bmp);
 
-                memStream.Position = 0;
-                imageMagick.Read(memStream);
-            }
+            memStream.Position = 0;
+            imageMagick.Read(memStream);
         }
 
         private static bool IsSupportedImageFormat(ImageFormat format)

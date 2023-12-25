@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace Flowframes.IO
     class Config
     {
         private static string configPath;
-        public static Dictionary<string, string> cachedValues = new Dictionary<string, string>();
+        public static Dictionary<string, string> cachedValues = [];
 
         public static void Init()
         {
@@ -68,7 +67,7 @@ namespace Flowframes.IO
 
         private static void WriteConfig()
         {
-            SortedDictionary<string, string> cachedValuesSorted = new SortedDictionary<string, string>(cachedValues);
+            SortedDictionary<string, string> cachedValuesSorted = new(cachedValues);
             File.WriteAllText(configPath, JsonConvert.SerializeObject(cachedValuesSorted, Formatting.Indented));
         }
 
@@ -76,11 +75,10 @@ namespace Flowframes.IO
         {
             try
             {
-                Dictionary<string, string> newDict = new Dictionary<string, string>();
+                Dictionary<string, string> newDict = [];
                 Dictionary<string, string> deserializedConfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(configPath));
 
-                if (deserializedConfig == null)
-                    deserializedConfig = new Dictionary<string, string>();
+                deserializedConfig ??= [];
 
                 foreach (KeyValuePair<string, string> entry in deserializedConfig)
                     newDict.Add(entry.Key, entry.Value);
@@ -118,8 +116,8 @@ namespace Flowframes.IO
 
             try
             {
-                if (cachedValues.ContainsKey(keyStr))
-                    return cachedValues[keyStr];
+                if (cachedValues.TryGetValue(keyStr, out string value))
+                    return value;
 
                 return WriteDefaultValIfExists(key.ToString(), type);
             }

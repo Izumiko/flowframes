@@ -1,6 +1,7 @@
 ﻿using Flowframes.Data;
 using Flowframes.IO;
 using Flowframes.MiscUtils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace Flowframes.Media
         {
             var args = new List<string>();
 
-            fps = fps / new Fraction(itsScale);
+            fps /= new Fraction(itsScale);
             args.Add($"-r {fps}");
 
             return string.Join(" ", args);
@@ -91,7 +92,7 @@ namespace Flowframes.Media
             }
 
             filters.Add(GetPadFilter());
-            filters = filters.Where(f => f.IsNotEmpty()).ToList();
+            filters = filters.Where(f => !String.IsNullOrEmpty(f)).ToList();
 
             return filters.Count > 0 ?
                 $"{string.Join(" ", beforeArgs)} -filter_complex [0:v]{string.Join("[vf],[vf]", filters.Where(f => !string.IsNullOrWhiteSpace(f)))}[vf] -map [vf] {string.Join(" ", extraArgs)}" :
@@ -137,9 +138,9 @@ namespace Flowframes.Media
             string dither = Config.Get(Config.Key.gifDitherType).Split(' ').First();
             string paletteFilter = palette ? $"-vf \"split[s0][s1];[s0]palettegen={colors}[p];[s1][p]paletteuse=dither={dither}\"" : "";
             string fpsFilter = (resampleFps.GetFloat() <= 0) ? "" : $"fps=fps={resampleFps}";
-            string vf = FormatUtils.ConcatStrings(new string[] { paletteFilter, fpsFilter });
+            string vf = FormatUtils.ConcatStrings([paletteFilter, fpsFilter]);
             string extraArgs = Config.Get(Config.Key.ffEncArgs);
-            rate = rate / new Fraction(itsScale);
+            rate /= new Fraction(itsScale);
             string args = $"-f concat -r {rate} -i {framesFilename.Wrap()} -gifflags -offsetting {vf} {extraArgs} {outPath.Wrap()}";
             await RunFfmpeg(args, framesFile.GetParentDir(), LogMode.OnlyLastLine, "error");
         }

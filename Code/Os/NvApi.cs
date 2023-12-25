@@ -2,15 +2,13 @@
 using NvAPIWrapper.GPU;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Flowframes.Os
 {
     class NvApi
     {
         public enum Architecture { Undetected, Fermi, Kepler, Maxwell, Pascal, Turing, Ampere };
-        public static List<PhysicalGPU> gpuList = new List<PhysicalGPU>();
+        public static List<PhysicalGPU> gpuList = [];
 
         public static void Init()
         {
@@ -22,9 +20,9 @@ namespace Flowframes.Os
                 if (gpus.Length == 0)
                     return;
 
-                gpuList = gpus.ToList();
+                gpuList = [.. gpus];
 
-                List<string> gpuNames = new List<string>();
+                List<string> gpuNames = [];
 
                 foreach (PhysicalGPU gpu in gpus)
                     gpuNames.Add(gpu.FullName);

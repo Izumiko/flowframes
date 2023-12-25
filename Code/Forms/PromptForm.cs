@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flowframes.Forms
@@ -28,7 +21,7 @@ namespace Flowframes.Forms
 
         }
 
-        private void confirmBtn_Click(object sender, EventArgs e)
+        private void ConfirmBtn_Click(object sender, EventArgs e)
         {
             EnteredText = textBox.Text.Trim();
             DialogResult = DialogResult.OK;

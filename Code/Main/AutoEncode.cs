@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Flowframes.Ui;
 using Flowframes.Os;
@@ -21,8 +20,8 @@ namespace Flowframes.Main
         public static int chunkSize;    // Encode every n frames
         public static int safetyBufferFrames;      // Ignore latest n frames to avoid using images that haven't been fully encoded yet
         public static string[] interpFramesLines;
-        public static List<int> encodedFrameLines = new List<int>();
-        public static List<int> unencodedFrameLines = new List<int>();
+        public static List<int> encodedFrameLines = [];
+        public static List<int> unencodedFrameLines = [];
 
         public static bool debug;
         public static bool busy;
@@ -192,7 +191,7 @@ namespace Flowframes.Main
             if(debug)
                 Logger.Log("[AE] Starting DeleteOldFramesAsync.", true, false, "ffmpeg");
 
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
 
             foreach (int frame in frameLinesToEncode)

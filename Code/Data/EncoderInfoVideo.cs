@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using static Flowframes.Data.Enums.Encoding;
 
 namespace Flowframes.Data
@@ -14,11 +10,11 @@ namespace Flowframes.Data
         public bool HwAccelerated { get; set; } = false;
         public int Modulo { get; set; } = 2;
         public int MaxFramerate { get; set; } = 1000;
-        public List<PixelFormat> PixelFormats { get; set; } = new List<PixelFormat>();
+        public List<PixelFormat> PixelFormats { get; set; } = [];
         public PixelFormat PixelFormatDefault { get; set; } = (PixelFormat)(-1);
         public bool IsImageSequence { get; set; } = false;
         public string OverideExtension { get; set; } = "";
-        public List<string> QualityLevels { get; set; } = new List<string> ();
+        public List<string> QualityLevels { get; set; } = [];
         public int QualityDefault { get; set; } = 0;
     }
 }

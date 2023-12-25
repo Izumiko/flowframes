@@ -33,7 +33,7 @@ namespace Flowframes.Forms
             this.longProgBar = new HTAlt.WinForms.HTProgressBar();
             this.downloadModelsBtn = new HTAlt.WinForms.HTButton();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.progressCircle = new CircularProgressBar.CircularProgressBar();
+            this.progressCircle = new CircularProgressBar_NET5.CircularProgressBar();
             this.label39 = new System.Windows.Forms.Label();
             this.closeBtn = new HTAlt.WinForms.HTButton();
             this.cancelBtn = new HTAlt.WinForms.HTButton();
@@ -59,16 +59,16 @@ namespace Flowframes.Forms
             // 
             this.downloadModelsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.downloadModelsBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.downloadModelsBtn.FlatAppearance.BorderSize = 0;
-            this.downloadModelsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.downloadModelsBtn.FlatAppearance.BorderSize = 0;
+            //this.downloadModelsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.downloadModelsBtn.ForeColor = System.Drawing.Color.White;
             this.downloadModelsBtn.Location = new System.Drawing.Point(12, 239);
             this.downloadModelsBtn.Name = "downloadModelsBtn";
             this.downloadModelsBtn.Size = new System.Drawing.Size(150, 23);
             this.downloadModelsBtn.TabIndex = 87;
             this.downloadModelsBtn.Text = "Download Model Files";
-            this.downloadModelsBtn.UseVisualStyleBackColor = false;
-            this.downloadModelsBtn.Click += new System.EventHandler(this.downloadModelsBtn_Click);
+            //this.downloadModelsBtn.UseVisualStyleBackColor = false;
+            this.downloadModelsBtn.Click += new System.EventHandler(this.DownloadModelsBtn_Click);
             // 
             // titleLabel
             // 
@@ -84,10 +84,10 @@ namespace Flowframes.Forms
             // 
             // progressCircle
             // 
-            this.progressCircle.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this.progressCircle.AnimationFunction = WinFormAnimation_NET5.KnownAnimationFunctions.Linear;
             this.progressCircle.AnimationSpeed = 500;
             this.progressCircle.BackColor = System.Drawing.Color.Transparent;
-            this.progressCircle.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold);
+            this.progressCircle.Font = new System.Drawing.Font("Segoe UI", 72F, System.Drawing.FontStyle.Bold);
             this.progressCircle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.progressCircle.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.progressCircle.InnerMargin = 2;
@@ -100,7 +100,7 @@ namespace Flowframes.Forms
             this.progressCircle.OuterWidth = 21;
             this.progressCircle.ProgressColor = System.Drawing.Color.LimeGreen;
             this.progressCircle.ProgressWidth = 8;
-            this.progressCircle.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
+            this.progressCircle.SecondaryFont = new System.Drawing.Font("Segoe UI", 36F);
             this.progressCircle.Size = new System.Drawing.Size(40, 40);
             this.progressCircle.StartAngle = 270;
             this.progressCircle.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -128,31 +128,31 @@ namespace Flowframes.Forms
             // 
             this.closeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.closeBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.closeBtn.FlatAppearance.BorderSize = 0;
-            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.closeBtn.FlatAppearance.BorderSize = 0;
+            //this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeBtn.ForeColor = System.Drawing.Color.White;
             this.closeBtn.Location = new System.Drawing.Point(168, 239);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(150, 23);
             this.closeBtn.TabIndex = 92;
             this.closeBtn.Text = "Close";
-            this.closeBtn.UseVisualStyleBackColor = false;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
+            //this.closeBtn.UseVisualStyleBackColor = false;
+            this.closeBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
             // cancelBtn
             // 
             this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cancelBtn.FlatAppearance.BorderSize = 0;
-            this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.cancelBtn.FlatAppearance.BorderSize = 0;
+            //this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.ForeColor = System.Drawing.Color.White;
             this.cancelBtn.Location = new System.Drawing.Point(168, 239);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(150, 23);
             this.cancelBtn.TabIndex = 93;
             this.cancelBtn.Text = "Cancel";
-            this.cancelBtn.UseVisualStyleBackColor = false;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            //this.cancelBtn.UseVisualStyleBackColor = false;
+            this.cancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // statusLabel
             // 
@@ -265,7 +265,7 @@ namespace Flowframes.Forms
         private HTAlt.WinForms.HTProgressBar longProgBar;
         private HTAlt.WinForms.HTButton downloadModelsBtn;
         private System.Windows.Forms.Label titleLabel;
-        private CircularProgressBar.CircularProgressBar progressCircle;
+        private CircularProgressBar_NET5.CircularProgressBar progressCircle;
         private System.Windows.Forms.Label label39;
         private HTAlt.WinForms.HTButton closeBtn;
         private HTAlt.WinForms.HTButton cancelBtn;

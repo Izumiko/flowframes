@@ -1,10 +1,5 @@
 ﻿using Flowframes.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flowframes.Data
 {
@@ -29,7 +24,7 @@ namespace Flowframes.Data
 
         public override string ToString()
         {
-            List<string> lines = new List<string>();
+            List<string> lines = [];
 
             try
             {

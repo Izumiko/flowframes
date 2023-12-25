@@ -7,7 +7,7 @@ namespace Flowframes.Data
     {
         public long Numerator;
         public long Denominator;
-        public static Fraction Zero = new Fraction(0, 0);
+        public static Fraction Zero = new(0, 0);
 
         public Fraction(long numerator, long denominator)
         {
@@ -101,7 +101,7 @@ namespace Flowframes.Data
         }
 
 
-        public Fraction ToDenominator(long targetDenominator)
+        public readonly Fraction ToDenominator(long targetDenominator)
         {
             //Multiply the fraction by a factor to make the denominator
             //match the target denominator
@@ -125,7 +125,7 @@ namespace Flowframes.Data
             return modifiedFraction;
         }
 
-        public Fraction GetReduced()
+        public readonly Fraction GetReduced()
         {
             //Reduce the fraction to lowest terms
             Fraction modifiedFraction = this;
@@ -156,7 +156,7 @@ namespace Flowframes.Data
             return modifiedFraction;
         }
 
-        public Fraction GetReciprocal()
+        public readonly Fraction GetReciprocal()
         {
             //Flip the numerator and the denominator
             return new Fraction(this.Denominator, this.Numerator);
@@ -233,17 +233,17 @@ namespace Flowframes.Data
         }
 
 
-        public double ToDouble()
+        public readonly double ToDouble()
         {
             return (double)this.Numerator / this.Denominator;
         }
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return Numerator + "/" + Denominator;
         }
 
-        public float GetFloat()
+        public readonly float GetFloat()
         {
             if (Denominator < 1)    // Avoid div by zero
                 return 0f;
@@ -251,12 +251,12 @@ namespace Flowframes.Data
             return (float)Numerator / (float)Denominator;
         }
 
-        public long GetLong()
+        public readonly long GetLong()
         {
             return (long)Numerator / (long)Denominator;
         }
 
-        public string GetString()
+        public readonly string GetString()
         {
             return ((float)Numerator / Denominator).ToString();
         }

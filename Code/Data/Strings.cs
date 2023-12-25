@@ -4,7 +4,7 @@ namespace Flowframes.Data
 {
     public class Strings
     {
-        public static Dictionary<string, string> OutputFormat = new Dictionary<string, string>
+        public static Dictionary<string, string> OutputFormat = new()
         {
             { Enums.Output.Format.Mp4.ToString(), "MP4" },
             { Enums.Output.Format.Mkv.ToString(), "MKV" },
@@ -16,7 +16,7 @@ namespace Flowframes.Data
             { Enums.Output.Format.Realtime.ToString(), "Realtime" },
         };
 
-        public static Dictionary<string, string> Encoder = new Dictionary<string, string>
+        public static Dictionary<string, string> Encoder = new()
         {
             { Enums.Encoding.Encoder.X264.ToString(), "h264" },
             { Enums.Encoding.Encoder.X265.ToString(), "h265" },
@@ -40,7 +40,7 @@ namespace Flowframes.Data
             { Enums.Encoding.Encoder.Rawvideo.ToString(), "Raw Video" },
         };
 
-        public static Dictionary<string, string> PixelFormat = new Dictionary<string, string>
+        public static Dictionary<string, string> PixelFormat = new()
         {
             { Enums.Encoding.PixelFormat.Yuv420P.ToString(), "YUV 4:2:0 8-bit" },
             { Enums.Encoding.PixelFormat.Yuva420P.ToString(), "YUVA 4:2:0 8-bit" },
@@ -55,7 +55,7 @@ namespace Flowframes.Data
             { Enums.Encoding.PixelFormat.Rgba.ToString(), "RGBA 8-bit" },
         };
 
-        public static Dictionary<string, string> VideoQuality = new Dictionary<string, string>
+        public static Dictionary<string, string> VideoQuality = new()
         {
             { Enums.Encoding.Quality.Common.Lossless.ToString(), "Lossless" },
             { Enums.Encoding.Quality.Common.VeryHigh.ToString(), "Very High" },

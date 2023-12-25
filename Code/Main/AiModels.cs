@@ -1,16 +1,12 @@
 ﻿using Flowframes.Data;
 using Flowframes.IO;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Flowframes.Main
 {
-    class AiModels
+    partial class AiModels
     {
         public static ModelCollection GetModels (AI ai)
         {
@@ -24,7 +20,7 @@ namespace Flowframes.Main
                 return new ModelCollection(ai);
             }
 
-            ModelCollection modelCollection = new ModelCollection(ai, modelsFile);
+            ModelCollection modelCollection = new(ai, modelsFile);
 
             foreach (string customModel in GetCustomModels(ai))
             {
@@ -39,11 +35,11 @@ namespace Flowframes.Main
         public static List<string> GetCustomModels(AI ai)
         {
             string pkgPath = Path.Combine(Paths.GetPkgPath(), ai.PkgDir);
-            List<string> custModels = new List<string>();
+            List<string> custModels = [];
 
             foreach (DirectoryInfo dir in new DirectoryInfo(pkgPath).GetDirectories())
             {
-                if (dir.Name.EndsWith("_custom") && Regex.IsMatch(dir.Name, @"^[a-zA-Z0-9_]+$"))
+                if (dir.Name.EndsWith("_custom") && Regexw().IsMatch(dir.Name))
                     custModels.Add(dir.Name);
             }
 
@@ -75,5 +71,8 @@ namespace Flowframes.Main
 
             return null;
         }
+
+        [GeneratedRegex(@"^[a-zA-Z0-9_]+$")]
+        private static partial Regex Regexw();
     }
 }

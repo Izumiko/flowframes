@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flowframes.Forms
 {
     public partial class MessageForm : Form
     {
-        private string _text = "";
-        private string _title = "";
-        private MessageBoxButtons _btns;
+        private readonly string _text = "";
+        private readonly string _title = "";
+        private readonly MessageBoxButtons _btns;
 
         private bool _dialogResultSet = false;
 
@@ -57,12 +51,20 @@ namespace Flowframes.Forms
             }
 
             Size labelSize = GetLabelSize(textLabel);
-            Size = new Size((labelSize.Width + 60).Clamp(360, Program.mainForm.Size.Width), (labelSize.Height + 120).Clamp(200, Program.mainForm.Size.Height));
+            try
+            {
+                Size = new Size((labelSize.Width + 60).Clamp(360, Program.mainForm.Size.Width), (labelSize.Height + 120).Clamp(200, Program.mainForm.Size.Height));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw;
+            }
 
             CenterToScreen();
         }
 
-        private Size GetLabelSize(Label label)
+        private static Size GetLabelSize(Label label)
         {
             return TextRenderer.MeasureText(label.Text, label.Font, label.ClientSize, TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
         }
@@ -74,7 +76,7 @@ namespace Flowframes.Forms
             btn3.Visible = b3;
         }
 
-        private void btn1_Click(object sender, EventArgs e)
+        private void Btn1_Click(object sender, EventArgs e)
         {
             if (_btns == MessageBoxButtons.OK) // OK Button
                 DialogResult = DialogResult.OK;
@@ -87,7 +89,7 @@ namespace Flowframes.Forms
             Close();
         }
 
-        private void btn2_Click(object sender, EventArgs e)
+        private void Btn2_Click(object sender, EventArgs e)
         {
             if (_btns == MessageBoxButtons.YesNo) // Yes Button
                 DialogResult = DialogResult.Yes;
@@ -98,7 +100,7 @@ namespace Flowframes.Forms
             Close();
         }
 
-        private void btn3_Click(object sender, EventArgs e)
+        private void Btn3_Click(object sender, EventArgs e)
         {
             if (_btns == MessageBoxButtons.YesNoCancel) // Yes Button
                 DialogResult = DialogResult.Yes;

@@ -1,5 +1,4 @@
-﻿using Flowframes;
-using Flowframes.Media;
+﻿using Flowframes.Media;
 using Flowframes.Data;
 using Flowframes.IO;
 using Flowframes.Magick;
@@ -27,7 +26,7 @@ namespace Flowframes
         public static MediaFile currentMediaFile;
         public static bool canceled = false;
         public static float InterpProgressMultiplier = 1f;
-        static Stopwatch sw = new Stopwatch();
+        static Stopwatch sw = new();
 
         public static async Task Start()
         {
@@ -144,7 +143,7 @@ namespace Flowframes
                 int framesLeft = IoUtils.GetAmountOfFiles(outPath, false, "*" + currentSettings.framesExt);
                 int framesDeleted = currentMediaFile.FrameCount - framesLeft;
                 float percentDeleted = ((float)framesDeleted / currentMediaFile.FrameCount) * 100f;
-                string keptPercent = $"{(100f - percentDeleted).ToString("0.0")}%";
+                string keptPercent = $"{100f - percentDeleted:0.0}%";
 
                 if (framesDeleted > 0)
                 {
@@ -208,7 +207,7 @@ namespace Flowframes
             if (!ai.Piped || (ai.Piped && dedupe))
                 await Task.Run(async () => { await FrameOrder.CreateFrameOrderFile(currentSettings.framesFolder, Config.GetBool(Config.Key.enableLoop), currentSettings.interpFactor); });
 
-            if (currentSettings.model.FixedFactors.Count() > 0 && (currentSettings.interpFactor != (int)currentSettings.interpFactor || !currentSettings.model.FixedFactors.Contains(currentSettings.interpFactor.RoundToInt())))
+            if (currentSettings.model.FixedFactors.Length > 0 && (currentSettings.interpFactor != (int)currentSettings.interpFactor || !currentSettings.model.FixedFactors.Contains(currentSettings.interpFactor.RoundToInt())))
                 Cancel($"The selected model does not support {currentSettings.interpFactor}x interpolation.\n\nSupported Factors: {currentSettings.model.GetFactorsString()}");
 
             if (canceled) return;
@@ -221,7 +220,7 @@ namespace Flowframes
             currentlyUsingAutoEnc = Utils.CanUseAutoEnc(stepByStep, currentSettings);
             IoUtils.CreateDir(outpath);
 
-            List<Task> tasks = new List<Task>();
+            List<Task> tasks = [];
 
             if (ai.NameInternal == Implementations.rifeCuda.NameInternal)
                 tasks.Add(AiProcess.RunRifeCuda(currentSettings.framesFolder, currentSettings.interpFactor, currentSettings.model.Dir));

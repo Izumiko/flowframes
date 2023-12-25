@@ -1,24 +1,18 @@
 ﻿using Flowframes.IO;
 using Flowframes.Os;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Flowframes.MiscUtils;
-using Microsoft.VisualBasic;
 using Flowframes.Media;
-using System.Windows.Input;
 
 namespace Flowframes
 {
     class AvProcess
     {
         public static Process lastAvProcess;
-        public static Stopwatch timeSinceLastOutput = new Stopwatch();
+        public static Stopwatch timeSinceLastOutput = new();
 
         public static string lastOutputFfmpeg;
 
@@ -62,7 +56,7 @@ namespace Flowframes
             bool show = Config.GetInt(Config.Key.cmdDebugMode) > 0;
             string processOutput = "";
             Process ffmpeg = OsUtils.NewProcess(!show);
-            NmkdStopwatch timeSinceLastOutput = new NmkdStopwatch();
+            NmkdStopwatch timeSinceLastOutput = new();
             lastAvProcess = ffmpeg;
 
             if (string.IsNullOrWhiteSpace(loglevel))
@@ -148,7 +142,7 @@ namespace Flowframes
 
             string processOutput = "";
             Process ffprobe = OsUtils.NewProcess(!show);
-            NmkdStopwatch timeSinceLastOutput = new NmkdStopwatch();
+            NmkdStopwatch timeSinceLastOutput = new();
 
             ffprobe.StartInfo.Arguments = $"{GetCmdArg()} cd /D {GetAvDir().Wrap()} & ffprobe -v {settings.LogLevel} {settings.Args}";
 
@@ -160,7 +154,7 @@ namespace Flowframes
 
             if (!show)
             {
-                string[] ignore = new string[0];
+                string[] ignore = [];
                 ffprobe.OutputDataReceived += (sender, outLine) => { processOutput += outLine + Environment.NewLine; };
                 ffprobe.ErrorDataReceived += (sender, outLine) => { processOutput += outLine + Environment.NewLine; };
             }

@@ -1,12 +1,10 @@
 ﻿using Flowframes.Media;
 using Flowframes.Data;
 using Flowframes.IO;
-using Flowframes.Main;
 using Flowframes.MiscUtils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,7 +82,7 @@ namespace Flowframes
         {
             Logger.Log($"GetDuration({inputFile}) - Reading Duration using ffprobe.", true, false, "ffmpeg");
             string args = $"-select_streams v:0 -show_entries format=duration -of csv=s=x:p=0 -sexagesimal {inputFile.Wrap()}";
-            FfprobeSettings settings = new FfprobeSettings() { Args = args };
+            FfprobeSettings settings = new() { Args = args };
             string output = await RunFfprobe(settings);
 
             return FormatUtils.TimestampToMs(output);
@@ -93,8 +91,8 @@ namespace Flowframes
         public static async Task<Fraction> GetFramerate(string inputFile, bool preferFfmpeg = false)
         {
             Logger.Log($"GetFramerate(inputFile = '{inputFile}', preferFfmpeg = {preferFfmpeg})", true, false, "ffmpeg");
-            Fraction ffprobeFps = new Fraction(0, 1);
-            Fraction ffmpegFps = new Fraction(0, 1);
+            Fraction ffprobeFps = new(0, 1);
+            Fraction ffmpegFps = new(0, 1);
 
             try
             {
@@ -153,7 +151,7 @@ namespace Flowframes
 
             foreach(string line in outputLines)
             {
-                if (!line.Contains("x") || line.Trim().Length < 3)
+                if (!line.Contains('x') || line.Trim().Length < 3)
                     continue;
 
                 string[] numbers = line.Split('x');
@@ -194,7 +192,7 @@ namespace Flowframes
 
         public static async Task<int> ReadFrameCountFfprobePacketCount(string filePath)
         {
-            FfprobeSettings settings = new FfprobeSettings() { Args = $"-select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 {filePath.Wrap()}", LoggingMode = LogMode.Hidden, LogLevel = "error" };
+            FfprobeSettings settings = new() { Args = $"-select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 {filePath.Wrap()}", LoggingMode = LogMode.Hidden, LogLevel = "error" };
             string output = await RunFfprobe(settings);
             string[] lines = output.SplitIntoLines().Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 
@@ -206,7 +204,7 @@ namespace Flowframes
 
         public static async Task<int> ReadFrameCountFfprobe(string filePath)
         {
-            FfprobeSettings s = new FfprobeSettings() { Args = $"-threads 0 -select_streams v:0 -show_entries stream=nb_frames -of default=noprint_wrappers=1 {filePath.Wrap()}", LoggingMode = LogMode.Hidden, LogLevel = "panic" };
+            FfprobeSettings s = new() { Args = $"-threads 0 -select_streams v:0 -show_entries stream=nb_frames -of default=noprint_wrappers=1 {filePath.Wrap()}", LoggingMode = LogMode.Hidden, LogLevel = "panic" };
             string info = await RunFfprobe(s);
             string[] entries = info.SplitIntoLines();
 
@@ -231,7 +229,7 @@ namespace Flowframes
             {
                 string[] lines = info.SplitIntoLines();
                 string lastLine = lines.Last().ToLowerInvariant();
-                return lastLine.Substring(0, lastLine.IndexOf("fps")).GetInt();
+                return lastLine[..lastLine.IndexOf("fps")].GetInt();
             }
             catch
             {
@@ -242,7 +240,7 @@ namespace Flowframes
         public static async Task<VidExtraData> GetVidExtraInfo(string inputFile)
         {
             string ffprobeOutput = await GetVideoInfo.GetFfprobeInfoAsync(inputFile, GetVideoInfo.FfprobeMode.ShowBoth);
-            VidExtraData data = new VidExtraData(ffprobeOutput);
+            VidExtraData data = new(ffprobeOutput);
             return data;
         }
 
@@ -273,7 +271,7 @@ namespace Flowframes
         public static List<string> GetAudioCodecs(string path, int streamIndex = -1)
         {
             Logger.Log($"GetAudioCodecs('{Path.GetFileName(path)}', {streamIndex})", true, false, "ffmpeg");
-            List<string> codecNames = new List<string>();
+            List<string> codecNames = [];
             string args = $"-loglevel panic -select_streams a -show_entries stream=codec_name {path.Wrap()}";
             string info = GetFfprobeOutput(args);
             string[] entries = info.SplitIntoLines();

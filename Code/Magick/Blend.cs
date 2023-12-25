@@ -15,7 +15,7 @@ namespace Flowframes.Magick
     {
         public static async Task BlendSceneChanges(string framesFilePath, bool setStatus = true)
         {
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
             int totalFrames = 0;
 
@@ -35,9 +35,9 @@ namespace Flowframes.Magick
             if (setStatus)
                 Program.mainForm.SetStatus("Blending scene transitions...");
 
-            string[] frames = FrameRename.framesAreRenamed ? new string[0] : IoUtils.GetFilesSorted(Interpolate.currentSettings.framesFolder);
+            string[] frames = FrameRename.framesAreRenamed ? [] : IoUtils.GetFilesSorted(Interpolate.currentSettings.framesFolder);
 
-            List<Task> runningTasks = new List<Task>();
+            List<Task> runningTasks = [];
             int maxThreads = Environment.ProcessorCount * 2;
 
             foreach (string line in framesLines)
@@ -50,7 +50,7 @@ namespace Flowframes.Magick
                         string[] values = trimmedLine.Split('>');
                         string frameFrom = FrameRename.framesAreRenamed ? values[0] : frames[values[0].GetInt()];
                         string frameTo = FrameRename.framesAreRenamed ? values[1] : frames[values[1].GetInt()];
-                        int amountOfBlendFrames = values.Count() == 3 ? values[2].GetInt() : (int)Interpolate.currentSettings.interpFactor - 1;
+                        int amountOfBlendFrames = values.Length == 3 ? values[2].GetInt() : (int)Interpolate.currentSettings.interpFactor - 1;
 
                         string img1 = Path.Combine(Interpolate.currentSettings.framesFolder, frameFrom);
                         string img2 = Path.Combine(Interpolate.currentSettings.framesFolder, frameTo);
@@ -58,7 +58,7 @@ namespace Flowframes.Magick
                         string firstOutputFrameName = line.Split('/').Last().Remove("'").Split('#').First();
                         string ext = Path.GetExtension(firstOutputFrameName);
                         int firstOutputFrameNum = firstOutputFrameName.GetInt();
-                        List<string> outputFilenames = new List<string>();
+                        List<string> outputFilenames = [];
 
                         for (int blendFrameNum = 1; blendFrameNum <= amountOfBlendFrames; blendFrameNum++)
                         {
@@ -101,7 +101,7 @@ namespace Flowframes.Magick
                 await Task.Delay(10);
             }
 
-            Logger.Log($"Created {totalFrames} blend frames in {FormatUtils.TimeSw(sw)} ({(totalFrames / (sw.ElapsedMilliseconds / 1000f)).ToString("0.00")} FPS)", true);
+            Logger.Log($"Created {totalFrames} blend frames in {FormatUtils.TimeSw(sw)} ({totalFrames / (sw.ElapsedMilliseconds / 1000f):0.00} FPS)", true);
 
             if (setStatus)
                 Program.mainForm.SetStatus(oldStatus);
@@ -118,8 +118,8 @@ namespace Flowframes.Magick
 
         public static void BlendImages(string img1Path, string img2Path, string imgOutPath)
         {
-            MagickImage img1 = new MagickImage(img1Path);
-            MagickImage img2 = new MagickImage(img2Path);
+            MagickImage img1 = new(img1Path);
+            MagickImage img2 = new(img2Path);
             img2.Alpha(AlphaOption.Opaque);
             img2.Evaluate(Channels.Alpha, EvaluateOperator.Set, new Percentage(50));
             img1.Composite(img2, Gravity.Center, CompositeOperator.Over);
@@ -132,8 +132,8 @@ namespace Flowframes.Magick
         {
             try
             {
-                MagickImage img1 = new MagickImage(img1Path);
-                MagickImage img2 = new MagickImage(img2Path);
+                MagickImage img1 = new(img1Path);
+                MagickImage img2 = new(img2Path);
 
                 int alphaFraction = (100f / (imgOutPaths.Length + 1)).RoundToInt();   // Alpha percentage per image
                 int currentAlpha = alphaFraction;
@@ -142,8 +142,8 @@ namespace Flowframes.Magick
                 {
                     string outPath = imgOutPath.Trim();
 
-                    MagickImage img1Inst = new MagickImage(img1);
-                    MagickImage img2Inst = new MagickImage(img2);
+                    MagickImage img1Inst = new(img1);
+                    MagickImage img2Inst = new(img2);
 
                     img2Inst.Alpha(AlphaOption.Opaque);
                     img2Inst.Evaluate(Channels.Alpha, EvaluateOperator.Set, new Percentage(currentAlpha));

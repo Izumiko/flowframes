@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace Flowframes.Media
         enum InfoType { Ffmpeg, Ffprobe };
         public enum FfprobeMode { ShowFormat, ShowStreams, ShowBoth };
 
-        static Dictionary<QueryInfo, string> cmdCache = new Dictionary<QueryInfo, string>();
+        static Dictionary<QueryInfo, string> cmdCache = [];
 
         public static async Task<string> GetFfmpegInfoAsync(string path, string lineFilter = "", bool noCache = false)
         {
@@ -79,13 +78,13 @@ namespace Flowframes.Media
                 if (stripKeyName)
                 {
 
-                    List<string> filtered = output.SplitIntoLines().Where(x => x.ToLowerInvariant().Contains(lineFilter.ToLowerInvariant())).ToList();    // Filter
+                    List<string> filtered = output.SplitIntoLines().Where(x => x.Contains(lineFilter, System.StringComparison.OrdinalIgnoreCase)).ToList();    // Filter
                     filtered = filtered.Select(x => string.Join("", x.Split('=').Skip(1))).ToList();    // Ignore everything before (and including) the first '=' sign
                     output = string.Join("\n", filtered);
                 }
                 else
                 {
-                    output = string.Join("\n", output.SplitIntoLines().Where(x => x.ToLowerInvariant().Contains(lineFilter.ToLowerInvariant())).ToArray());
+                    output = string.Join("\n", output.SplitIntoLines().Where(x => x.Contains(lineFilter, System.StringComparison.OrdinalIgnoreCase)).ToArray());
                 }
             }
 
@@ -95,7 +94,7 @@ namespace Flowframes.Media
         static async Task<string> GetOutputCached(string path, Process process, bool noCache = false)
         {
             long filesize = IoUtils.GetPathSize(path);
-            QueryInfo hash = new QueryInfo(path, filesize, process.StartInfo.Arguments);
+            QueryInfo hash = new(path, filesize, process.StartInfo.Arguments);
 
             if (!noCache && filesize > 0 && CacheContains(hash, ref cmdCache))
             {

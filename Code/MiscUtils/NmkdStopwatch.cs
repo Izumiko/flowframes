@@ -5,7 +5,7 @@ namespace Flowframes.MiscUtils
 {
     class NmkdStopwatch
     {
-        public Stopwatch Sw = new Stopwatch();
+        public Stopwatch Sw = new();
         public TimeSpan Elapsed { get { return Sw.Elapsed; } }
         public long ElapsedMs { get { return Sw.ElapsedMilliseconds; } }
 

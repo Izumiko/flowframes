@@ -1,14 +1,9 @@
-﻿using Flowframes.Data;
-using Flowframes.IO;
+﻿using Flowframes.IO;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Flowframes.MiscUtils;
-using Flowframes.Ui;
 using I = Flowframes.Interpolate;
 using Newtonsoft.Json;
 
@@ -16,7 +11,7 @@ namespace Flowframes.Main
 {
     class AutoEncodeResume
     {
-        public static List<string> processedInputFrames = new List<string>();
+        public static List<string> processedInputFrames = [];
         public static int encodedChunks = 0;
         public static int encodedFrames = 0;
 
@@ -27,7 +22,7 @@ namespace Flowframes.Main
 
         public static void Reset ()
         {
-            processedInputFrames = new List<string>();
+            processedInputFrames = [];
             encodedChunks = 0;
             encodedFrames = 0;
         }
@@ -38,9 +33,11 @@ namespace Flowframes.Main
             Directory.CreateDirectory(saveDir);
 
             string chunksJsonPath = Path.Combine(saveDir, chunksFilename);
-            Dictionary<string, string> saveData = new Dictionary<string, string>();
-            saveData.Add("encodedChunks", encodedChunks.ToString());
-            saveData.Add("encodedFrames", encodedFrames.ToString());
+            Dictionary<string, string> saveData = new()
+            {
+                { "encodedChunks", encodedChunks.ToString() },
+                { "encodedFrames", encodedFrames.ToString() }
+            };
             File.WriteAllText(chunksJsonPath, JsonConvert.SerializeObject(saveData, Formatting.Indented));
 
             string inputFramesJsonPath = Path.Combine(saveDir, inputFramesFilename);

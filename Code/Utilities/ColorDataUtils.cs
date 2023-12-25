@@ -1,15 +1,4 @@
-﻿using Flowframes.Data;
-using Flowframes.IO;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Flowframes.Utilities
+﻿namespace Flowframes.Utilities
 {
     class ColorDataUtils
     {
@@ -86,72 +75,68 @@ namespace Flowframes.Utilities
 
         public static string GetColorPrimariesString(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "bt709";
-                case 4: return "bt470m";
-                case 5: return "bt470bg";
-                case 6: return "bt601";
-                case 7: return "smpte240m";
-                case 8: return "film";
-                case 9: return "bt2020";
-                case 10: return "smpte428";
-                case 11: return "smpte431";
-                case 12: return "smpte432";
-            }
-
-            return "";
+                1 => "bt709",
+                4 => "bt470m",
+                5 => "bt470bg",
+                6 => "bt601",
+                7 => "smpte240m",
+                8 => "film",
+                9 => "bt2020",
+                10 => "smpte428",
+                11 => "smpte431",
+                12 => "smpte432",
+                _ => "",
+            };
         }
 
         public static string GetColorTransferString(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "bt709";
-                case 4: return "gamma22"; // "bt470m"
-                case 5: return "gamma28"; // "bt470bg"
-                case 6: return "bt601"; // "smpte170m"
-                case 7: return "smpte240m";
-                case 8: return "linear";
-                case 11: return "iec61966-2-4";
-                case 12: return "bt1361";
-                case 13: return "srgb";
-                case 14: return "bt2020-10";
-                case 15: return "bt2020-12";
-                case 16: return "smpte2084";
-                case 17: return "smpte428";
-                case 18: return "bt2100";
-            }
-
-            return "";
+                1 => "bt709",
+                4 => "gamma22",// "bt470m"
+                5 => "gamma28",// "bt470bg"
+                6 => "bt601",// "smpte170m"
+                7 => "smpte240m",
+                8 => "linear",
+                11 => "iec61966-2-4",
+                12 => "bt1361",
+                13 => "srgb",
+                14 => "bt2020-10",
+                15 => "bt2020-12",
+                16 => "smpte2084",
+                17 => "smpte428",
+                18 => "bt2100",
+                _ => "",
+            };
         }
 
         public static string GetColorMatrixCoeffsString(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "bt709";
-                case 4: return "fcc";
-                case 5: return "bt470bg";
-                case 6: return "bt601";
-                case 7: return "smpte240m";
-                case 8: return "ycgco";
-                case 9: return "bt2020ncl";
-                case 10: return "bt2020";
-            }
-
-            return "";
+                1 => "bt709",
+                4 => "fcc",
+                5 => "bt470bg",
+                6 => "bt601",
+                7 => "smpte240m",
+                8 => "ycgco",
+                9 => "bt2020ncl",
+                10 => "bt2020",
+                _ => "",
+            };
         }
 
         public static string GetColorRangeString(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "tv";
-                case 2: return "pc";
-            }
-
-            return "";
+                1 => "tv",
+                2 => "pc",
+                _ => "",
+            };
         }
 
         #endregion
@@ -160,83 +145,79 @@ namespace Flowframes.Utilities
 
         public static string GetColorPrimariesName(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "BT.709";
-                case 2: return "Unspecified";
-                case 4: return "BT.470 System B, G (historical)";
-                case 5: return "BT.470 System M (historical)";
-                case 6: return "BT.601";
-                case 7: return "SMPTE 240";
-                case 8: return "Generic film (color filters using illuminant C)";
-                case 9: return "BT.2020, BT.2100";
-                case 10: return "SMPTE 428 (CIE 1921 XYZ)";
-                case 11: return "SMPTE RP 431-2";
-                case 12: return "SMPTE EG 432-1";
-                case 22: return "EBU Tech. 3213-E";
-            }
-
-            return "Unknown";
+                1 => "BT.709",
+                2 => "Unspecified",
+                4 => "BT.470 System B, G (historical)",
+                5 => "BT.470 System M (historical)",
+                6 => "BT.601",
+                7 => "SMPTE 240",
+                8 => "Generic film (color filters using illuminant C)",
+                9 => "BT.2020, BT.2100",
+                10 => "SMPTE 428 (CIE 1921 XYZ)",
+                11 => "SMPTE RP 431-2",
+                12 => "SMPTE EG 432-1",
+                22 => "EBU Tech. 3213-E",
+                _ => "Unknown",
+            };
         }
 
         public static string GetColorTransferName(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "BT.709";
-                case 2: return "Unspecified";
-                case 4: return "BT.470 System B, G (historical)";
-                case 5: return "BT.470 System M (historical)";
-                case 6: return "BT.601";
-                case 7: return "SMPTE 240 M";
-                case 8: return "Linear";
-                case 9: return "Logarithmic (100 : 1 range)";
-                case 10: return "Logarithmic (100 * Sqrt(10) : 1 range)";
-                case 11: return "IEC 61966-2-4";
-                case 12: return "BT.1361";
-                case 13: return "sRGB or sYCC";
-                case 14: return "BT.2020 10-bit systems";
-                case 15: return "BT.2020 12-bit systems";
-                case 16: return "SMPTE ST 2084, ITU BT.2100 PQ";
-                case 17: return "SMPTE ST 428";
-                case 18: return "BT.2100 HLG, ARIB STD-B67";
-            }
-
-            return "Unknown";
+                1 => "BT.709",
+                2 => "Unspecified",
+                4 => "BT.470 System B, G (historical)",
+                5 => "BT.470 System M (historical)",
+                6 => "BT.601",
+                7 => "SMPTE 240 M",
+                8 => "Linear",
+                9 => "Logarithmic (100 : 1 range)",
+                10 => "Logarithmic (100 * Sqrt(10) : 1 range)",
+                11 => "IEC 61966-2-4",
+                12 => "BT.1361",
+                13 => "sRGB or sYCC",
+                14 => "BT.2020 10-bit systems",
+                15 => "BT.2020 12-bit systems",
+                16 => "SMPTE ST 2084, ITU BT.2100 PQ",
+                17 => "SMPTE ST 428",
+                18 => "BT.2100 HLG, ARIB STD-B67",
+                _ => "Unknown",
+            };
         }
 
         public static string GetColorMatrixCoeffsName(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 1: return "BT.709";
-                case 2: return "Unspecified";
-                case 4: return "US FCC 73.628";
-                case 5: return "BT.470 System B, G (historical)";
-                case 6: return "BT.601";
-                case 7: return "SMPTE 240 M";
-                case 8: return "YCgCo";
-                case 9: return "BT.2020 non-constant luminance, BT.2100 YCbCr";
-                case 10: return "BT.2020 constant luminance";
-                case 11: return "SMPTE ST 2085 YDzDx";
-                case 12: return "Chromaticity-derived non-constant luminance";
-                case 13: return "Chromaticity-derived constant luminance";
-                case 14: return "BT.2100 ICtCp";
-            }
-
-            return "Unknown";
+                1 => "BT.709",
+                2 => "Unspecified",
+                4 => "US FCC 73.628",
+                5 => "BT.470 System B, G (historical)",
+                6 => "BT.601",
+                7 => "SMPTE 240 M",
+                8 => "YCgCo",
+                9 => "BT.2020 non-constant luminance, BT.2100 YCbCr",
+                10 => "BT.2020 constant luminance",
+                11 => "SMPTE ST 2085 YDzDx",
+                12 => "Chromaticity-derived non-constant luminance",
+                13 => "Chromaticity-derived constant luminance",
+                14 => "BT.2100 ICtCp",
+                _ => "Unknown",
+            };
         }
 
         public static string GetColorRangeName(int n)
         {
-            switch (n)
+            return n switch
             {
-                case 0: return "Unspecified";
-                case 1: return "TV (Limited)";
-                case 2: return "PC (Full)";
-            }
-
-            return "Unknown";
+                0 => "Unspecified",
+                1 => "TV (Limited)",
+                2 => "PC (Full)",
+                _ => "Unknown",
+            };
         }
 
         #endregion

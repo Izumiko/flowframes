@@ -1,10 +1,7 @@
 ﻿using Flowframes.Data;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flowframes.MiscUtils
 {
@@ -14,7 +11,7 @@ namespace Flowframes.MiscUtils
         {
             try
             {
-                string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+                string[] suf = ["B", "KB", "MB", "GB", "TB", "PB", "EB"];
                 if (sizeBytes == 0)
                     return "0" + suf[0];
                 long bytes = Math.Abs(sizeBytes);
@@ -68,7 +65,7 @@ namespace Flowframes.MiscUtils
 
                 if (hasMilliseconds)
                 {
-                    int milliseconds = int.Parse(values[2].Split('.')[1].Substring(0, 2)) * 10;
+                    int milliseconds = int.Parse(values[2].Split('.')[1][..2]) * 10;
 
                     if (milliseconds >= 500)
                         secs++;
@@ -93,9 +90,9 @@ namespace Flowframes.MiscUtils
                 int seconds = int.Parse(values[2].Split('.')[0]);
                 long ms = 0;
 
-                if (timestamp.Contains("."))
+                if (timestamp.Contains('.'))
                 {
-                    int milliseconds = int.Parse(values[2].Split('.')[1].Substring(0, 2)) * 10;
+                    int milliseconds = int.Parse(values[2].Split('.')[1][..2]) * 10;
                     ms = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
                 }
                 else

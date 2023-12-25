@@ -11,10 +11,10 @@ namespace Flowframes.Data
 {
     class Servers
     {
-        public static Server hetznerEu = new Server { name = "Germany (Nürnberg)", host = "nmkd-hz.de", pattern = "https://dl.*" };
-        public static Server contaboUs = new Server { name = "USA (St. Louis)", host = "nmkd-cb.de", pattern = "https://dl.*" };
+        public static Server hetznerEu = new() { name = "Germany (Nürnberg)", host = "nmkd-hz.de", pattern = "https://dl.*" };
+        public static Server contaboUs = new() { name = "USA (St. Louis)", host = "nmkd-cb.de", pattern = "https://dl.*" };
 
-        public static List<Server> serverList = new List<Server> { hetznerEu, contaboUs };
+        public static List<Server> serverList = [hetznerEu, contaboUs];
 
         private static Server closestServer = serverList[0];
 
@@ -32,21 +32,21 @@ namespace Flowframes.Data
 
         public static async Task Init(ComboBox comboBox = null)
         {
-            Dictionary<string[], long> serversPings = new Dictionary<string[], long>();
+            Dictionary<string[], long> serversPings = [];
 
             foreach (Server server in serverList)
             {
                 try
                 {
-                    Ping p = new Ping();
+                    Ping p = new();
                     PingReply replyEur = p.Send(server.host, 2000);
-                    serversPings[new string[] { server.name, server.host, server.pattern }] = replyEur.RoundtripTime;
+                    serversPings[[server.name, server.host, server.pattern]] = replyEur.RoundtripTime;
                     Logger.Log($"[Servers] Ping to {server.host}: {replyEur.RoundtripTime} ms", true);
                 }
                 catch (Exception e)
                 {
                     Logger.Log($"[Servers] Failed to ping {server.host}: {e.Message}", true);
-                    serversPings[new string[] { server.name, server.host, server.pattern }] = 10000;
+                    serversPings[[server.name, server.host, server.pattern]] = 10000;
                 }
             }
 

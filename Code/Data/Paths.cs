@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Flowframes.IO
@@ -45,7 +44,7 @@ namespace Flowframes.IO
 
 		public static string GetExe()
 		{
-			return System.Reflection.Assembly.GetEntryAssembly().GetName().CodeBase.Replace("file:///", "");
+			return System.Reflection.Assembly.GetEntryAssembly().Location;
 		}
 
 		public static string GetExeDir()

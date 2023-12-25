@@ -2,11 +2,8 @@
 using Flowframes.Data.Streams;
 using Flowframes.IO;
 using Flowframes.MiscUtils;
-using Flowframes.Os;
-using Flowframes.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,7 +19,7 @@ namespace Flowframes.Media
         private readonly static FfprobeMode showStreams = FfprobeMode.ShowStreams;
         private readonly static FfprobeMode showFormat = FfprobeMode.ShowFormat;
 
-        public static List<Encoder> CompatibleHwEncoders = new List<Encoder>();
+        public static List<Encoder> CompatibleHwEncoders = [];
         public static bool NvencSupportsBFrames = false;
 
         public static async Task<int> GetStreamCount(string path)
@@ -38,12 +35,11 @@ namespace Flowframes.Media
 
         public static async Task<List<Stream>> GetStreams(string path, bool progressBar, int streamCount, Fraction? defaultFps, bool countFrames)
         {
-            List<Stream> streamList = new List<Stream>();
+            List<Stream> streamList = [];
 
             try
             {
-                if (defaultFps == null)
-                    defaultFps = new Fraction(30, 1);
+                defaultFps ??= new Fraction(30, 1);
 
                 string output = await GetFfmpegInfoAsync(path, "Stream #0:");
                 string[] streams = output.SplitIntoLines().Where(x => x.MatchesWildcard("*Stream #0:*: *: *")).ToArray();
@@ -71,9 +67,11 @@ namespace Flowframes.Media
                             Size dar = SizeFromString(await GetFfprobeInfoAsync(path, showStreams, "display_aspect_ratio", idx));
                             Fraction fps = path.IsConcatFile() ? (Fraction)defaultFps : await IoUtils.GetVideoFramerate(path);
                             int frameCount = countFrames ? await GetFrameCountCached.GetFrameCountAsync(path) : 0;
-                            VideoStream vStream = new VideoStream(lang, title, codec, codecLong, pixFmt, kbits, res, sar, dar, fps, frameCount);
-                            vStream.Index = idx;
-                            vStream.IsDefault = def;
+                            VideoStream vStream = new(lang, title, codec, codecLong, pixFmt, kbits, res, sar, dar, fps, frameCount)
+                            {
+                                Index = idx,
+                                IsDefault = def
+                            };
                             Logger.Log($"Added video stream: {vStream}", true);
                             streamList.Add(vStream);
                             continue;
@@ -85,15 +83,17 @@ namespace Flowframes.Media
                             string title = await GetFfprobeInfoAsync(path, showStreams, "TAG:title", idx);
                             string codec = await GetFfprobeInfoAsync(path, showStreams, "codec_name", idx);
                             string profile = await GetFfprobeInfoAsync(path, showStreams, "profile", idx);
-                            if (codec.ToLowerInvariant() == "dts" && profile != "unknown") codec = profile;
+                            if (codec.Equals("dts", StringComparison.OrdinalIgnoreCase) && profile != "unknown") codec = profile;
                             string codecLong = await GetFfprobeInfoAsync(path, showStreams, "codec_long_name", idx);
                             int kbits = (await GetFfprobeInfoAsync(path, showStreams, "bit_rate", idx)).GetInt() / 1024;
                             int sampleRate = (await GetFfprobeInfoAsync(path, showStreams, "sample_rate", idx)).GetInt();
                             int channels = (await GetFfprobeInfoAsync(path, showStreams, "channels", idx)).GetInt();
                             string layout = (await GetFfprobeInfoAsync(path, showStreams, "channel_layout", idx));
-                            AudioStream aStream = new AudioStream(lang, title, codec, codecLong, kbits, sampleRate, channels, layout);
-                            aStream.Index = idx;
-                            aStream.IsDefault = def;
+                            AudioStream aStream = new(lang, title, codec, codecLong, kbits, sampleRate, channels, layout)
+                            {
+                                Index = idx,
+                                IsDefault = def
+                            };
                             Logger.Log($"Added audio stream: {aStream}", true);
                             streamList.Add(aStream);
                             continue;
@@ -106,9 +106,11 @@ namespace Flowframes.Media
                             string codec = await GetFfprobeInfoAsync(path, showStreams, "codec_name", idx);
                             string codecLong = await GetFfprobeInfoAsync(path, showStreams, "codec_long_name", idx);
                             bool bitmap = await IsSubtitleBitmapBased(path, idx, codec);
-                            SubtitleStream sStream = new SubtitleStream(lang, title, codec, codecLong, bitmap);
-                            sStream.Index = idx;
-                            sStream.IsDefault = def;
+                            SubtitleStream sStream = new(lang, title, codec, codecLong, bitmap)
+                            {
+                                Index = idx,
+                                IsDefault = def
+                            };
                             Logger.Log($"Added subtitle stream: {sStream}", true);
                             streamList.Add(sStream);
                             continue;
@@ -118,9 +120,11 @@ namespace Flowframes.Media
                         {
                             string codec = await GetFfprobeInfoAsync(path, showStreams, "codec_name", idx);
                             string codecLong = await GetFfprobeInfoAsync(path, showStreams, "codec_long_name", idx);
-                            DataStream dStream = new DataStream(codec, codecLong);
-                            dStream.Index = idx;
-                            dStream.IsDefault = def;
+                            DataStream dStream = new(codec, codecLong)
+                            {
+                                Index = idx,
+                                IsDefault = def
+                            };
                             Logger.Log($"Added data stream: {dStream}", true);
                             streamList.Add(dStream);
                             continue;
@@ -132,16 +136,18 @@ namespace Flowframes.Media
                             string codecLong = await GetFfprobeInfoAsync(path, showStreams, "codec_long_name", idx);
                             string filename = await GetFfprobeInfoAsync(path, showStreams, "TAG:filename", idx);
                             string mimeType = await GetFfprobeInfoAsync(path, showStreams, "TAG:mimetype", idx);
-                            AttachmentStream aStream = new AttachmentStream(codec, codecLong, filename, mimeType);
-                            aStream.Index = idx;
-                            aStream.IsDefault = def;
+                            AttachmentStream aStream = new(codec, codecLong, filename, mimeType)
+                            {
+                                Index = idx,
+                                IsDefault = def
+                            };
                             Logger.Log($"Added attachment stream: {aStream}", true);
                             streamList.Add(aStream);
                             continue;
                         }
 
                         Logger.Log($"Unknown stream (not vid/aud/sub/dat/att): {streamStr}", true);
-                        Stream stream = new Stream { Codec = "Unknown", CodecLong = "Unknown", Index = idx, IsDefault = def, Type = Stream.StreamType.Unknown };
+                        Stream stream = new() { Codec = "Unknown", CodecLong = "Unknown", Index = idx, IsDefault = def, Type = Stream.StreamType.Unknown };
                         streamList.Add(stream);
                     }
                     catch (Exception e)
@@ -234,10 +240,10 @@ namespace Flowframes.Media
                 }
                 else
                 {
-                    return new string[] {
+                    return [
                         $"{string.Join(" ", args)} -b:v 0 {qualityStr} {GetVp9Speed()} {t} -row-mt 1 -pass 1 -an",
                         $"{string.Join(" ", args)} -b:v 0 {qualityStr} {GetVp9Speed()} {t} -row-mt 1 -pass 2"
-                    };
+                    ];
                 }
             }
 
@@ -306,7 +312,7 @@ namespace Flowframes.Media
                 args.Add($"-q:v {OutputUtils.WebpQuality[qualityLevel]}");
             }
 
-            return new string[] { string.Join(" ", args) };
+            return [string.Join(" ", args)];
         }
 
         private static int GetCrf(OutputSettings settings)
@@ -391,11 +397,11 @@ namespace Flowframes.Media
             bool supported = false;
             string alias = GetAudioExt(format);
 
-            string[] formatsMp4 = new string[] { "m4a", "mp3", "ac3", "dts" };
-            string[] formatsMkv = new string[] { "m4a", "mp3", "ac3", "dts", "ogg", "mp2", "wav", "wma" };
-            string[] formatsWebm = new string[] { "ogg" };
-            string[] formatsMov = new string[] { "m4a", "ac3", "dts", "wav" };
-            string[] formatsAvi = new string[] { "m4a", "ac3", "dts" };
+            string[] formatsMp4 = ["m4a", "mp3", "ac3", "dts"];
+            string[] formatsMkv = ["m4a", "mp3", "ac3", "dts", "ogg", "mp2", "wav", "wma"];
+            string[] formatsWebm = ["ogg"];
+            string[] formatsMov = ["m4a", "ac3", "dts", "wav"];
+            string[] formatsAvi = ["m4a", "ac3", "dts"];
 
             switch (outFormat)
             {
@@ -428,23 +434,22 @@ namespace Flowframes.Media
             if (codec.StartsWith("pcm_"))
                 return "wav";
 
-            switch (codec)
+            return codec switch
             {
-                case "vorbis": return "ogg";
-                case "opus": return "ogg";
-                case "mp2": return "mp2";
-                case "mp3": return "mp3";
-                case "aac": return "m4a";
-                case "ac3": return "ac3";
-                case "eac3": return "ac3";
-                case "dts": return "dts";
-                case "alac": return "wav";
-                case "flac": return "wav";
-                case "wmav1": return "wma";
-                case "wmav2": return "wma";
-            }
-
-            return "unsupported";
+                "vorbis" => "ogg",
+                "opus" => "ogg",
+                "mp2" => "mp2",
+                "mp3" => "mp3",
+                "aac" => "m4a",
+                "ac3" => "ac3",
+                "eac3" => "ac3",
+                "dts" => "dts",
+                "alac" => "wav",
+                "flac" => "wav",
+                "wmav1" => "wma",
+                "wmav2" => "wma",
+                _ => "unsupported",
+            };
         }
 
         public static async Task<string> GetAudioFallbackArgs(string videoPath, Enums.Output.Format outFormat, float itsScale)
@@ -502,7 +507,7 @@ namespace Flowframes.Media
                 return 0;
 
             Directory.CreateDirectory(outputPath.GetParentDir());
-            validExtensions = validExtensions ?? new List<string>();
+            validExtensions ??= [];
             validExtensions = validExtensions.Select(x => x.Remove(".").Lower()).ToList(); // Ignore "." in extensions
             var validFiles = IoUtils.GetFilesSorted(inputFilesDir).Where(f => validExtensions.Contains(Path.GetExtension(f).Replace(".", "").Lower()));
             string fileContent = string.Join(Environment.NewLine, validFiles.Select(f => $"file '{f.Replace(@"\", "/")}'"));

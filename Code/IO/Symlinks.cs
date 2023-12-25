@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using Flowframes.MiscUtils;
 
 namespace Flowframes.IO
 {
-    class Symlinks
+    partial class Symlinks
     {
         public enum Flag { File = 0, Directory = 1, Unprivileged = 2 }
-        [DllImport("kernel32.dll")]
-        public static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, Flag dwFlags);
+        [LibraryImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static partial bool CreateSymbolicLink([MarshalAs(UnmanagedType.LPStr)] string lpSymlinkFileName, [MarshalAs(UnmanagedType.LPStr)] string lpTargetFileName, Flag dwFlags);
 
         public static bool SymlinksAllowed()
         {
@@ -34,9 +33,9 @@ namespace Flowframes.IO
 
         public static async Task CreateSymlinksParallel(Dictionary<string, string> pathsLinkTarget, bool debug = false, int maxThreads = 150)
         {
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
-            ParallelOptions opts = new ParallelOptions() {MaxDegreeOfParallelism = maxThreads};
+            ParallelOptions opts = new() {MaxDegreeOfParallelism = maxThreads};
 
             Task forEach = Task.Run(async () => Parallel.ForEach(pathsLinkTarget, opts, pair =>
             {
@@ -56,13 +55,13 @@ namespace Flowframes.IO
             { 
                 IoUtils.DeleteIfExists(linksDir);
                 Directory.CreateDirectory(linksDir);
-                Stopwatch sw = new Stopwatch();
+                Stopwatch sw = new();
                 sw.Restart();
                 Logger.Log($"Creating symlinks for '{framesFile}' in '{linksDir} with zPadding {zPad}'", true);
 
                 int counter = 0;
 
-                Dictionary<string, string> pathsLinkTarget = new Dictionary<string, string>();
+                Dictionary<string, string> pathsLinkTarget = [];
 
                 foreach (string line in File.ReadAllLines(framesFile))
                 {

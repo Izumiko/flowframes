@@ -10,7 +10,7 @@ namespace Flowframes.Data
     public class ModelCollection
     {
         public AI Ai { get; set; } = null;
-        public List<ModelInfo> Models { get; set; } = new List<ModelInfo>();
+        public List<ModelInfo> Models { get; set; } = [];
 
         public class ModelInfo
         {
@@ -21,13 +21,13 @@ namespace Flowframes.Data
             public bool SupportsAlpha { get; set; } = false;
             public bool IsDefault { get; set; } = false;
             private int[] _fixedFactors = null;
-            public int[] FixedFactors { get { return _fixedFactors == null ? new int[0] : _fixedFactors; } set { _fixedFactors = value; } }
+            public int[] FixedFactors { get { return _fixedFactors ?? ([]); } set { _fixedFactors = value; } }
 
             public ModelInfo() { }
 
             public string GetUiString()
             {
-                return $"{Name} - {Desc}{(SupportsAlpha ? " (Supports Transparency)" : "")}{(FixedFactors.Count() > 0 ? $" ({GetFactorsString()})" : "")}{(IsDefault ? " (Recommended)" : "")}";
+                return $"{Name} - {Desc}{(SupportsAlpha ? " (Supports Transparency)" : "")}{(FixedFactors.Length > 0 ? $" ({GetFactorsString()})" : "")}{(IsDefault ? " (Recommended)" : "")}";
             }
 
             public string GetFactorsString ()
@@ -48,7 +48,7 @@ namespace Flowframes.Data
             if (IoUtils.IsPathValid(jsonContentOrPath) && File.Exists(jsonContentOrPath))
                 jsonContentOrPath = File.ReadAllText(jsonContentOrPath);
 
-            Models = new List<ModelInfo>();
+            Models = [];
             dynamic data = JsonConvert.DeserializeObject(jsonContentOrPath);
 
             foreach (var item in data)
@@ -59,7 +59,7 @@ namespace Flowframes.Data
                 bool def = false;
                 bool.TryParse((string)item.isDefault, out def);
 
-                ModelInfo modelInfo = new ModelInfo()
+                ModelInfo modelInfo = new()
                 {
                     Ai = ai,
                     Name = (string)item.name,

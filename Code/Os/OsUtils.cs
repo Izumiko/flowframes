@@ -12,7 +12,8 @@ using DiskDetector.Models;
 using Microsoft.VisualBasic.Devices;
 using Flowframes.MiscUtils;
 using System.Linq;
-using Tulpep.NotificationWindow;
+//using Tulpep.NotificationWindow;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Flowframes.Os
 {
@@ -39,7 +40,7 @@ namespace Flowframes.Os
             {
                 //get the currently logged in user
                 user = WindowsIdentity.GetCurrent();
-                WindowsPrincipal principal = new WindowsPrincipal(user);
+                WindowsPrincipal principal = new(user);
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
             catch (Exception e)
@@ -49,8 +50,7 @@ namespace Flowframes.Os
             }
             finally
             {
-                if (user != null)
-                    user.Dispose();
+                user?.Dispose();
             }
             return isAdmin;
         }
@@ -95,14 +95,13 @@ namespace Flowframes.Os
 
         public static Process NewProcess(bool hidden, string filename = "cmd.exe")
         {
-            Process proc = new Process();
+            Process proc = new();
             return SetStartInfo(proc, hidden, filename);
         }
 
         public static void KillProcessTree(int pid)
         {
-            ManagementObjectSearcher processSearcher = new ManagementObjectSearcher
-              ("Select * From Win32_Process Where ParentProcessID=" + pid);
+            ManagementObjectSearcher processSearcher = new("Select * From Win32_Process Where ParentProcessID=" + pid);
             ManagementObjectCollection processCollection = processSearcher.Get();
 
             try
@@ -117,7 +116,7 @@ namespace Flowframes.Os
 
             if (processCollection != null)
             {
-                foreach (ManagementObject mo in processCollection)
+                foreach (ManagementObject mo in processCollection.Cast<ManagementObject>())
                 {
                     KillProcessTree(Convert.ToInt32(mo["ProcessID"])); //kill child processes(also kills childrens of childrens etc.)
                 }
@@ -185,18 +184,16 @@ namespace Flowframes.Os
 
             try
             {
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem"))
+                using ManagementObjectSearcher searcher = new("SELECT * FROM Win32_OperatingSystem");
+                ManagementObjectCollection information = searcher.Get();
+
+                if (information != null)
                 {
-                    ManagementObjectCollection information = searcher.Get();
-
-                    if (information != null)
-                    {
-                        foreach (ManagementObject obj in information)
-                            info = $"{obj["Caption"]} | {obj["OSArchitecture"]}";
-                    }
-
-                    info = info.Replace("NT 5.1.2600", "XP").Replace("NT 5.2.3790", "Server 2003");
+                    foreach (ManagementObject obj in information.Cast<ManagementObject>())
+                        info = $"{obj["Caption"]} | {obj["OSArchitecture"]}";
                 }
+
+                info = info.Replace("NT 5.1.2600", "XP").Replace("NT 5.2.3790", "Server 2003");
             }
             catch (Exception e)
             {
@@ -208,10 +205,10 @@ namespace Flowframes.Os
 
         public static IEnumerable<Process> GetChildProcesses(Process process)
         {
-            List<Process> children = new List<Process>();
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(String.Format("Select * From Win32_Process Where ParentProcessID={0}", process.Id));
+            List<Process> children = [];
+            ManagementObjectSearcher mos = new(String.Format("Select * From Win32_Process Where ParentProcessID={0}", process.Id));
 
-            foreach (ManagementObject mo in mos.Get())
+            foreach (ManagementObject mo in mos.Get().Cast<ManagementObject>())
             {
                 children.Add(Process.GetProcessById(Convert.ToInt32(mo["ProcessID"])));
             }
@@ -222,9 +219,9 @@ namespace Flowframes.Os
         public static async Task<string> GetOutputAsync(Process process, bool onlyLastLine = false)
         {
             Logger.Log($"Getting output for {process.StartInfo.FileName} {process.StartInfo.Arguments}", true);
-            NmkdStopwatch sw = new NmkdStopwatch();
+            NmkdStopwatch sw = new();
 
-            Stopwatch timeSinceLastOutput = new Stopwatch();
+            Stopwatch timeSinceLastOutput = new();
             timeSinceLastOutput.Restart();
 
             string output = "";
@@ -265,12 +262,22 @@ namespace Flowframes.Os
 
         public static void ShowNotification(string title, string text)
         {
-            var popupNotifier = new PopupNotifier { TitleText = title, ContentText = text, IsRightToLeft = false };
-            popupNotifier.BodyColor = System.Drawing.ColorTranslator.FromHtml("#323232");
-            popupNotifier.ContentColor = System.Drawing.Color.White;
-            popupNotifier.TitleColor = System.Drawing.Color.LightGray;
-            popupNotifier.GradientPower = 0;
-            popupNotifier.Popup();
+            //var popupNotifier = new PopupNotifier
+            //{
+            //    TitleText = title,
+            //    ContentText = text,
+            //    IsRightToLeft = false,
+            //    BodyColor = System.Drawing.ColorTranslator.FromHtml("#323232"),
+            //    ContentColor = System.Drawing.Color.White,
+            //    TitleColor = System.Drawing.Color.LightGray,
+            //    GradientPower = 0
+            //};
+            //popupNotifier.Popup();
+
+            new ToastContentBuilder()
+                .AddText(title)
+                .AddText(text)
+                .Show();
         }
 
         public static void ShowNotificationIfInBackground (string title, string text)
@@ -283,30 +290,30 @@ namespace Flowframes.Os
 
         public static string GetGpus ()
         {
-            List<string> gpusVk = new List<string>();
-            List<string> gpusNv = new List<string>();
+            List<string> gpusVk = [];
+            List<string> gpusNv = [];
 
             if(VulkanUtils.VkDevices != null)
             {
                 gpusVk.AddRange(VulkanUtils.VkDevices.Select(d => $"{d.Name.Remove("NVIDIA ").Remove("GeForce ").Remove("AMD ").Remove("Intel ").Remove("(TM)")} ({d.Id})"));
             }
 
-            if(NvApi.gpuList != null && NvApi.gpuList.Any())
+            if(NvApi.gpuList != null && NvApi.gpuList.Count != 0)
             {
                 gpusNv.AddRange(NvApi.gpuList.Select(d => $"{d.FullName.Remove("NVIDIA ").Remove("GeForce ")} ({NvApi.gpuList.IndexOf(d)})"));
             }
 
-            if (!gpusVk.Any() && !gpusNv.Any())
+            if (gpusVk.Count == 0 && gpusNv.Count == 0)
                 return "No GPUs detected.";
 
             string s = "";
 
-            if (gpusVk.Any())
+            if (gpusVk.Count != 0)
             {
                 s += $"Vulkan GPUs: {string.Join(", ", gpusVk)}";
             }
 
-            if (gpusNv.Any())
+            if (gpusNv.Count != 0)
             {
                 s += $" - CUDA GPUs: {string.Join(", ", gpusNv)}";
             }
@@ -322,7 +329,7 @@ namespace Flowframes.Os
         public static string GetPathVar(IEnumerable<string> additionalPaths)
         {
             var paths = Environment.GetEnvironmentVariable("PATH").Split(';');
-            List<string> newPaths = new List<string>();
+            List<string> newPaths = [];
 
             if (paths != null)
                 newPaths.AddRange(additionalPaths.Where(p => p.IsNotEmpty()));

@@ -1,5 +1,4 @@
 ﻿using Flowframes.MiscUtils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vulkan;
@@ -25,8 +24,8 @@ namespace Flowframes.Os
         public static void Init()
         {
             var sw = new NmkdStopwatch();
-            VkDevices = new List<VkDevice>();
-            Instance vkInstance = new Instance(new InstanceCreateInfo());
+            VkDevices = [];
+            Instance vkInstance = new(new InstanceCreateInfo());
             PhysicalDevice[] physicalDevices = vkInstance.EnumeratePhysicalDevices();
 
             for (int idx = 0; idx < physicalDevices.Length; idx++)

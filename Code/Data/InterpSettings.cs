@@ -3,14 +3,12 @@ using Flowframes.Data;
 using Flowframes.IO;
 using Flowframes.Main;
 using Flowframes.MiscUtils;
-using Flowframes.Ui;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.Logging;
 
 namespace Flowframes
 {
@@ -110,7 +108,7 @@ namespace Flowframes
             framesExt = "";
             interpExt = "";
 
-            Dictionary<string, string> entries = new Dictionary<string, string>();
+            Dictionary<string, string> entries = [];
 
             foreach(string line in serializedData.SplitIntoLines())
             {

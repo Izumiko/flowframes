@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Flowframes.Data;
@@ -10,7 +9,7 @@ namespace Flowframes.Media
 {
     class GetFrameCountCached
     {
-        private static Dictionary<QueryInfo, int> cache = new Dictionary<QueryInfo, int>();
+        private static readonly Dictionary<QueryInfo, int> cache = [];
 
         public static async Task<int> GetFrameCountAsync(MediaFile mf, int retryCount = 3)
         {
@@ -22,7 +21,7 @@ namespace Flowframes.Media
             Logger.Log($"Getting frame count ({path})", true);
 
             long filesize = IoUtils.GetPathSize(path);
-            QueryInfo hash = new QueryInfo(path, filesize);
+            QueryInfo hash = new(path, filesize);
 
             if (filesize > 0 && CacheContains(hash))
             {

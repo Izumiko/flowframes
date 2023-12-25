@@ -1,12 +1,9 @@
 ﻿using Flowframes.IO;
 using Flowframes.MiscUtils;
-using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flowframes.Ui
@@ -54,17 +51,17 @@ namespace Flowframes.Ui
 
         public static void ToggleMonospace(TextBox logBox)
         {
-            bool isMonospace = logBox.Font.Name.ToLowerInvariant().Contains("consolas");
+            bool isMonospace = logBox.Font.Name.Contains("consolas", System.StringComparison.OrdinalIgnoreCase);
 
             if (isMonospace)
-                logBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5f);
+                logBox.Font = new System.Drawing.Font("Segoe UI", 8.5f);
             else
                 logBox.Font = new System.Drawing.Font("Consolas", 8.0f);
         }
 
         public static void CopyLogToClipboard(string logFilename)
         {
-            StringCollection paths = new StringCollection();
+            StringCollection paths = [];
             string path = Path.Combine(Paths.GetLogPath(), logFilename);
             paths.Add(path);
             Clipboard.SetFileDropList(paths);
@@ -97,8 +94,8 @@ namespace Flowframes.Ui
 
         public static void SaveGrid(DataGridView grid)
         {
-            NmkdStopwatch sw = new NmkdStopwatch();
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            NmkdStopwatch sw = new();
+            Dictionary<string, string> dict = [];
 
             foreach (DataGridViewRow row in grid.Rows)
             {

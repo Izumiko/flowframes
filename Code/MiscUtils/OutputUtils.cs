@@ -11,7 +11,7 @@ namespace Flowframes.MiscUtils
 {
     internal class OutputUtils
     {
-        public static readonly List<PixFmt> AlphaFormats = new List<PixFmt> { PixFmt.Rgba, PixFmt.Yuva420P, PixFmt.Yuva444P10Le };
+        public static readonly List<PixFmt> AlphaFormats = [PixFmt.Rgba, PixFmt.Yuva420P, PixFmt.Yuva444P10Le];
 
         public static EncoderInfoVideo GetEncoderInfoVideo(Encoder encoder)
         {
@@ -21,7 +21,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H264,
                     Name = "libx264",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                 };
@@ -33,7 +33,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H265,
                     Name = "libx265",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P10Le],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                 };
@@ -45,7 +45,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H264,
                     Name = "h264_nvenc",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -58,7 +58,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.AV1,
                     Name = "libsvtav1",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv420P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv420P10Le],
                     PixelFormatDefault = PixFmt.Yuv420P10Le,
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
@@ -73,7 +73,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.VP9,
                     Name = "libvpx-vp9",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P, PixFmt.Yuv444P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P, PixFmt.Yuv444P10Le],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                 };
@@ -85,7 +85,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H265,
                     Name = "hevc_nvenc",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -98,7 +98,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.AV1,
                     Name = "av1_nvenc",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv420P10Le],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     PixelFormatDefault = PixFmt.Yuv420P10Le,
@@ -113,7 +113,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H264,
                     Name = "h264_amf",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P },
+                    PixelFormats = [PixFmt.Yuv420P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -127,7 +127,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H265,
                     Name = "hevc_amf",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P },
+                    PixelFormats = [PixFmt.Yuv420P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -141,7 +141,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H264,
                     Name = "h264_qsv",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P },
+                    PixelFormats = [PixFmt.Yuv420P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -155,7 +155,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.H265,
                     Name = "hevc_qsv",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P },
+                    PixelFormats = [PixFmt.Yuv420P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.Common>(),
                     QualityDefault = (int)Quality.Common.VeryHigh,
                     HwAccelerated = true,
@@ -169,7 +169,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.ProRes,
                     Name = "prores_ks",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv422P10Le, PixFmt.Yuv444P10Le, PixFmt.Yuva444P10Le },
+                    PixelFormats = [PixFmt.Yuv422P10Le, PixFmt.Yuv444P10Le, PixFmt.Yuva444P10Le],
                     PixelFormatDefault = PixFmt.Yuv422P10Le,
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.ProResProfile>(),
                     QualityDefault = (int)Quality.ProResProfile.Standard,
@@ -182,7 +182,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Gif,
                     Name = "gif",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Pal8 },
+                    PixelFormats = [PixFmt.Pal8],
                     PixelFormatDefault = PixFmt.Pal8,
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.GifColors>(),
                     QualityDefault = (int)Quality.GifColors.High128,
@@ -198,7 +198,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Ffv1,
                     Name = "ffv1",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv422P, PixFmt.Yuv422P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P10Le },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv444P, PixFmt.Yuv422P, PixFmt.Yuv422P, PixFmt.Yuv420P10Le, PixFmt.Yuv444P10Le],
                     Lossless = true,
                 };
             }
@@ -209,7 +209,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Huffyuv,
                     Name = "huffyuv",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv422P, PixFmt.Rgb24 },
+                    PixelFormats = [PixFmt.Yuv422P, PixFmt.Rgb24],
                     Lossless = true,
                 };
             }
@@ -220,7 +220,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Magicyuv,
                     Name = "magicyuv",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv422P, PixFmt.Yuv444P },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv422P, PixFmt.Yuv444P],
                     Lossless = true,
                 };
             }
@@ -241,7 +241,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Png,
                     Name = "png",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Rgb24, PixFmt.Rgba },
+                    PixelFormats = [PixFmt.Rgb24, PixFmt.Rgba],
                     PixelFormatDefault = PixFmt.Rgb24,
                     Lossless = true,
                     IsImageSequence = true,
@@ -255,7 +255,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Jpeg,
                     Name = "mjpeg",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuv422P, PixFmt.Yuv444P },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuv422P, PixFmt.Yuv444P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.JpegWebm>(),
                     QualityDefault = (int)Quality.JpegWebm.ImgHigh,
                     IsImageSequence = true,
@@ -269,7 +269,7 @@ namespace Flowframes.MiscUtils
                 {
                     Codec = Codec.Webp,
                     Name = "libwebp",
-                    PixelFormats = new List<PixFmt>() { PixFmt.Yuv420P, PixFmt.Yuva420P },
+                    PixelFormats = [PixFmt.Yuv420P, PixFmt.Yuva420P],
                     QualityLevels = ParseUtils.GetEnumStrings<Quality.JpegWebm>(),
                     QualityDefault = (int)Quality.JpegWebm.ImgHigh,
                     IsImageSequence = true,
@@ -282,18 +282,18 @@ namespace Flowframes.MiscUtils
 
         public static List<Codec> GetSupportedCodecs(Enums.Output.Format format)
         {
-            switch (format)
+            return format switch
             {
-                case Enums.Output.Format.Mp4: return new List<Codec> { Codec.H264, Codec.H265, Codec.AV1 };
-                case Enums.Output.Format.Mkv: return new List<Codec> { Codec.H264, Codec.H265, Codec.AV1, Codec.VP9 };
-                case Enums.Output.Format.Webm: return new List<Codec> { Codec.VP9, Codec.AV1 };
-                case Enums.Output.Format.Mov: return new List<Codec> { Codec.ProRes };
-                case Enums.Output.Format.Avi: return new List<Codec> { Codec.Ffv1, Codec.Huffyuv, Codec.Magicyuv, Codec.Rawvideo };
-                case Enums.Output.Format.Gif: return new List<Codec> { Codec.Gif };
-                case Enums.Output.Format.Images: return new List<Codec> { Codec.Png, Codec.Jpeg, Codec.Webp };
-                case Enums.Output.Format.Realtime: return new List<Codec> { };
-                default: return new List<Codec> { };
-            }
+                Enums.Output.Format.Mp4 => [Codec.H264, Codec.H265, Codec.AV1],
+                Enums.Output.Format.Mkv => [Codec.H264, Codec.H265, Codec.AV1, Codec.VP9],
+                Enums.Output.Format.Webm => [Codec.VP9, Codec.AV1],
+                Enums.Output.Format.Mov => [Codec.ProRes],
+                Enums.Output.Format.Avi => [Codec.Ffv1, Codec.Huffyuv, Codec.Magicyuv, Codec.Rawvideo],
+                Enums.Output.Format.Gif => [Codec.Gif],
+                Enums.Output.Format.Images => [Codec.Png, Codec.Jpeg, Codec.Webp],
+                Enums.Output.Format.Realtime => [],
+                _ => [],
+            };
         }
 
         public static List<Encoder> GetAvailableEncoders(Enums.Output.Format format)
@@ -339,18 +339,18 @@ namespace Flowframes.MiscUtils
 
         public static int GetGifColors (Quality.GifColors qualityLevel)
         {
-            switch (qualityLevel)
+            return qualityLevel switch
             {
-                case Quality.GifColors.Max256: return 256;
-                case Quality.GifColors.High128: return 128;
-                case Quality.GifColors.Medium64: return 64;
-                case Quality.GifColors.Low32: return 32;
-                case Quality.GifColors.VeryLow16: return 16;
-                default: return 128;
-            }
+                Quality.GifColors.Max256 => 256,
+                Quality.GifColors.High128 => 128,
+                Quality.GifColors.Medium64 => 64,
+                Quality.GifColors.Low32 => 32,
+                Quality.GifColors.VeryLow16 => 16,
+                _ => 128,
+            };
         }
 
-        public static Dictionary<Quality.Common, int> Crfs = new Dictionary<Quality.Common, int>
+        public static Dictionary<Quality.Common, int> Crfs = new()
         {
             { Quality.Common.Lossless, 0 },
             { Quality.Common.VeryHigh, 16 },
@@ -360,7 +360,7 @@ namespace Flowframes.MiscUtils
             { Quality.Common.VeryLow, 40 },
         };
 
-        public static Dictionary<Quality.ProResProfile, string> ProresProfiles = new Dictionary<Quality.ProResProfile, string>
+        public static Dictionary<Quality.ProResProfile, string> ProresProfiles = new()
         {
             { Quality.ProResProfile.Proxy, "proxy" },
             { Quality.ProResProfile.Lt, "proxy" },
@@ -370,7 +370,7 @@ namespace Flowframes.MiscUtils
             { Quality.ProResProfile.Quad4Xq, "4444xq" },
         };
 
-        public static Dictionary<Quality.JpegWebm, int> JpegQuality = new Dictionary<Quality.JpegWebm, int>
+        public static Dictionary<Quality.JpegWebm, int> JpegQuality = new()
         {
             { Quality.JpegWebm.ImgMax, 1 },
             { Quality.JpegWebm.ImgHigh, 3 },
@@ -379,7 +379,7 @@ namespace Flowframes.MiscUtils
             { Quality.JpegWebm.ImgLowest, 31 },
         };
 
-        public static Dictionary<Quality.JpegWebm, int> WebpQuality = new Dictionary<Quality.JpegWebm, int>
+        public static Dictionary<Quality.JpegWebm, int> WebpQuality = new()
         {
             { Quality.JpegWebm.ImgMax, 100 },
             { Quality.JpegWebm.ImgHigh, 90 },

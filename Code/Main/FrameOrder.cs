@@ -13,12 +13,12 @@ namespace Flowframes.Main
 {
     class FrameOrder
     {
-        static Stopwatch benchmark = new Stopwatch();
+        static Stopwatch benchmark = new();
         static FileInfo[] frameFiles;
         static FileInfo[] frameFilesWithoutLast;
-        static List<string> sceneFrames = new List<string>();
-        static Dictionary<int, string> frameFileContents = new Dictionary<int, string>();
-        static List<string> inputFilenames = new List<string>();
+        static List<string> sceneFrames = [];
+        static readonly Dictionary<int, string> frameFileContents = [];
+        static readonly List<string> inputFilenames = [];
         static int lastOutFileCount;
 
         public static async Task CreateFrameOrderFile(string framesPath, bool loopEnabled, float times)
@@ -41,7 +41,7 @@ namespace Flowframes.Main
             }
 		}
 
-		static Dictionary<string, List<string>> dupesDict = new Dictionary<string, List<string>>();
+		static Dictionary<string, List<string>> dupesDict = [];
 
         static void LoadDupesFile(string path)
         {
@@ -77,7 +77,7 @@ namespace Flowframes.Main
 
             inputFilenames.Clear();
             bool debug = Config.GetBool("frameOrderDebug", false);
-            List<Task> tasks = new List<Task>();
+            List<Task> tasks = [];
             int linesPerTask = (400 / interpFactor).RoundToInt();
             int num = 0;
 
@@ -112,13 +112,13 @@ namespace Flowframes.Main
             }
 
             if (loop)
-                fileContent = fileContent.Remove(fileContent.LastIndexOf("\n"));
+                fileContent = fileContent.Remove(fileContent.LastIndexOf('\n'));
 
             File.WriteAllText(framesFile, fileContent);
             File.WriteAllText(framesFile + ".inputframes.json", JsonConvert.SerializeObject(inputFilenames, Formatting.Indented));
 
             string framesFileVs = Path.Combine(framesPath.GetParentDir(), "frames.vs.json");
-            List<int> frameNums = new List<int>();
+            List<int> frameNums = [];
 
             foreach (string line in fileContent.SplitIntoLines().Where(x => x.StartsWith("file ")))
                 frameNums.Add(line.Split('/')[1].Split('.')[0].GetInt() - 1); // Convert filename to 0-indexed number
@@ -153,7 +153,7 @@ namespace Flowframes.Main
 
             public override string ToString()
             {
-                List<string> strings = new List<string>();
+                List<string> strings = [];
 
                 if (!string.IsNullOrWhiteSpace(InFileNameTo)) strings.Add($"to {InFileNameTo}");
                 if (Timestep >= 0f) strings.Add($"@ {Timestep.ToString("0.000000").Split('.').Last()}");
@@ -169,9 +169,9 @@ namespace Flowframes.Main
             int totalFileCount = 0;
             bool blendSceneChances = Config.GetInt(Config.Key.sceneChangeFillMode) > 0;
             string ext = Interpolate.currentSettings.interpExt;
-            Fraction step = new Fraction(sourceFrameCount, targetFrameCount + InterpolateUtils.GetRoundedInterpFramesPerInputFrame(factor));
+            Fraction step = new(sourceFrameCount, targetFrameCount + InterpolateUtils.GetRoundedInterpFramesPerInputFrame(factor));
 
-            List<FrameFileLine> lines = new List<FrameFileLine>();
+            List<FrameFileLine> lines = [];
 
             string lastUndiscardFrame = "";
 
@@ -246,7 +246,7 @@ namespace Flowframes.Main
 
                 string frameName = GetNameNoExt(frameFilesWithoutLast[i].Name);
                 string frameNameImport = GetNameNoExt(FrameRename.importFilenames[i]);
-                int dupesAmount = dupesDict.ContainsKey(frameNameImport) ? dupesDict[frameNameImport].Count : 0;
+                int dupesAmount = dupesDict.TryGetValue(frameNameImport, out List<string> value) ? value.Count : 0;
                 bool discardThisFrame = (sceneDetection && i < frameFilesWithoutLast.Length && sceneFrames.Contains(GetNameNoExt(FrameRename.importFilenames[i + 1]))); // i+2 is in scene detection folder, means i+1 is ugly interp frame
 
                 for (int frm = 0; frm < interpFramesAmount; frm++)  // Generate frames file lines
@@ -300,7 +300,7 @@ namespace Flowframes.Main
         static string WriteFrameWithDupes(int dupesAmount, string fileContent, int frameNum, string ext, bool debug, string debugNote = "", string forcedNote = "")
         {
             for (int writtenDupes = -1; writtenDupes < dupesAmount; writtenDupes++)      // Write duplicates
-                fileContent += $"file '{Paths.interpDir}/{frameNum.ToString().PadLeft(Padding.interpFrames, '0')}{ext}' # {(debug ? ($"Dupe {(writtenDupes + 1).ToString("000")} {debugNote}").Replace("Dupe 000", "        ") : "")}{forcedNote}\n";
+                fileContent += $"file '{Paths.interpDir}/{frameNum.ToString().PadLeft(Padding.interpFrames, '0')}{ext}' # {(debug ? ($"Dupe {writtenDupes + 1:000} {debugNote}").Replace("Dupe 000", "        ") : "")}{forcedNote}\n";
 
             return fileContent;
         }

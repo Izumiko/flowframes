@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Win32Interop;
 
 namespace Flowframes.Extensions
 {
-    public static class ProcessExtensions
+    public static partial class ProcessExtensions
     {
         [Flags]
         public enum ThreadAccess : int
@@ -25,12 +20,12 @@ namespace Flowframes.Extensions
             DIRECT_IMPERSONATION = (0x0200)
         }
 
-        [DllImport("kernel32.dll")]
-        static extern IntPtr OpenThread(ThreadAccess dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
-        [DllImport("kernel32.dll")]
-        static extern uint SuspendThread(IntPtr hThread);
-        [DllImport("kernel32.dll")]
-        static extern int ResumeThread(IntPtr hThread);
+        [LibraryImport("kernel32.dll")]
+        private static partial IntPtr OpenThread(ThreadAccess dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, uint dwThreadId);
+        [LibraryImport("kernel32.dll")]
+        private static partial uint SuspendThread(IntPtr hThread);
+        [LibraryImport("kernel32.dll")]
+        private static partial int ResumeThread(IntPtr hThread);
 
         public static void Suspend(this Process process)
         {
@@ -41,7 +36,7 @@ namespace Flowframes.Extensions
                 if (pOpenThread == IntPtr.Zero)
                     break;
 
-                SuspendThread(pOpenThread);
+                _ = SuspendThread(pOpenThread);
             }
         }
 
@@ -54,7 +49,7 @@ namespace Flowframes.Extensions
                 if (pOpenThread == IntPtr.Zero)
                     break;
 
-                ResumeThread(pOpenThread);
+                _ = ResumeThread(pOpenThread);
             }
         }
     }

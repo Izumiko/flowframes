@@ -69,14 +69,14 @@
             this.stopBtn.Text = "Stop After Current Task";
             this.stopBtn.UseVisualStyleBackColor = false;
             this.stopBtn.Visible = false;
-            this.stopBtn.Click += new System.EventHandler(this.stopBtn_Click);
+            this.stopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
             // runBtn
             // 
             this.runBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.runBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.runBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.runBtn.ForeColor = System.Drawing.Color.White;
             this.runBtn.Location = new System.Drawing.Point(682, 443);
             this.runBtn.Name = "runBtn";
@@ -84,14 +84,14 @@
             this.runBtn.TabIndex = 36;
             this.runBtn.Text = "Start";
             this.runBtn.UseVisualStyleBackColor = false;
-            this.runBtn.Click += new System.EventHandler(this.runBtn_Click);
+            this.runBtn.Click += new System.EventHandler(this.RunBtn_Click);
             // 
             // addToQueue
             // 
             this.addToQueue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addToQueue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.addToQueue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addToQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addToQueue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToQueue.ForeColor = System.Drawing.Color.White;
             this.addToQueue.Location = new System.Drawing.Point(682, 65);
             this.addToQueue.Name = "addToQueue";
@@ -99,7 +99,7 @@
             this.addToQueue.TabIndex = 39;
             this.addToQueue.Text = "Add Current Configuration To Queue";
             this.addToQueue.UseVisualStyleBackColor = false;
-            this.addToQueue.Click += new System.EventHandler(this.addToQueue_Click);
+            this.addToQueue.Click += new System.EventHandler(this.AddToQueue_Click);
             // 
             // forceStopBtn
             // 
@@ -114,7 +114,7 @@
             this.forceStopBtn.Text = "Force Stop Now";
             this.forceStopBtn.UseVisualStyleBackColor = false;
             this.forceStopBtn.Visible = false;
-            this.forceStopBtn.Click += new System.EventHandler(this.forceStopBtn_Click);
+            this.forceStopBtn.Click += new System.EventHandler(this.ForceStopBtn_Click);
             // 
             // clearBtn
             // 
@@ -128,13 +128,13 @@
             this.clearBtn.TabIndex = 41;
             this.clearBtn.Text = "Clear All Queue Entries";
             this.clearBtn.UseVisualStyleBackColor = false;
-            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            this.clearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // taskList
             // 
             this.taskList.AllowDrop = true;
             this.taskList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.taskList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.taskList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.taskList.ForeColor = System.Drawing.Color.White;
             this.taskList.FormattingEnabled = true;
             this.taskList.ItemHeight = 16;
@@ -142,9 +142,9 @@
             this.taskList.Name = "taskList";
             this.taskList.Size = new System.Drawing.Size(664, 420);
             this.taskList.TabIndex = 43;
-            this.taskList.SelectedIndexChanged += new System.EventHandler(this.taskList_SelectedIndexChanged);
-            this.taskList.DragDrop += new System.Windows.Forms.DragEventHandler(this.taskList_DragDrop);
-            this.taskList.DragEnter += new System.Windows.Forms.DragEventHandler(this.taskList_DragEnter);
+            this.taskList.SelectedIndexChanged += new System.EventHandler(this.TaskList_SelectedIndexChanged);
+            this.taskList.DragDrop += new System.Windows.Forms.DragEventHandler(this.TaskList_DragDrop);
+            this.taskList.DragEnter += new System.Windows.Forms.DragEventHandler(this.TaskList_DragEnter);
             // 
             // clearSelectedBtn
             // 
@@ -159,7 +159,7 @@
             this.clearSelectedBtn.TabIndex = 44;
             this.clearSelectedBtn.Text = "Clear Selected Queue Entry";
             this.clearSelectedBtn.UseVisualStyleBackColor = false;
-            this.clearSelectedBtn.Click += new System.EventHandler(this.clearSelectedBtn_Click);
+            this.clearSelectedBtn.Click += new System.EventHandler(this.ClearSelectedBtn_Click);
             // 
             // label1
             // 
@@ -177,7 +177,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(682, 203);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 142);
@@ -188,7 +188,7 @@
             this.moveDownBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.moveDownBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.moveDownBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveDownBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveDownBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveDownBtn.ForeColor = System.Drawing.Color.White;
             this.moveDownBtn.Location = new System.Drawing.Point(636, 445);
             this.moveDownBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -198,14 +198,14 @@
             this.moveDownBtn.Text = "↓";
             this.moveDownBtn.UseVisualStyleBackColor = false;
             this.moveDownBtn.Visible = false;
-            this.moveDownBtn.Click += new System.EventHandler(this.moveDownBtn_Click);
+            this.moveDownBtn.Click += new System.EventHandler(this.MoveDownBtn_Click);
             // 
             // moveUpBtn
             // 
             this.moveUpBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.moveUpBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.moveUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveUpBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveUpBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveUpBtn.ForeColor = System.Drawing.Color.White;
             this.moveUpBtn.Location = new System.Drawing.Point(597, 445);
             this.moveUpBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -215,7 +215,7 @@
             this.moveUpBtn.Text = "↑";
             this.moveUpBtn.UseVisualStyleBackColor = false;
             this.moveUpBtn.Visible = false;
-            this.moveUpBtn.Click += new System.EventHandler(this.moveUpBtn_Click);
+            this.moveUpBtn.Click += new System.EventHandler(this.MoveUpBtn_Click);
             // 
             // BatchForm
             // 

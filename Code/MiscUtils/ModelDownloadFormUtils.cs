@@ -2,7 +2,6 @@
 using Flowframes.Forms;
 using Flowframes.IO;
 using Flowframes.Main;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,7 +18,7 @@ namespace Flowframes.MiscUtils
         {
 			form.SetDownloadBtnEnabled(true);
 			canceled = false;
-			List<AI> ais = new List<AI>();
+			List<AI> ais = [];
 
 			if (rifeC) ais.Add(Implementations.rifeCuda);
 			if (rifeN) ais.Add(Implementations.rifeNcnn);

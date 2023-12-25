@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Flowframes.MiscUtils
 {
     class BackgroundTaskManager
     {
         public static ulong currentId = 0;
-        public static List<RunningTask> runningTasks = new List<RunningTask>();
+        public static List<RunningTask> runningTasks = [];
 
         public class RunningTask
         {

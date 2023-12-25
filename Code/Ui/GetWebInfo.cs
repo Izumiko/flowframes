@@ -44,8 +44,8 @@ namespace Flowframes.Ui
             try
             {
                 Logger.Log("Parsing Patrons from CSV...", true);
-                List<string> goldPatrons = new List<string>();
-                List<string> silverPatrons = new List<string>();
+                List<string> goldPatrons = [];
+                List<string> silverPatrons = [];
                 string str = "Gold:\n";
                 string[] lines = csvData.SplitIntoLines().Select(x => x.Replace(";", ",")).ToArray();
 

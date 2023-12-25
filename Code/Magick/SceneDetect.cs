@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Flowframes.Magick
@@ -27,7 +25,7 @@ namespace Flowframes.Magick
             }
         }
 
-        public static Dictionary<string, MagickImage> imageCache = new Dictionary<string, MagickImage>();
+        public static Dictionary<string, MagickImage> imageCache = [];
         static MagickImage GetImage(string path, bool allowCaching = true)
         {
             if (!allowCaching)
@@ -52,7 +50,7 @@ namespace Flowframes.Magick
             MagickImage prevFrame = GetImage(lastFrame.FullName, false);
             MagickImage currFrame = GetImage(frame.FullName, false);
 
-            Size originalSize = new Size(currFrame.Width, currFrame.Height);
+            Size originalSize = new(currFrame.Width, currFrame.Height);
             int downscaleHeight = 144;
             prevFrame.Scale(currFrame.Width / (currFrame.Height / downscaleHeight), downscaleHeight);
             currFrame.Scale(currFrame.Width / (currFrame.Height / downscaleHeight), downscaleHeight);
@@ -61,8 +59,8 @@ namespace Flowframes.Magick
             double errRootMeanSquared = currFrame.Compare(prevFrame, ErrorMetric.RootMeanSquared);
 
             string str = $"\nMetrics of {frame.Name.Split('.')[0]} against {lastFrame.Name.Split('.')[0]}:\n";
-            str += $"NormalizedCrossCorrelation: {errNormalizedCrossCorrelation.ToString("0.000")}\n";
-            str += $"RootMeanSquared: {errRootMeanSquared.ToString("0.000")}\n";
+            str += $"NormalizedCrossCorrelation: {errNormalizedCrossCorrelation:0.000}\n";
+            str += $"RootMeanSquared: {errRootMeanSquared:0.000}\n";
             str += "\n\n";
 
             bool nccTrigger = errNormalizedCrossCorrelation < 0.45f;

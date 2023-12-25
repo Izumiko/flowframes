@@ -44,7 +44,7 @@ namespace Flowframes.IO
             IoUtils.TryDeleteIfExists(savePath);
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
             Logger.Log($"Downloading '{url}' to '{savePath}'", true);
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
             bool completed = false;
             int lastProgPercentage = -1;
@@ -107,7 +107,7 @@ namespace Flowframes.IO
 
         static List<ModelFile> GetModelFilesFromJson (string json)
         {
-            List<ModelFile> modelFiles = new List<ModelFile>();
+            List<ModelFile> modelFiles = [];
 
             try
             {
@@ -196,7 +196,7 @@ namespace Flowframes.IO
 
         public static List<string> GetAllModelFolders()
         {
-            List<string> modelPaths = new List<string>();
+            List<string> modelPaths = [];
 
             foreach (AI ai in Implementations.NetworksAll)
             {
@@ -272,7 +272,7 @@ namespace Flowframes.IO
 
         static Dictionary<string, string> GetDict (string[] lines, char sep = ':')
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string> dict = [];
 
             foreach (string line in lines)
             {

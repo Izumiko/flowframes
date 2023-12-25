@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Padding = Flowframes.Data.Padding;
 using I = Flowframes.Interpolate;
 using System.Diagnostics;
@@ -56,7 +55,7 @@ namespace Flowframes.Main
             try
             {
                 string max = Config.Get(Config.Key.maxFps);
-                Fraction maxFps = max.Contains("/") ? new Fraction(max) : new Fraction(max.GetFloat());
+                Fraction maxFps = max.Contains('/') ? new Fraction(max) : new Fraction(max.GetFloat());
                 bool fpsLimit = maxFps.GetFloat() > 0f && I.currentSettings.outFps.GetFloat() > maxFps.GetFloat();
                 bool dontEncodeFullFpsVid = fpsLimit && Config.GetInt(Config.Key.maxFpsMode) == 0;
 
@@ -79,7 +78,7 @@ namespace Flowframes.Main
             string encArgs = FfmpegUtils.GetEncArgs(s.outSettings, (s.ScaledResolution.IsEmpty ? s.InputResolution : s.ScaledResolution), s.outFps.GetFloat(), true).FirstOrDefault();
 
             string max = Config.Get(Config.Key.maxFps);
-            Fraction maxFps = max.Contains("/") ? new Fraction(max) : new Fraction(max.GetFloat());
+            Fraction maxFps = max.Contains('/') ? new Fraction(max) : new Fraction(max.GetFloat());
             bool fpsLimit = maxFps.GetFloat() > 0f && s.outFps.GetFloat() > maxFps.GetFloat();
 
             VidExtraData extraData = await FfmpegCommands.GetVidExtraInfo(s.inPath);
@@ -117,7 +116,7 @@ namespace Flowframes.Main
             Enums.Encoding.Encoder desiredFormat = I.currentSettings.outSettings.Encoder;
             string availableFormat = Path.GetExtension(IoUtils.GetFilesSorted(framesPath, "*.*")[0]).Remove(".").ToUpper();
             string max = Config.Get(Config.Key.maxFps);
-            Fraction maxFps = max.Contains("/") ? new Fraction(max) : new Fraction(max.GetFloat());
+            Fraction maxFps = max.Contains('/') ? new Fraction(max) : new Fraction(max.GetFloat());
             bool fpsLimit = maxFps.GetFloat() > 0f && I.currentSettings.outFps.GetFloat() > maxFps.GetFloat();
             bool dontEncodeFullFpsSeq = fpsLimit && Config.GetInt(Config.Key.maxFpsMode) == 0;
             string framesFile = Path.Combine(framesPath.GetParentDir(), Paths.GetFrameOrderFilename(I.currentSettings.interpFactor));
@@ -128,7 +127,7 @@ namespace Flowframes.Main
                 IoUtils.RenameExistingFolder(outputFolderPath);
                 Logger.Log($"Exporting {desiredFormat.ToString().Upper()} frames to '{Path.GetFileName(outputFolderPath)}'...");
 
-                if (desiredFormat.GetInfo().OverideExtension.ToUpper() == availableFormat.ToUpper())   // Move if frames are already in the desired format
+                if (desiredFormat.GetInfo().OverideExtension.Equals(availableFormat, StringComparison.OrdinalIgnoreCase))   // Move if frames are already in the desired format
                     await CopyOutputFrames(framesPath, framesFile, outputFolderPath, 1, fpsLimit, false);
                 else    // Encode if frames are not in desired format
                     await FfmpegEncode.FramesToFrames(framesFile, outputFolderPath, 1, I.currentSettings.outFps, new Fraction(), desiredFormat, OutputUtils.GetImgSeqQ(I.currentSettings.outSettings));
@@ -148,7 +147,7 @@ namespace Flowframes.Main
         static async Task CopyOutputFrames(string framesPath, string framesFile, string outputFolderPath, int startNo, bool dontMove, bool hideLog)
         {
             IoUtils.CreateDir(outputFolderPath);
-            Stopwatch sw = new Stopwatch();
+            Stopwatch sw = new();
             sw.Restart();
 
             string[] framesLines = IoUtils.ReadLines(framesFile);
@@ -214,14 +213,14 @@ namespace Flowframes.Main
                 return;
             }
 
-            NmkdStopwatch sw = new NmkdStopwatch();
+            NmkdStopwatch sw = new();
 
             if (!isBackup)
                 Program.mainForm.SetStatus("Merging video chunks...");
 
             try
             {
-                DirectoryInfo chunksDir = new DirectoryInfo(chunksFolder);
+                DirectoryInfo chunksDir = new(chunksFolder);
                 foreach (DirectoryInfo dir in chunksDir.GetDirectories())
                 {
                     string suffix = dir.Name.Replace("chunks", "");
@@ -281,7 +280,7 @@ namespace Flowframes.Main
                 await Blend.BlendSceneChanges(concatFile, false);
 
             string max = Config.Get(Config.Key.maxFps);
-            Fraction maxFps = max.Contains("/") ? new Fraction(max) : new Fraction(max.GetFloat());
+            Fraction maxFps = max.Contains('/') ? new Fraction(max) : new Fraction(max.GetFloat());
             bool fpsLimit = maxFps.GetFloat() != 0 && I.currentSettings.outFps.GetFloat() > maxFps.GetFloat();
             VidExtraData extraData = await FfmpegCommands.GetVidExtraInfo(I.currentSettings.inPath);
 
@@ -300,7 +299,7 @@ namespace Flowframes.Main
                     if (chunkNo == 1)    // Only check for existing folder on first chunk, otherwise each chunk makes a new folder
                         IoUtils.RenameExistingFolder(outFolderPath);
 
-                    if (desiredFormat.ToUpper() == availableFormat.ToUpper())   // Move if frames are already in the desired format
+                    if (desiredFormat.Equals(availableFormat, StringComparison.OrdinalIgnoreCase))   // Move if frames are already in the desired format
                         await CopyOutputFrames(interpDir, concatFile, outFolderPath, startNo, fpsLimit, true);
                     else    // Encode if frames are not in desired format
                         await FfmpegEncode.FramesToFrames(concatFile, outFolderPath, startNo, I.currentSettings.outFps, new Fraction(), settings.Encoder, OutputUtils.GetImgSeqQ(settings), AvProcess.LogMode.Hidden);

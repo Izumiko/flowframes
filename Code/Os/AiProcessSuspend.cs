@@ -1,17 +1,14 @@
 ﻿using Flowframes.Extensions;
 using Flowframes.Properties;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Flowframes.Os
 {
     class AiProcessSuspend
     {
         public static bool aiProcFrozen;
-        static List<Process> suspendedProcesses = new List<Process>();
+        static readonly List<Process> suspendedProcesses = [];
         public static bool isRunning;
 
         public static void Reset()
@@ -48,11 +45,7 @@ namespace Flowframes.Os
 
             if (freeze)
             {
-                List<Process> procs = new List<Process>();
-                procs.Add(currProcess);
-
-                foreach (var subProc in OsUtils.GetChildProcesses(currProcess))
-                    procs.Add(subProc);
+                List<Process> procs = [currProcess, .. OsUtils.GetChildProcesses(currProcess)];
 
                 aiProcFrozen = true;
                 SetPauseButtonStyle(true);

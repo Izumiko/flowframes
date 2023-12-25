@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flowframes.Os
 {
@@ -54,9 +52,12 @@ namespace Flowframes.Os
             int targetFrameCountMatchDuration = (frameCount * s.Factor).RoundToInt(); // Target frame count to match original duration (and for loops)
             int targetFrameCountTrue = targetFrameCountMatchDuration - endDupeCount; // Target frame count without dupes at the end (only in-between frames added)
 
-            List<string> l = new List<string> { "import sys", "import os", "import json", "import time", "import functools", "import vapoursynth as vs", "core = vs.core", "" }; // Imports
-            l.Add($"inputPath = r'{inputPath}'");
-            l.Add($"");
+            List<string> l =
+            [
+                "import sys", "import os", "import json", "import time", "import functools", "import vapoursynth as vs", "core = vs.core", "",
+                $"inputPath = r'{inputPath}'",
+                $"",
+            ]; // Imports
 
             bool loadFrames = s.InterpSettings.inputIsFrames || (s.Dedupe && !s.Realtime);
 

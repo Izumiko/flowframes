@@ -38,7 +38,7 @@ namespace Flowframes.Forms
             // 
             // mainLabel
             // 
-            this.mainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainLabel.ForeColor = System.Drawing.Color.White;
             this.mainLabel.Location = new System.Drawing.Point(12, 9);
             this.mainLabel.Name = "mainLabel";
@@ -49,7 +49,7 @@ namespace Flowframes.Forms
             // 
             // countdownLabel
             // 
-            this.countdownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countdownLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countdownLabel.ForeColor = System.Drawing.Color.White;
             this.countdownLabel.Location = new System.Drawing.Point(12, 42);
             this.countdownLabel.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
@@ -61,22 +61,22 @@ namespace Flowframes.Forms
             // cancelActionBtn
             // 
             this.cancelActionBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cancelActionBtn.FlatAppearance.BorderSize = 0;
-            this.cancelActionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.cancelActionBtn.FlatAppearance.BorderSize = 0;
+            //this.cancelActionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelActionBtn.ForeColor = System.Drawing.Color.White;
             this.cancelActionBtn.Location = new System.Drawing.Point(12, 126);
             this.cancelActionBtn.Name = "cancelActionBtn";
             this.cancelActionBtn.Size = new System.Drawing.Size(320, 23);
             this.cancelActionBtn.TabIndex = 39;
             this.cancelActionBtn.Text = "Cancel Action";
-            this.cancelActionBtn.UseVisualStyleBackColor = false;
-            this.cancelActionBtn.Click += new System.EventHandler(this.cancelActionBtn_Click);
+            //this.cancelActionBtn.UseVisualStyleBackColor = false;
+            this.cancelActionBtn.Click += new System.EventHandler(this.CancelActionBtn_Click);
             // 
             // skipCountdownBtn
             // 
             this.skipCountdownBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.skipCountdownBtn.FlatAppearance.BorderSize = 0;
-            this.skipCountdownBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.skipCountdownBtn.FlatAppearance.BorderSize = 0;
+            //this.skipCountdownBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.skipCountdownBtn.ForeColor = System.Drawing.Color.White;
             this.skipCountdownBtn.Location = new System.Drawing.Point(12, 94);
             this.skipCountdownBtn.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
@@ -84,8 +84,8 @@ namespace Flowframes.Forms
             this.skipCountdownBtn.Size = new System.Drawing.Size(320, 23);
             this.skipCountdownBtn.TabIndex = 40;
             this.skipCountdownBtn.Text = "Run Action Now";
-            this.skipCountdownBtn.UseVisualStyleBackColor = false;
-            this.skipCountdownBtn.Click += new System.EventHandler(this.skipCountdownBtn_Click);
+            //this.skipCountdownBtn.UseVisualStyleBackColor = false;
+            this.skipCountdownBtn.Click += new System.EventHandler(this.SkipCountdownBtn_Click);
             // 
             // TimeoutForm
             // 

@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DT = System.DateTime;
 
@@ -18,7 +17,7 @@ namespace Flowframes
         public const string defaultLogName = "sessionlog";
         public static long id;
 
-        private static Dictionary<string, string> sessionLogs = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> sessionLogs = [];
         private static string _lastUi = "";
         public static string LastUiLine { get { return _lastUi; } }
         private static string _lastLog = "";
@@ -40,7 +39,7 @@ namespace Flowframes
             }
         }
 
-        private static ConcurrentQueue<LogEntry> logQueue = new ConcurrentQueue<LogEntry>();
+        private static readonly ConcurrentQueue<LogEntry> logQueue = new();
 
         public static void Log(string msg, bool hidden = false, bool replaceLastLine = false, string filename = "")
         {
@@ -50,9 +49,7 @@ namespace Flowframes
 
         public static void ShowNext()
         {
-            LogEntry entry;
-
-            if (logQueue.TryDequeue(out entry))
+            if (logQueue.TryDequeue(out LogEntry entry))
                 Show(entry);
         }
 
@@ -79,7 +76,7 @@ namespace Flowframes
                 {
                     textbox.Suspend();
                     string[] lines = textbox.Text.SplitIntoLines();
-                    textbox.Text = string.Join(Environment.NewLine, lines.Take(lines.Count() - 1).ToArray());
+                    textbox.Text = string.Join(Environment.NewLine, lines.Take(lines.Length - 1).ToArray());
                 }
             }
             catch { }
@@ -116,7 +113,7 @@ namespace Flowframes
             try
             {
                 string appendStr = noLineBreak ? $" {logStr}" : $"{Environment.NewLine}[{id.ToString().PadLeft(8, '0')}] [{time}]: {logStr}";
-                sessionLogs[filename] = (sessionLogs.ContainsKey(filename) ? sessionLogs[filename] : "") + appendStr;
+                sessionLogs[filename] = (sessionLogs.TryGetValue(filename, out string value) ? value : "") + appendStr;
                 File.AppendAllText(file, appendStr);
                 id++;
             }
@@ -131,8 +128,8 @@ namespace Flowframes
             if (!filename.Contains(".txt"))
                 filename = Path.ChangeExtension(filename, "txt");
 
-            if (sessionLogs.ContainsKey(filename))
-                return sessionLogs[filename];
+            if (sessionLogs.TryGetValue(filename, out string value))
+                return value;
             else
                 return "";
         }

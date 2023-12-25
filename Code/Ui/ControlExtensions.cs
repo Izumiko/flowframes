@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flowframes.Ui
 {
-    public static class ControlExtensions
+    public static partial class ControlExtensions
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern bool LockWindowUpdate(IntPtr hWndLock);
+        [System.Runtime.InteropServices.LibraryImport("user32.dll")]
+        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+        public static partial bool LockWindowUpdate(IntPtr hWndLock);
 
         public static void Suspend(this Control control)
         {
@@ -24,7 +23,7 @@ namespace Flowframes.Ui
 
         public static List<Control> GetControls(this Control control)
         {
-            List<Control> list = new List<Control>();
+            List<Control> list = [];
             var controls = control.Controls.Cast<Control>().ToList();
             list.AddRange(controls);
             controls.ForEach(c => list.AddRange(c.GetControls()));

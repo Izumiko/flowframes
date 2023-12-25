@@ -79,7 +79,7 @@ namespace Flowframes.Forms
             this.tabPage2.Size = new System.Drawing.Size(912, 396);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Config Editor";
-            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
+            this.tabPage2.Enter += new System.EventHandler(this.TabPage2_Enter);
             // 
             // panel2
             // 
@@ -126,9 +126,9 @@ namespace Flowframes.Forms
             this.configDataGrid.Name = "configDataGrid";
             this.configDataGrid.Size = new System.Drawing.Size(900, 310);
             this.configDataGrid.TabIndex = 0;
-            this.configDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.configDataGrid_CellValueChanged);
-            this.configDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.configDataGrid_RowsAdded);
-            this.configDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.configDataGrid_RowsRemoved);
+            this.configDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigDataGrid_CellValueChanged);
+            this.configDataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.ConfigDataGrid_RowsAdded);
+            this.configDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.ConfigDataGrid_RowsRemoved);
             // 
             // tabPage1
             // 
@@ -151,24 +151,24 @@ namespace Flowframes.Forms
             // copyTextClipboardBtn
             // 
             this.copyTextClipboardBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.copyTextClipboardBtn.FlatAppearance.BorderSize = 0;
-            this.copyTextClipboardBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.copyTextClipboardBtn.FlatAppearance.BorderSize = 0;
+            //this.copyTextClipboardBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.copyTextClipboardBtn.ForeColor = System.Drawing.Color.White;
             this.copyTextClipboardBtn.Location = new System.Drawing.Point(600, 6);
             this.copyTextClipboardBtn.Name = "copyTextClipboardBtn";
             this.copyTextClipboardBtn.Size = new System.Drawing.Size(150, 23);
             this.copyTextClipboardBtn.TabIndex = 80;
             this.copyTextClipboardBtn.Text = "Copy Text To Clipboard";
-            this.copyTextClipboardBtn.UseVisualStyleBackColor = false;
-            this.copyTextClipboardBtn.Click += new System.EventHandler(this.copyTextClipboardBtn_Click);
+            //this.copyTextClipboardBtn.UseVisualStyleBackColor = false;
+            this.copyTextClipboardBtn.Click += new System.EventHandler(this.CopyTextClipboardBtn_Click);
             // 
             // monospaceBtn
             // 
             this.monospaceBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.monospaceBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_format_size_white_48dp;
             this.monospaceBtn.DrawImage = true;
-            this.monospaceBtn.FlatAppearance.BorderSize = 0;
-            this.monospaceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.monospaceBtn.FlatAppearance.BorderSize = 0;
+            //this.monospaceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.monospaceBtn.ForeColor = System.Drawing.Color.White;
             this.monospaceBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.monospaceBtn.Location = new System.Drawing.Point(241, 6);
@@ -176,16 +176,16 @@ namespace Flowframes.Forms
             this.monospaceBtn.Size = new System.Drawing.Size(23, 23);
             this.monospaceBtn.TabIndex = 79;
             this.toolTip.SetToolTip(this.monospaceBtn, "Toggle Monospace Font");
-            this.monospaceBtn.UseVisualStyleBackColor = false;
-            this.monospaceBtn.Click += new System.EventHandler(this.monospaceBtn_Click);
+            //this.monospaceBtn.UseVisualStyleBackColor = false;
+            this.monospaceBtn.Click += new System.EventHandler(this.MonospaceBtn_Click);
             // 
             // refreshBtn
             // 
             this.refreshBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.refreshBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_refresh_white_48dp;
             this.refreshBtn.DrawImage = true;
-            this.refreshBtn.FlatAppearance.BorderSize = 0;
-            this.refreshBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.refreshBtn.FlatAppearance.BorderSize = 0;
+            //this.refreshBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.refreshBtn.ForeColor = System.Drawing.Color.White;
             this.refreshBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.refreshBtn.Location = new System.Drawing.Point(212, 6);
@@ -193,16 +193,16 @@ namespace Flowframes.Forms
             this.refreshBtn.Size = new System.Drawing.Size(23, 23);
             this.refreshBtn.TabIndex = 78;
             this.toolTip.SetToolTip(this.refreshBtn, "Refresh");
-            this.refreshBtn.UseVisualStyleBackColor = false;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            //this.refreshBtn.UseVisualStyleBackColor = false;
+            this.refreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // textWrapBtn
             // 
             this.textWrapBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textWrapBtn.ButtonImage = global::Flowframes.Properties.Resources.baseline_wrap_text_white_48dp;
             this.textWrapBtn.DrawImage = true;
-            this.textWrapBtn.FlatAppearance.BorderSize = 0;
-            this.textWrapBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.textWrapBtn.FlatAppearance.BorderSize = 0;
+            //this.textWrapBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.textWrapBtn.ForeColor = System.Drawing.Color.White;
             this.textWrapBtn.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.textWrapBtn.Location = new System.Drawing.Point(270, 5);
@@ -210,36 +210,36 @@ namespace Flowframes.Forms
             this.textWrapBtn.Size = new System.Drawing.Size(23, 23);
             this.textWrapBtn.TabIndex = 77;
             this.toolTip.SetToolTip(this.textWrapBtn, "Toggle Text Wrap");
-            this.textWrapBtn.UseVisualStyleBackColor = false;
-            this.textWrapBtn.Click += new System.EventHandler(this.textWrapBtn_Click);
+            //this.textWrapBtn.UseVisualStyleBackColor = false;
+            this.textWrapBtn.Click += new System.EventHandler(this.TextWrapBtn_Click);
             // 
             // clearLogsBtn
             // 
             this.clearLogsBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.clearLogsBtn.FlatAppearance.BorderSize = 0;
-            this.clearLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.clearLogsBtn.FlatAppearance.BorderSize = 0;
+            //this.clearLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearLogsBtn.ForeColor = System.Drawing.Color.White;
             this.clearLogsBtn.Location = new System.Drawing.Point(756, 6);
             this.clearLogsBtn.Name = "clearLogsBtn";
             this.clearLogsBtn.Size = new System.Drawing.Size(150, 23);
             this.clearLogsBtn.TabIndex = 76;
             this.clearLogsBtn.Text = "Clear Logs";
-            this.clearLogsBtn.UseVisualStyleBackColor = false;
-            this.clearLogsBtn.Click += new System.EventHandler(this.clearLogsBtn_Click);
+            //this.clearLogsBtn.UseVisualStyleBackColor = false;
+            this.clearLogsBtn.Click += new System.EventHandler(this.ClearLogsBtn_Click);
             // 
             // openLogFolderBtn
             // 
             this.openLogFolderBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.openLogFolderBtn.FlatAppearance.BorderSize = 0;
-            this.openLogFolderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.openLogFolderBtn.FlatAppearance.BorderSize = 0;
+            //this.openLogFolderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openLogFolderBtn.ForeColor = System.Drawing.Color.White;
             this.openLogFolderBtn.Location = new System.Drawing.Point(444, 6);
             this.openLogFolderBtn.Name = "openLogFolderBtn";
             this.openLogFolderBtn.Size = new System.Drawing.Size(150, 23);
             this.openLogFolderBtn.TabIndex = 75;
             this.openLogFolderBtn.Text = "Open Log Folder";
-            this.openLogFolderBtn.UseVisualStyleBackColor = false;
-            this.openLogFolderBtn.Click += new System.EventHandler(this.openLogFolderBtn_Click);
+            //this.openLogFolderBtn.UseVisualStyleBackColor = false;
+            this.openLogFolderBtn.Click += new System.EventHandler(this.OpenLogFolderBtn_Click);
             // 
             // logFilesDropdown
             // 
@@ -252,7 +252,7 @@ namespace Flowframes.Forms
             this.logFilesDropdown.Name = "logFilesDropdown";
             this.logFilesDropdown.Size = new System.Drawing.Size(200, 23);
             this.logFilesDropdown.TabIndex = 73;
-            this.logFilesDropdown.SelectedIndexChanged += new System.EventHandler(this.logFilesDropdown_SelectedIndexChanged);
+            this.logFilesDropdown.SelectedIndexChanged += new System.EventHandler(this.LogFilesDropdown_SelectedIndexChanged);
             // 
             // logBox
             // 

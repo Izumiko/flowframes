@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flowframes.MiscUtils
 {
@@ -10,8 +8,7 @@ namespace Flowframes.MiscUtils
     {
         public static TEnum GetEnum<TEnum>(string str, bool ignoreCase = true, Dictionary<string, string> stringMap = null) where TEnum : Enum
         {
-            if (stringMap == null)
-                stringMap = new Dictionary<string, string>();
+            stringMap ??= [];
 
             str = stringMap.Get(str, true, true);
             var values = Enum.GetValues(typeof(TEnum)).Cast<TEnum>();

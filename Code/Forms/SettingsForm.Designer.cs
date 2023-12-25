@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.settingsTabList = new Cyotek.Windows.Forms.TabList();
-            this.generalTab = new Cyotek.Windows.Forms.TabListPage();
+            this.settingsTabList = new HTAlt.WinForms.HTTabControl();
+            this.generalTab = new System.Windows.Forms.TabPage();
             this.custOutDirBrowseBtn = new HTAlt.WinForms.HTButton();
             this.custOutDir = new System.Windows.Forms.TextBox();
             this.outFolderLoc = new System.Windows.Forms.ComboBox();
@@ -60,7 +60,7 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.maxVidHeight = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.tabListPage2 = new Cyotek.Windows.Forms.TabListPage();
+            this.tabListPage2 = new System.Windows.Forms.TabPage();
             this.autoEncBlockPanel = new System.Windows.Forms.Panel();
             this.label70 = new System.Windows.Forms.Label();
             this.alwaysWaitForAutoEnc = new System.Windows.Forms.CheckBox();
@@ -103,7 +103,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.keepAudio = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.aiOptsPage = new Cyotek.Windows.Forms.TabListPage();
+            this.aiOptsPage = new System.Windows.Forms.TabPage();
             this.label66 = new System.Windows.Forms.Label();
             this.rifeCudaFp16 = new System.Windows.Forms.CheckBox();
             this.label65 = new System.Windows.Forms.Label();
@@ -127,7 +127,7 @@
             this.ncnnGpus = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.vidExportTab = new Cyotek.Windows.Forms.TabListPage();
+            this.vidExportTab = new System.Windows.Forms.TabPage();
             this.label73 = new System.Windows.Forms.Label();
             this.fixOutputDuration = new System.Windows.Forms.CheckBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -142,7 +142,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.debugTab = new Cyotek.Windows.Forms.TabListPage();
+            this.debugTab = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.serverCombox = new System.Windows.Forms.ComboBox();
             this.ffEncArgs = new System.Windows.Forms.TextBox();
@@ -180,17 +180,19 @@
             this.settingsTabList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsTabList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.settingsTabList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.settingsTabList.Controls.Add(this.generalTab);
             this.settingsTabList.Controls.Add(this.tabListPage2);
             this.settingsTabList.Controls.Add(this.aiOptsPage);
             this.settingsTabList.Controls.Add(this.vidExportTab);
             this.settingsTabList.Controls.Add(this.debugTab);
-            this.settingsTabList.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.settingsTabList.SelectedTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.settingsTabList.Location = new System.Drawing.Point(12, 62);
             this.settingsTabList.Name = "settingsTabList";
-            this.settingsTabList.Size = new System.Drawing.Size(920, 427);
-            this.settingsTabList.TabIndex = 0;
+            this.settingsTabList.Size = new System.Drawing.Size(920, 450);
+            this.settingsTabList.SelectedIndex = 0;
+            this.settingsTabList.DisableClose = true;
+            this.settingsTabList.DisableDragging = true;
             // 
             // generalTab
             // 
@@ -1846,10 +1848,10 @@
 
         #endregion
 
-        private Cyotek.Windows.Forms.TabList settingsTabList;
-        private Cyotek.Windows.Forms.TabListPage generalTab;
-        private Cyotek.Windows.Forms.TabListPage tabListPage2;
-        private Cyotek.Windows.Forms.TabListPage debugTab;
+        private HTAlt.WinForms.HTTabControl settingsTabList;
+        private System.Windows.Forms.TabPage generalTab;
+        private System.Windows.Forms.TabPage tabListPage2;
+        private System.Windows.Forms.TabPage debugTab;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox keepAudio;
@@ -1860,7 +1862,7 @@
         private System.Windows.Forms.Label dedupeSensLabel;
         private System.Windows.Forms.CheckBox enableLoop;
         private System.Windows.Forms.Label label15;
-        private Cyotek.Windows.Forms.TabListPage vidExportTab;
+        private System.Windows.Forms.TabPage vidExportTab;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label22;
@@ -1868,7 +1870,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label24;
-        private Cyotek.Windows.Forms.TabListPage aiOptsPage;
+        private System.Windows.Forms.TabPage aiOptsPage;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox torchGpus;
         private System.Windows.Forms.Label label33;

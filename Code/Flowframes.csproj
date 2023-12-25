@@ -78,7 +78,6 @@
       <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
     </PackageReference>
     <PackageReference Include="Crc32.NET" Version="1.2.0" />
-    <PackageReference Include="CyotekTabList" Version="2.2.0" />
     <PackageReference Include="diskdetector-net" Version="0.3.2" />
     <PackageReference Include="Fody" Version="6.8.0">
       <PrivateAssets>all</PrivateAssets>

@@ -11,18 +11,26 @@ namespace Flowframes.Data
         public static string GetHash(string path, bool b64 = true)
         {
             bool isDir = Directory.Exists(path);
+            string hash = "";
 
             if (isDir)
             {
                 var dir = new DirectoryInfo(path);
                 var files = IoUtils.GetFileInfosSorted(path);
-                string dirHash = $"{dir.Name}{files.Sum(f => f.Length)}{dir.LastWriteTime.ToString("yyyyMMddHHmmss")}";
-                return b64 ? Convert.ToBase64String(Encoding.UTF8.GetBytes(dirHash)).TrimEnd('=') : dirHash;
+                hash = $"{dir.Name}{files.Sum(f => f.Length)}{dir.LastWriteTime.ToString("yyyyMMddHHmmss")}";
+            }
+            else
+            {
+                var file = new FileInfo(path);
+                hash = $"{file.Name}{file.Length}{file.LastWriteTime.ToString("yyyyMMddHHmmss")}";
             }
 
-            var file = new FileInfo(path);
-            string hash = $"{file.Name}{file.Length}{file.LastWriteTime.ToString("yyyyMMddHHmmss")}";
-            return b64 ? Convert.ToBase64String(Encoding.UTF8.GetBytes(hash)).TrimEnd('=') : hash;
+            if (!b64)
+                return hash;
+
+            string hashB64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(hash));
+            hashB64 = new string(hashB64.TrimEnd('=').Where(c => !Path.GetInvalidFileNameChars().Contains(c)).ToArray()); // Ensure no invalid chars in b64 hash
+            return hashB64;
         }
     }
 }

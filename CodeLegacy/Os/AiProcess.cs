@@ -379,7 +379,7 @@ namespace Flowframes.Os
             if (rt)
             {
                 Logger.ClearLogBox();
-                Logger.Log($"Starting. Use Space to pause, Left Arrow and Right Arrow to seek, though seeking can be slow.");
+                Logger.Log($"Starting. Use Space to pause, Left Arrow and Right Arrow to seek (can be slow), Q to exit.");
                 AiStartedRt(rifeNcnnVs, inPath);
             }
             else

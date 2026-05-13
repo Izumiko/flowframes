@@ -108,11 +108,10 @@ namespace Flowframes.Main
             {
                 encArgs = _useNutPipe ? "-c:v rawvideo -pix_fmt rgba" : $"-pix_fmt yuv444p16";
                 string format = _useNutPipe ? "nut" : "yuv4mpegpipe";
-
-                return
-                    $"{extraArgsIn} -i - {encArgs} {""} -f {format} - | ffplay - " +
-                    $"-autoexit -seek_interval {VapourSynthUtils.GetSeekSeconds(Program.mainForm.currInDuration)} " +
-                    $"-window_title \"Flowframes Realtime Interpolation ({s.inFps.GetString()} FPS x{s.interpFactor} = {s.outFps.GetString()} FPS) ({s.model.Name})\" ";
+                string seek = $"-seek_interval {VapourSynthUtils.GetSeekSeconds(Program.mainForm.currInDuration)}";
+                string title = $"\"Flowframes Realtime Interpolation ({s.inFps.GetString()} FPS x{s.interpFactor} = {s.outFps.GetString()} FPS) ({s.model.Name})\"";
+                string fs = Program.mainForm.checkRealtimeFs.Checked ? "-fs " : "";
+                return $"{extraArgsIn} -i - {encArgs} {""} -f {format} - | ffplay - -autoexit {seek} {fs} -window_title {title} ";
             }
             else
             {

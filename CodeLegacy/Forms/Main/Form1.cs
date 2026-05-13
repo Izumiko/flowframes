@@ -141,6 +141,7 @@ namespace Flowframes.Forms.Main
             var outMode = ParseUtils.GetEnum<Enums.Output.Format>(comboxOutputFormat.Text, true, Strings.OutputFormat);
             comboxOutputEncoder.FillFromEnum(OutputUtils.GetAvailableEncoders(outMode), Strings.Encoder, 0);
             comboxOutputEncoder.Visible = comboxOutputEncoder.Items.Count > 0;
+            checkRealtimeFs.Visible = outMode == Enums.Output.Format.Realtime;
             UpdateOutputEncodingUi();
         }
 
@@ -523,10 +524,12 @@ namespace Flowframes.Forms.Main
             if (comboxOutputQuality.Visible) strings.Add(comboxOutputQuality.Text);
             if (comboxOutputColors.Visible) strings.Add(comboxOutputColors.Text);
             Config.Set(Config.Key.lastOutputSettings, string.Join(",", strings));
+            ConfigParser.SaveGuiElement(checkRealtimeFs);
         }
 
         private void LoadOutputSettings()
         {
+            ConfigParser.LoadGuiElement(checkRealtimeFs);
             string[] strings = Config.Get(Config.Key.lastOutputSettings).Split(',');
 
             if (strings.Length < 4)

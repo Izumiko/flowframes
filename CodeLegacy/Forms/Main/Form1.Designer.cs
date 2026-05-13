@@ -143,6 +143,7 @@
             this.cancelBtn = new System.Windows.Forms.Button();
             this.menuStripQueue = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addCurrentConfigurationToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkRealtimeFs = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -946,6 +947,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.comboxOutputFormat);
+            this.flowLayoutPanel1.Controls.Add(this.checkRealtimeFs);
             this.flowLayoutPanel1.Controls.Add(this.comboxOutputEncoder);
             this.flowLayoutPanel1.Controls.Add(this.comboxOutputQuality);
             this.flowLayoutPanel1.Controls.Add(this.textboxOutputQualityCust);
@@ -976,7 +978,7 @@
             this.comboxOutputEncoder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboxOutputEncoder.ForeColor = System.Drawing.Color.White;
             this.comboxOutputEncoder.FormattingEnabled = true;
-            this.comboxOutputEncoder.Location = new System.Drawing.Point(81, 0);
+            this.comboxOutputEncoder.Location = new System.Drawing.Point(204, 0);
             this.comboxOutputEncoder.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.comboxOutputEncoder.Name = "comboxOutputEncoder";
             this.comboxOutputEncoder.Size = new System.Drawing.Size(90, 23);
@@ -990,7 +992,7 @@
             this.comboxOutputQuality.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboxOutputQuality.ForeColor = System.Drawing.Color.White;
             this.comboxOutputQuality.FormattingEnabled = true;
-            this.comboxOutputQuality.Location = new System.Drawing.Point(177, 0);
+            this.comboxOutputQuality.Location = new System.Drawing.Point(300, 0);
             this.comboxOutputQuality.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.comboxOutputQuality.Name = "comboxOutputQuality";
             this.comboxOutputQuality.Size = new System.Drawing.Size(100, 23);
@@ -1002,7 +1004,7 @@
             this.textboxOutputQualityCust.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textboxOutputQualityCust.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textboxOutputQualityCust.ForeColor = System.Drawing.Color.White;
-            this.textboxOutputQualityCust.Location = new System.Drawing.Point(283, 0);
+            this.textboxOutputQualityCust.Location = new System.Drawing.Point(406, 0);
             this.textboxOutputQualityCust.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.textboxOutputQualityCust.MaxLength = 3;
             this.textboxOutputQualityCust.MinimumSize = new System.Drawing.Size(4, 21);
@@ -1019,7 +1021,7 @@
             this.comboxOutputColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboxOutputColors.ForeColor = System.Drawing.Color.White;
             this.comboxOutputColors.FormattingEnabled = true;
-            this.comboxOutputColors.Location = new System.Drawing.Point(319, 0);
+            this.comboxOutputColors.Location = new System.Drawing.Point(442, 0);
             this.comboxOutputColors.Margin = new System.Windows.Forms.Padding(0);
             this.comboxOutputColors.Name = "comboxOutputColors";
             this.comboxOutputColors.Size = new System.Drawing.Size(117, 23);
@@ -1694,6 +1696,18 @@
             this.addCurrentConfigurationToQueueToolStripMenuItem.Text = "Add Current Configuration to Queue";
             this.addCurrentConfigurationToQueueToolStripMenuItem.Click += new System.EventHandler(this.addCurrentConfigurationToQueueToolStripMenuItem_Click);
             // 
+            // checkRealtimeFs
+            // 
+            this.checkRealtimeFs.AutoSize = true;
+            this.checkRealtimeFs.ForeColor = System.Drawing.Color.White;
+            this.checkRealtimeFs.Location = new System.Drawing.Point(84, 3);
+            this.checkRealtimeFs.Name = "checkRealtimeFs";
+            this.checkRealtimeFs.Size = new System.Drawing.Size(117, 19);
+            this.checkRealtimeFs.TabIndex = 48;
+            this.checkRealtimeFs.Text = "Play in Fullscreen";
+            this.checkRealtimeFs.UseVisualStyleBackColor = true;
+            this.checkRealtimeFs.Visible = false;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -1884,6 +1898,7 @@
         public System.Windows.Forms.TabPage welcomeTab;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox vfrHandling;
+        public System.Windows.Forms.CheckBox checkRealtimeFs;
     }
 }
 

@@ -45,14 +45,17 @@ namespace Flowframes.IO
             }
         }
 
-        public static void Set(Key key, string value)
+        public static void Set(Key key, string value, bool allowIfExists = true)
         {
-            Set(key.ToString(), value);
+            Set(key.ToString(), value, allowIfExists);
         }
 
-        public static void Set(string str, string value)
+        public static void Set(string str, string value, bool allowIfExists = true)
         {
             // Reload();
+            if (!allowIfExists && CachedValues.ContainsKey(str))
+                return;
+
             CachedValues[str] = value;
             WriteConfig();
         }

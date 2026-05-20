@@ -76,13 +76,13 @@ namespace Flowframes.Os
             if (VkDevices.Count == 0)
             {
                 Logger.Log($"No Vulkan-capable GPUs found. NCNN implementations will run on the CPU instead and may be unstable.");
-                Config.Set(Config.Key.ncnnGpus, "-1"); // -1 = CPU
+                Config.Set(Config.Key.ncnnGpus, "-1", allowIfExists: false); // -1 = CPU
                 return;
             }
 
             // Set the device that has the most compute queues as default GPU
             var maxQueuesDevice = VkDevices.OrderByDescending(d => d.ComputeQueueCount).First();
-            Config.Set(Config.Key.ncnnGpus, $"{maxQueuesDevice.Id}");
+            Config.Set(Config.Key.ncnnGpus, $"{maxQueuesDevice.Id}", allowIfExists: false);
         }
 
         public static int GetMaxNcnnThreads(int deviceId)
